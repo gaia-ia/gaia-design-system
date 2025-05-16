@@ -16,6 +16,10 @@
     "prettier": "^3.2.5",
     "turbo": "^2.5.3"
   },
-  "packageManager": "pnpm@8.15.6",
-  "name": "design-system"
+  "name": "design-system",
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }
