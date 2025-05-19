@@ -3,13 +3,7 @@
   "version": "0.0.0",
   "sideEffects": false,
   "license": "MIT",
-  "exports": {
-    "./button": {
-      "types": "./src/button.tsx",
-      "import": "./dist/button.mjs",
-      "require": "./dist/button.js"
-    }
-  },
+  "main": "./src/index.ts",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
