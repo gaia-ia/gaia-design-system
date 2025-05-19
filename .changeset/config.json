@@ -6,7 +6,5 @@
   "linked": [],
   "access": "public",
   "updateInternalDependencies": "patch",
-  "ignore": [
-    "@repo/docs"
-  ]
+  "ignore": ["@gaia_dev/docs"]
 }

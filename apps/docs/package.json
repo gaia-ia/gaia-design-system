@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "@gaia_dev/docs",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -11,13 +11,13 @@
     "lint": "eslint ./stories/*.stories.tsx --max-warnings 0"
   },
   "dependencies": {
-    "@acme/ui": "*",
-    "@acme/theme": "*",
+    "@gaia_dev/ui": "*",
+    "@gaia_dev/theme": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
+    "@gaia_dev/eslint-config": "*",
     "@storybook/addon-actions": "^8.2.6",
     "@storybook/addon-essentials": "^8.2.6",
     "@storybook/addon-links": "^8.2.6",
@@ -27,7 +27,7 @@
     "eslint": "^8.57.0",
     "serve": "^14.2.1",
     "storybook": "^8.2.6",
-    "@repo/typescript-config": "*",
+    "@gaia_dev/typescript-config": "*",
     "typescript": "5.5.4",
     "vite": "^5.1.4"
   }
