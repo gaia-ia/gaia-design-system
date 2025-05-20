@@ -5,6 +5,10 @@ export * as ButtonGroup from "./buttons/ButtonGroup";
 export { ButtonLink } from "./buttons/ButtonLink";
 export type { ButtonLinkProps } from "./buttons/ButtonLink/types";
 
+// General
+export { Badge } from "./general/Badge";
+export type { BadgeProps } from "./general/Badge/types";
+
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";
 export type { CheckboxProps } from "./inputs/Checkbox/types";

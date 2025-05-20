@@ -1,0 +1,14 @@
+.badge {
+  display: inline;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.badge.primary {
+  background-color: var(--color-accent-300);
+}
+
+.badge.secondary {
+  background-color: var(--color-background-300);
+}
