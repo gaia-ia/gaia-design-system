@@ -1,8 +1,8 @@
 import { Body } from "../../typography/Body";
 import styles from "./styles.module.css";
-import { TextAreaProps } from "./types";
+import { TextareaProps } from "./types";
 
-export const Textarea: React.FC<TextAreaProps> = ({
+export const Textarea: React.FC<TextareaProps> = ({
   label,
   id,
   error,
