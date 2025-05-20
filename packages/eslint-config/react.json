@@ -1,0 +1,14 @@
+{
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": false,
+        "semi": true
+      }
+    ],
+    "no-useless-constructor": "off"
+  },
+  "extends": "@rocketseat/eslint-config/react",
+  "plugins": ["simple-import-sort"]
+}
