@@ -8,6 +8,8 @@ export type { ButtonLinkProps } from "./buttons/ButtonLink/types";
 // General
 export { Badge } from "./general/Badge";
 export type { BadgeProps } from "./general/Badge/types";
+export { Card } from "./general/Card";
+export type { CardProps } from "./general/Card/types";
 
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";
