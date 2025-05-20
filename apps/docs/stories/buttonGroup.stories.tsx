@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { ButtonGroup } from "@gaia_dev_test/ui";
+import type { Meta, StoryObj } from "@storybook/react";
 
 // O componente correto a ser usado como referência é o Root
 const meta = {

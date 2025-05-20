@@ -1,5 +1,10 @@
 {
+  "plugins": [
+    "simple-import-sort"
+  ],
   "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
     "prettier/prettier": [
       "error",
       {
@@ -9,6 +14,5 @@
     ],
     "no-useless-constructor": "off"
   },
-  "extends": "@rocketseat/eslint-config/react",
-  "plugins": ["simple-import-sort"]
+  "extends": "@rocketseat/eslint-config/react"
 }

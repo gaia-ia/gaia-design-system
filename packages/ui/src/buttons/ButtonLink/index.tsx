@@ -1,7 +1,7 @@
-import { Body } from "../../typography/Body";
-import { BodyVariant } from "../../typography/Body/types";
 import { Link } from "react-router-dom";
 
+import { Body } from "../../typography/Body";
+import { BodyVariant } from "../../typography/Body/types";
 import styles from "./styles.module.css";
 import { ButtonLinkProps } from "./types";
 

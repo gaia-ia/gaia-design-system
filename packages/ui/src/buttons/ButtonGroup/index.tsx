@@ -1,7 +1,7 @@
 import * as RadioGroup from "@radix-ui/react-radio-group";
 
-import styles from "./styles.module.css";
 import { Body } from "../../typography/Body";
+import styles from "./styles.module.css";
 
 export const Root = (props: RadioGroup.RadioGroupProps) => {
   return (

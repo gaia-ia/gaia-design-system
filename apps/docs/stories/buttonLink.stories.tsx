@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { ButtonLink } from "@gaia_dev_test/ui";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Cookie, Croissant, Pizza } from "lucide-react";
 
 const meta: Meta<typeof ButtonLink> = {
