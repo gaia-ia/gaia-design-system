@@ -1,0 +1,99 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-decoration: none;
+}
+
+/* primary */
+
+.button.primary {
+  background-color: var(--color-primary-500);
+  border: none;
+}
+
+.button.primary:hover {
+  background-color: var(--color-primary-600);
+}
+
+.button.primary span {
+  color: var(--color-fixed-white);
+}
+
+/* secondary */
+
+.button.secondary {
+  background-color: var(--color-primary-300);
+  border: none;
+}
+
+.button.secondary:hover {
+  background-color: var(--color-primary-400);
+}
+
+.button.secondary span {
+  color: var(--color-text-900);
+}
+
+/* outlined */
+
+.button.outlined {
+  background-color: transparent;
+  border: 1px solid var(--color-primary-800);
+}
+
+.button.outlined:hover span {
+  text-decoration: underline;
+}
+
+.button.outlined span {
+  color: var(--color-primary-800);
+}
+
+/* text */
+
+.button.text {
+  background-color: transparent;
+  color: var(--color-primary-800);
+  border: none;
+}
+
+.button.text span {
+  color: var(--color-primary-800);
+}
+
+.button.text:hover span {
+  text-decoration: underline;
+}
+
+/* sizes */
+
+.button.extra_large,
+.button.large {
+  padding: 8px 16px;
+  gap: 12px;
+}
+
+.button.extra_large svg {
+  width: 24px;
+  height: 24px;
+}
+
+.button.large svg {
+  width: 20px;
+  height: 20px;
+}
+
+.button.small {
+  padding: 6px 16px;
+  gap: 10px;
+}
+
+.button.small svg {
+  width: 18px;
+  height: 18px;
+}

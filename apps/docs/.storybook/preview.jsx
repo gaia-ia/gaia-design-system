@@ -1,6 +1,8 @@
 /** @type { import('@storybook/react').Preview } */
-import "@gaia_dev_test/theme";
+import React from "react";
 import { themes } from "@storybook/theming";
+import { MemoryRouter } from "react-router-dom";
+import "@gaia_dev_test/theme";
 
 const preview = {
   parameters: {
@@ -18,6 +20,13 @@ const preview = {
       theme: themes.dark, // The replacement theme to use
     },
   },
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 };
 
 export default preview;
