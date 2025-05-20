@@ -1,0 +1,43 @@
+.root {
+  display: flex;
+  gap: 16px;
+}
+
+.item {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 16px;
+  border-radius: 28px;
+  cursor: pointer;
+  width: fit-content;
+  background-color: var(--color-background-200);
+
+  &:hover {
+    background-color: var(--color-primary-500);
+  }
+
+  &:hover span {
+    color: var(--color-fixed-white);
+  }
+
+  &:focus {
+    background-color: var(--color-primary-500);
+  }
+
+  &:disabled {
+    background-color: var(--color-primary-50);
+    border: none;
+    cursor: not-allowed;
+  }
+
+  &[data-state='checked'] {
+    background-color: var(--color-primary-500);
+  }
+
+  &[data-state='checked'] span {
+    font-weight: 700;
+    color: var(--color-fixed-white);
+  }
+}
