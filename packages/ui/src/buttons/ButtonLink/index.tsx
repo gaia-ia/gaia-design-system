@@ -39,3 +39,5 @@ export const ButtonLink: React.FC<ButtonLinkProps> = ({
     </Link>
   );
 };
+
+ButtonLink.displayName = "ButtonLink";
