@@ -1,0 +1,53 @@
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 10;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 32px);
+  max-width: 600px;
+  background-color: var(--color-background-100);
+  border-radius: 8px;
+  padding: 16px;
+  z-index: 11;
+}
+
+.modal,
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.content div[data-input-container] {
+  background-color: var(--color-background-200);
+}
+
+.header {
+  display: flex;
+  gap: 16px;
+
+  & > span {
+    width: 100%;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+
+  & > * {
+    width: fit-content;
+  }
+}

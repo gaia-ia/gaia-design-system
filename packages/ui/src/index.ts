@@ -12,6 +12,8 @@ export { Card } from "./general/Card";
 export type { CardProps } from "./general/Card/types";
 export { Divider } from "./general/Divider";
 export type { DividerProps } from "./general/Divider/types";
+export * as Modal from "./general/Modal";
+export type * as ModalProps from "./general/Modal/types";
 
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";
