@@ -14,6 +14,8 @@ export { Divider } from "./general/Divider";
 export type { DividerProps } from "./general/Divider/types";
 export * as Modal from "./general/Modal";
 export type * as ModalProps from "./general/Modal/types";
+export { ProgressBar } from "./general/ProgressBar";
+export type { ProgressBarProps } from "./general/ProgressBar/types";
 
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";

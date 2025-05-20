@@ -1,0 +1,13 @@
+.progressBarContainer {
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden; /* Esconde o excesso da barra interna */
+  background-color: var(--color-background-200);
+}
+
+.progressBar {
+  height: 100%;
+  border-radius: 8px;
+  background-color: var(--color-primary-500);
+  transition: width 0.3s ease;
+}
