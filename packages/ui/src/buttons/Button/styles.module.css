@@ -15,7 +15,7 @@
   border: none;
 }
 
-.button.primary:hover {
+.button.primary:hover:enabled {
   background-color: var(--color-primary-600);
 }
 
@@ -26,12 +26,12 @@
 /* secondary */
 
 .button.secondary {
-  background-color: var(--color-primary-300);
+  background-color: var(--color-background-300);
   border: none;
 }
 
-.button.secondary:hover {
-  background-color: var(--color-primary-400);
+.button.secondary:hover:enabled {
+  background-color: var(--color-background-400);
 }
 
 .button.secondary span {
@@ -45,7 +45,7 @@
   border: 1px solid var(--color-primary-800);
 }
 
-.button.outlined:hover span {
+.button.outlined:hover:enabled span {
   text-decoration: underline;
 }
 
@@ -65,8 +65,75 @@
   color: var(--color-primary-800);
 }
 
-.button.text:hover span {
+.button.text:hover:enabled span {
   text-decoration: underline;
+}
+
+/* icon */
+
+.button.icon {
+  width: fit-content;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.button.icon:hover:enabled {
+  background-color: var(--color-primary-50);
+}
+
+.button.icon span {
+  display: none;
+}
+
+/* disabled */
+.button:disabled {
+  background-color: var(--color-primary-50);
+  border: none;
+  cursor: not-allowed;
+}
+
+.button:disabled span {
+  color: var(--color-text-300);
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.button.loading svg {
+  /* rotate animation */
+  -webkit-animation: rotating 2s linear infinite;
+  -moz-animation: rotating 2s linear infinite;
+  -ms-animation: rotating 2s linear infinite;
+  -o-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
 }
 
 /* sizes */
@@ -95,4 +162,13 @@
 .button.small svg {
   width: 18px;
   height: 18px;
+}
+
+.button.icon {
+  padding: 0;
+}
+
+.button.icon svg {
+  width: 24px;
+  height: 24px;
 }
