@@ -10,6 +10,8 @@ export { Badge } from "./general/Badge";
 export type { BadgeProps } from "./general/Badge/types";
 export { Card } from "./general/Card";
 export type { CardProps } from "./general/Card/types";
+export { Divider } from "./general/Divider";
+export type { DividerProps } from "./general/Divider/types";
 
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";
