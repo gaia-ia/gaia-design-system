@@ -1,4 +1,4 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ["@gaia_dev/eslint-config/base.js"],
+  extends: ["@gaia_dev_test/eslint-config/base.js"],
 };

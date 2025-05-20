@@ -1,4 +1,4 @@
-import { Body } from "@gaia_dev/ui";
+import { Body } from "@gaia_dev_test/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof Body> = {

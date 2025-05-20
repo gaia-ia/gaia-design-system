@@ -1,5 +1,5 @@
 {
-  "extends": "@gaia_dev/typescript-config/react-library.json",
+  "extends": "@gaia_dev_test/typescript-config/react-library.json",
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]
 }

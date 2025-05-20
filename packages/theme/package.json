@@ -1,6 +1,9 @@
 {
-  "name": "@gaia_dev/theme",
+  "name": "@gaia_dev_test/theme",
   "version": "0.0.0",
   "main": "index.css",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "restricted"
+  }
 }

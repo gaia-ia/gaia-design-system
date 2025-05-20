@@ -1,5 +1,5 @@
 /** @type { import('@storybook/react').Preview } */
-import "@gaia_dev/theme";
+import "@gaia_dev_test/theme";
 import { themes } from "@storybook/theming";
 
 const preview = {

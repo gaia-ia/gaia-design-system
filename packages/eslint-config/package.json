@@ -1,5 +1,5 @@
 {
-  "name": "@gaia_dev/eslint-config",
+  "name": "@gaia_dev_test/eslint-config",
   "version": "0.0.0",
   "private": true,
   "files": [
