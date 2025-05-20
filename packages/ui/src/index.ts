@@ -10,3 +10,4 @@ export { Body } from "./typography/Body";
 export { Checkbox } from "./inputs/Checkbox";
 export { Input } from "./inputs/Input";
 export { RadioInput } from "./inputs/RadioInput";
+export { Textarea } from "./inputs/Textarea";
