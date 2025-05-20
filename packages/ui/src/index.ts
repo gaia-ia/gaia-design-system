@@ -9,3 +9,4 @@ export { Body } from "./typography/Body";
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";
 export { Input } from "./inputs/Input";
+export { RadioInput } from "./inputs/RadioInput";
