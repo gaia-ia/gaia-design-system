@@ -1,0 +1,44 @@
+.text {
+  font-family: 'Source Code Pro', sans-serif;
+  color: var(--color-text-950);
+  padding: 0;
+  margin: 0;
+}
+
+.display {
+  font-size: 3rem;
+}
+
+.headline {
+  font-size: 2.25rem;
+}
+
+.title {
+  font-size: 1.5rem;
+}
+
+.subheading-bold,
+.subheading {
+  font-size: 1.25rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+}
+
+.subtitle-small {
+  font-size: 0.875rem;
+}
+
+.display,
+.headline,
+.title,
+.subheading-bold,
+.subtitle,
+.subtitle-small {
+  font-weight: 700;
+}
+
+.subheading {
+  font-weight: 500;
+}

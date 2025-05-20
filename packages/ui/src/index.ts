@@ -5,7 +5,7 @@ export { ButtonLink } from "./buttons/ButtonLink";
 
 // Typography
 export { Body } from "./typography/Body";
-
+export { Title } from "./typography/Title";
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";
 export { Input } from "./inputs/Input";
