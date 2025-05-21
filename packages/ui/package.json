@@ -28,6 +28,6 @@
     "react-tooltip": "^5.28.0"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   }
 }
