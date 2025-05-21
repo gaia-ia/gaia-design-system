@@ -26,6 +26,8 @@ jobs:
 
     - name: Deploy storybook
       working-directory: ./apps/docs
-      run: touch storybook-static/.nojekyll && yarn deploy-storybook -- --ci --existing-output-dir=storybook-static
+      run: |
+        touch storybook-static/.nojekyll
+        yarn deploy-storybook -- --ci --existing-output-dir=storybook-static --remote=origin --branch=gh-pages --source-branch=main
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
