@@ -6,5 +6,5 @@
   "linked": [],
   "access": "public",
   "updateInternalDependencies": "patch",
-  "ignore": ["@gaia_dev_test/docs"]
+  "ignore": ["@gaia-dev/docs"]
 }

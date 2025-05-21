@@ -1,4 +1,4 @@
-import { Textarea } from "@gaia_dev_test/ui";
+import { Textarea } from "@gaia-dev/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof Textarea> = {

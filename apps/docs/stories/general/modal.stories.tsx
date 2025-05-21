@@ -1,4 +1,4 @@
-import { Button, Modal } from "@gaia_dev_test/ui";
+import { Button, Modal } from "@gaia-dev/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 

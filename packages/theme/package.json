@@ -1,6 +1,6 @@
 {
-  "name": "@gaia_dev_test/theme",
-  "version": "0.0.0",
+  "name": "@gaia-dev/theme",
+  "version": "0.1.0",
   "main": "index.css",
   "license": "MIT",
   "publishConfig": {

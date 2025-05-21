@@ -1,4 +1,4 @@
-import { Title } from "@gaia_dev_test/ui";
+import { Title } from "@gaia-dev/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof Title> = {

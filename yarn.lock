@@ -692,6 +692,11 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.9.tgz#50dea3616bc8191fb8e112283b49eaff03e78429"
   integrity sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==
 
+"@gaia_dev_test/theme@*":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@gaia_dev_test/theme/-/theme-0.0.0.tgz#2370a786c333449c31d21b278822caad7ab579d8"
+  integrity sha512-Z9s5xzE90xu5UKIbfAkQU4ISMQZYd827GgNOnlq2lo7COAtGERCqG5B8eUhXlUbq9oGhVGX7EazMSJZ+FhH++w==
+
 "@humanwhocodes/config-array@^0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.13.0.tgz#fb907624df3256d04b9aa2df50d7aa97ec648748"

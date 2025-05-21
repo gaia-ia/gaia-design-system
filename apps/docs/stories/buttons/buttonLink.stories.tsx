@@ -1,4 +1,4 @@
-import { ButtonLink } from "@gaia_dev_test/ui";
+import { ButtonLink } from "@gaia-dev/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Cookie, Croissant, Pizza } from "lucide-react";
 

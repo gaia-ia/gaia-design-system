@@ -1,6 +1,6 @@
 {
-  "name": "@gaia_dev_test/ui",
-  "version": "0.0.0",
+  "name": "@gaia-dev/ui",
+  "version": "0.1.0",
   "sideEffects": false,
   "license": "MIT",
   "main": "./src/index.ts",
@@ -11,8 +11,8 @@
     "clean": "rm -rf .turbo node_modules dist"
   },
   "devDependencies": {
-    "@gaia_dev_test/eslint-config": "*",
-    "@gaia_dev_test/typescript-config": "*",
+    "@gaia-dev/eslint-config": "*",
+    "@gaia-dev/typescript-config": "*",
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",

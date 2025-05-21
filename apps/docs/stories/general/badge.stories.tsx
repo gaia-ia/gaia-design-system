@@ -1,4 +1,4 @@
-import { Badge } from "@gaia_dev_test/ui";
+import { Badge } from "@gaia-dev/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof Badge> = {

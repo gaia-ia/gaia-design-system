@@ -1,4 +1,4 @@
-import { Divider } from "@gaia_dev_test/ui";
+import { Divider } from "@gaia-dev/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof Divider> = {

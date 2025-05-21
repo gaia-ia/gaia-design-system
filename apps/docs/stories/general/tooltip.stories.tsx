@@ -1,4 +1,4 @@
-import { Badge, Tooltip } from "@gaia_dev_test/ui";
+import { Badge, Tooltip } from "@gaia-dev/ui";
 import type { Meta } from "@storybook/react";
 
 const meta: Meta<typeof Tooltip> = {

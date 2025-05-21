@@ -1,4 +1,4 @@
-import { ButtonGroup } from "@gaia_dev_test/ui";
+import { ButtonGroup } from "@gaia-dev/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 
 // O componente correto a ser usado como referência é o Root

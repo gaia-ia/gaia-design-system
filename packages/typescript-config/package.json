@@ -1,6 +1,6 @@
 {
-  "name": "@gaia_dev_test/typescript-config",
-  "version": "0.0.0",
+  "name": "@gaia-dev/typescript-config",
+  "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "publishConfig": {

@@ -1,4 +1,4 @@
-import { ProgressBar } from "@gaia_dev_test/ui";
+import { ProgressBar } from "@gaia-dev/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof ProgressBar> = {

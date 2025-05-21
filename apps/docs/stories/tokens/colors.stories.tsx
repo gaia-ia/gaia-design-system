@@ -1,4 +1,4 @@
-import { Body, Title } from "@gaia_dev_test/ui";
+import { Body, Title } from "@gaia-dev/ui";
 import { Meta } from "@storybook/react";
 import React from "react";
 

@@ -1,4 +1,4 @@
-import { Card } from "@gaia_dev_test/ui";
+import { Card } from "@gaia-dev/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof Card> = {

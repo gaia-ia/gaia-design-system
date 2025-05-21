@@ -1,4 +1,4 @@
-import { Checkbox } from "@gaia_dev_test/ui";
+import { Checkbox } from "@gaia-dev/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 import { StoryContext, StoryFn } from "@storybook/react";
 import { useState } from "react";
