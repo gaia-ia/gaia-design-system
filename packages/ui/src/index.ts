@@ -16,6 +16,8 @@ export * as Modal from "./general/Modal";
 export type * as ModalProps from "./general/Modal/types";
 export { ProgressBar } from "./general/ProgressBar";
 export type { ProgressBarProps } from "./general/ProgressBar/types";
+export { Tooltip } from "./general/Tooltip";
+export type { TooltipProps } from "./general/Tooltip/types";
 
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";
