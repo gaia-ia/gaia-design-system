@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- adding table component
+
 ## 0.2.0
 
 ### Minor Changes
