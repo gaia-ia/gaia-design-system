@@ -40,10 +40,6 @@ export const Default = (args: Meta<typeof Tooltip>) => (
     }}
   >
     <Badge id="clickable">◕‿‿◕</Badge>
-    <Tooltip
-      anchorSelect="#clickable"
-      text="You can click me!"
-      {...args}
-    />
+    <Tooltip anchorSelect="#clickable" text="You can click me!" {...args} />
   </div>
 );
