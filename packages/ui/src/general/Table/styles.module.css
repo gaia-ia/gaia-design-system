@@ -1,0 +1,81 @@
+.tableContainer {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  caption-side: bottom;
+  font-size: 0.875rem;
+  color: var(--color-text-900);
+}
+
+.tableHeader tr {
+  border-bottom: 1px solid var(--color-text-200);
+}
+
+.tableBody tr:last-child {
+  border: none;
+}
+
+.tableFooter {
+  background-color: var(--color-transparent-50);
+  border-top: 1px solid var(--color-text-200);
+  font-weight: 500;
+}
+.tableFooter > tr:last-child {
+  border-bottom: none;
+}
+
+.tableRow {
+  border-bottom: 1px solid var(--color-text-200);
+  transition: background-color 0.15s ease;
+}
+.tableRow:hover {
+  background-color: var(--color-background-100) !important;
+}
+
+.tableHeader .tableRow:hover,
+.tableFooter .tableRow:hover {
+  background-color: transparent !important;
+}
+
+.tableRow[data-state='selected'] {
+  background-color: var(--color-transparent-100);
+}
+
+.tableBody .tableRow:nth-child(odd) {
+  background-color: var(--color-transparent-50);
+}
+
+.tableHead {
+  color: var(--color-text-500);
+  height: 48px;
+  padding: 4px 16px;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.tableHead [role='checkbox'] {
+  padding-right: 0;
+  transform: translateY(2px);
+}
+
+.tableCell {
+  padding: 4px 16px;
+  vertical-align: middle;
+  white-space: nowrap;
+  height: 65px;
+}
+.tableCell [role='checkbox'] {
+  padding-right: 0;
+  transform: translateY(2px);
+}
+
+.tableCaption {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--color-text-400);
+}
