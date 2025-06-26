@@ -1,4 +1,10 @@
 import { dirname, join, resolve } from "path";
+import { fileURLToPath } from "url";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 function getAbsolutePath(value) {
   return dirname(require.resolve(join(value, "package.json")));
@@ -14,11 +20,8 @@ const config = {
     name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
-
   core: {},
-
   async viteFinal(config, { configType }) {
-    // customize the Vite config here
     return {
       ...config,
       define: { "process.env": {} },
@@ -32,7 +35,6 @@ const config = {
       },
     };
   },
-
   docs: {
     autodocs: true,
   },

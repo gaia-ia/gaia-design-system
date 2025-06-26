@@ -70,6 +70,33 @@
   text-decoration: underline;
 }
 
+/* icon */
+
+.button.icon {
+  background-color: transparent;
+  border: none;
+  padding: 0 !important;
+  gap: 0;
+  width: fit-content;
+  position: relative;
+}
+
+.button.icon:hover::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  background-color: var(--color-primary-50);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.button.icon span {
+  display: none;
+}
+
 /* sizes */
 
 .button.extra_large,

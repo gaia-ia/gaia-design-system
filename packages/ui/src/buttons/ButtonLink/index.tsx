@@ -12,6 +12,8 @@ export const ButtonLink: React.FC<ButtonLinkProps> = ({
   size = "large",
   icon: Icon,
   iconPosition = "left",
+  iconColor,
+  iconSize = 20,
   ...props
 }) => {
   const bodyVariant: BodyVariant =
@@ -21,21 +23,28 @@ export const ButtonLink: React.FC<ButtonLinkProps> = ({
         ? "small_body_bold"
         : "caption_bold";
 
-  const iconColor =
+  const iconColors =
     variant === "primary"
       ? "var(--color-fixed-white)"
       : variant === "secondary"
         ? "var(--color-text-900)"
-        : "var(--color-primary-800)";
+        : variant === "icon"
+          ? "var(--color-text-950)"
+          : "var(--color-primary-800)";
+
+  const _iconColor = iconColor || iconColors;
+
+  const buttonClasses = `${styles.button} ${styles[variant]} ${styles[size]} ${className}`;
 
   return (
-    <Link
-      className={`${styles.button} ${styles[variant]} ${styles[size]} ${className || ""}`}
-      {...props}
-    >
-      {Icon && iconPosition === "left" && <Icon color={iconColor} />}
+    <Link className={buttonClasses} {...props}>
+      {Icon && iconPosition === "left" && (
+        <Icon color={_iconColor} size={iconSize} />
+      )}
       <Body variant={bodyVariant}>{children}</Body>
-      {Icon && iconPosition === "right" && <Icon color={iconColor} />}
+      {Icon && iconPosition === "right" && (
+        <Icon color={_iconColor} size={iconSize} />
+      )}
     </Link>
   );
 };
