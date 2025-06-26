@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 0.5.0
+
+### Minor Changes
+
+- adding icon variant to button link
+
 ## 0.4.0
 
 ### Minor Changes

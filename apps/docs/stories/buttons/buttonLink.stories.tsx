@@ -63,3 +63,13 @@ export const Primary: Story = {
     target: "_blank",
   },
 };
+
+export const Icon: Story = {
+  args: {
+    variant: "icon",
+    to: "https://gaia.dev",
+    target: "_blank",
+    icon: Pizza,
+    iconPosition: "left",
+  },
+};
