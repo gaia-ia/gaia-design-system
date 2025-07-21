@@ -1,6 +1,6 @@
 {
   "name": "@gaia-dev/ui",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "sideEffects": false,
   "license": "MIT",
   "main": "./src/index.ts",

@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 0.6.0
+
+### Minor Changes
+
+- adding select component
+
 ## 0.5.0
 
 ### Minor Changes
