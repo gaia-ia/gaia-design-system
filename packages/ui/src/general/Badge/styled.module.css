@@ -12,3 +12,27 @@
 .badge.secondary {
   background-color: var(--color-background-300);
 }
+
+.badge.error {
+  background-color: var(--color-alert-error-500);
+}
+
+.badge.error .badge_text {
+  color: var(--color-fixed-black);
+}
+
+.badge.success {
+  background-color: var(--color-alert-success-500);
+}
+
+.badge.success .badge_text {
+  color: var(--color-fixed-black);
+}
+
+.badge.warning {
+  background-color: var(--color-alert-warning-500);
+}
+
+.badge.warning .badge_text {
+  color: var(--color-fixed-black);
+}

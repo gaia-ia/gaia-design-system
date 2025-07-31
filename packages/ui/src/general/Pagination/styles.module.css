@@ -1,0 +1,58 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.paginationContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
+.paginationLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+}
+
+.prevNext {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-inline: 10px;
+
+  &:disabled {
+    background-color: transparent;
+  }
+}
+
+.label {
+  display: none;
+  font-size: 1rem; /* 16px */
+  color: var(--color-text-950);
+}
+
+@media (min-width: 640px) {
+  .label {
+    display: block;
+  }
+}
+
+.ellipsis {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-500);
+}
+
+.ellipsisIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-500);
+}
