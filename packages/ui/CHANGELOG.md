@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 0.7.0
+
+### Minor Changes
+
+- Adding changes to badge, and new components: Command, Dialog, Pagination and Popover
+
 ## 0.6.0
 
 ### Minor Changes
