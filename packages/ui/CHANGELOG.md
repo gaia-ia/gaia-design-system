@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 0.8.0
+
+### Minor Changes
+
+- fix exports
+
 ## 0.7.0
 
 ### Minor Changes
