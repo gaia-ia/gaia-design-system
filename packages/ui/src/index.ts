@@ -15,7 +15,10 @@ export * as Dialog from "./general/Dialog";
 export { Divider } from "./general/Divider";
 export type { DividerProps } from "./general/Divider/types";
 export * as Modal from "./general/Modal";
-export type * as ModalProps from "./general/Modal/types";
+export type {
+  ModalButtonsProps,
+  ModalContentProps,
+} from "./general/Modal/types";
 export * as Pagination from "./general/Pagination";
 export * as Popover from "./general/Popover";
 export { ProgressBar } from "./general/ProgressBar";
