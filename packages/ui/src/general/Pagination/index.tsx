@@ -76,9 +76,7 @@ export function PaginationPrevious({
       onClick={onClick}
       className={`${styles.prevNext} ${className}`}
       {...props}
-    >
-      <span className={styles.label}>Previous</span>
-    </Button>
+    />
   );
 }
 
@@ -97,9 +95,7 @@ export function PaginationNext({
       onClick={onClick}
       className={`${styles.prevNext} ${className}`}
       {...props}
-    >
-      <span className={styles.label}>Next</span>
-    </Button>
+    />
   );
 }
 
@@ -148,9 +144,9 @@ export function PaginationAll({
           const isFirst = pageNumber === 1;
           const isLast = pageNumber === totalPages;
           const isNearCurrent = Math.abs(pageNumber - page) <= 1;
-          const isEdgeCaseStart = page <= 4 && pageNumber <= 5;
+          const isEdgeCaseStart = page <= 2 && pageNumber <= 3;
           const isEdgeCaseEnd =
-            page >= totalPages - 3 && pageNumber >= totalPages - 4;
+            page >= totalPages - 2 && pageNumber >= totalPages - 2;
 
           const shouldRender =
             isFirst ||

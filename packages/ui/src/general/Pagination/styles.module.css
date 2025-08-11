@@ -36,12 +36,6 @@
   color: var(--color-text-950);
 }
 
-@media (min-width: 640px) {
-  .label {
-    display: block;
-  }
-}
-
 .ellipsis {
   display: flex;
   width: 36px;
