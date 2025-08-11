@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 0.9.0
+
+### Minor Changes
+
+- pagination mobile change
+
 ## 0.8.0
 
 ### Minor Changes
