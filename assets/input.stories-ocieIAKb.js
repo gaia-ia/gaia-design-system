@@ -1,0 +1,7 @@
+import{j as e}from"./jsx-runtime-CDt2p4po.js";import{B as r}from"./index-B4Vk6642.js";import"./index-GiUgBvb1.js";const m="_container_13n9b_1",b="_label_13n9b_8",x="_required_13n9b_12",h="_input_container_wrapper_13n9b_16",j="_input_container_13n9b_16",y="_error_13n9b_56",n={container:m,label:b,required:x,input_container_wrapper:h,input_container:j,error:y},a=({label:s,id:o,error:i,hint:c,required:d,..._})=>e.jsxs("div",{className:n.container,children:[s&&e.jsxs(r,{as:"label",htmlFor:o,className:n.label,variant:"label",children:[s,d&&e.jsx("span",{className:n.required,children:"*"})]}),e.jsxs("div",{className:n.input_container_wrapper,children:[e.jsx("div",{className:n.input_container,"data-input-container":!0,children:e.jsx("input",{id:o,..._})}),c&&e.jsx(r,{variant:"caption",className:n.hint,children:c}),i&&e.jsx(r,{variant:"caption",className:n.error,children:i})]})]});a.displayName="Input";a.__docgenInfo={description:"",methods:[],displayName:"Input"};const q={title:"Components/inputs/Input",component:a,tags:["autodocs"],argTypes:{label:{control:{type:"text"}},id:{control:{type:"text"}},error:{control:{type:"text"}},hint:{control:{type:"text"}}}},t={args:{label:"Label",id:"input-id",required:!0}};var p,l,u;t.parameters={...t.parameters,docs:{...(p=t.parameters)==null?void 0:p.docs,source:{originalSource:`{
+  args: {
+    label: "Label",
+    id: "input-id",
+    required: true
+  }
+}`,...(u=(l=t.parameters)==null?void 0:l.docs)==null?void 0:u.source}}};const v=["Default"];export{t as Default,v as __namedExportsOrder,q as default};
