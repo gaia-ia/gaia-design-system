@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 0.11.0
+
+### Minor Changes
+
+- add customization props to Divider and ProgressBar components
+
 ## 0.10.0
 
 ### Minor Changes
