@@ -14,6 +14,12 @@ const meta: Meta<typeof ProgressBar> = {
       control: { type: "number", min: 0, max: 10 },
       description: "Etapa atual da barra de progresso",
     },
+    color: {
+      control: {
+        type: "color",
+      },
+      description: "Cor da barra de progresso",
+    },
   },
 };
 
@@ -25,6 +31,7 @@ export const Default: Story = {
   args: {
     size: 5,
     currentStep: 2,
+    color: "var(--color-background-300)",
   },
 };
 
@@ -32,6 +39,7 @@ export const Empty: Story = {
   args: {
     size: 5,
     currentStep: 0,
+    color: "var(--color-background-300)",
   },
 };
 
@@ -39,6 +47,7 @@ export const Halfway: Story = {
   args: {
     size: 10,
     currentStep: 5,
+    color: "var(--color-background-300)",
   },
 };
 
@@ -46,5 +55,6 @@ export const Complete: Story = {
   args: {
     size: 5,
     currentStep: 5,
+    color: "var(--color-background-300)",
   },
 };

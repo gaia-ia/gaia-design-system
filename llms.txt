@@ -1,0 +1,146 @@
+Gaia Design System – LLM Reference
+==================================
+
+This document is for LLMs generating UI code that must follow the Gaia Design System found in this repository (`@gaia-dev/ui`). Read it fully before composing responses.
+
+Key Packages
+------------
+- `@gaia-dev/theme`: expose `index.css` with CSS custom properties (tokens), base typography, global resets, and light/dark theming. Always instruct consumers to import this once (e.g. in the app root) before using UI components.
+- `@gaia-dev/ui`: default export surface. All components should be imported from here rather than deep module paths.
+  - Example: `import { Button, Body, Title, Input, Modal, Pagination } from "@gaia-dev/ui";`
+
+General Guidance
+----------------
+- Use React + TypeScript (`.tsx`) in examples. Prefer functional components and hooks.
+- Compose layouts with semantic HTML elements, but leverage Gaia components for typography, buttons, inputs, and interactive surfaces. Avoid raw HTML equivalents unless the system lacks a component.
+- Respect accessibility primitives that ship with Radix-based components (`Dialog`, `Popover`, `Select`, `Command`, etc.). Wrap trigger/content inside the provided namespaces instead of re-implementing logic.
+- Favor the design tokens (`var(--color-*)`, `var(--color-text-*)`, etc.) defined in `@gaia-dev/theme/index.css`. Do not hardcode colors or spacing values when a token exists.
+- Typography should use `Title` and `Body`. Only fall back to raw tags when a specification explicitly requires it.
+- Keep button labels and body content wrapped in typography components (the components do this internally when necessary, see Button/ButtonLink). Avoid nesting additional typography wrappers unless adjusting variant or semantics.
+- Components expose `className` props; encourage consumers to extend styling via CSS Modules or inline styles that continue to use tokens.
+- Mention that icons come from `lucide-react` (already a dependency) when examples need icons.
+
+Design Tokens
+-------------
+Tokens live in `packages/theme/index.css` under the `:root` selector and include:
+- Color families: `--color-primary-*`, `--color-accent-*`, `--color-background-*`, `--color-text-*`, alert scales (`error`, `success`, `warning`), plus fixed black/white.
+- Utility shades: component styles also reference other CSS custom properties (e.g., table background transparencies); favor extending those tokens if you customize styling.
+- Theme switching leverages `color-scheme: light dark` and `light-dark()` pairs; advise consumers to toggle `.light` / `.dark` classes on `body` if they need to force a theme.
+When suggesting custom styles, reference these tokens (e.g. `style={{ backgroundColor: "var(--color-primary-500)" }}`).
+
+Typography
+----------
+- `Title`: Props `{ as?, variant?, className? }`. Variants: `display`, `headline`, `title`, `subheading-bold`, `subheading`, `subtitle`, `subtitle-small`. Default `as="span"`, variant `title`. Internally uses `Source Code Pro`.
+- `Body`: Props `{ as?, variant?, className? }`. Variants include body, small-body, caption, label, button, link states. Default `as="span"`, variant `body`. Internally uses `DM Sans`.
+- Encourage mapping typography variants to semantic tags (`Title` with `as="h1"` for page titles, etc.).
+
+Buttons
+-------
+- `Button`: Primary action component. Props extend native `button` attributes plus:
+  - `variant`: `"primary" | "secondary" | "outlined" | "text" | "icon"`
+  - `size`: `"extra_large" | "large" | "small" | "icon"`
+  - `icon`: Lucide icon component, `iconPosition` ("left" | "right"), `iconColor`, `iconSize`
+  - `loading`: shows spinning `Loader`
+  - Sets `disabled` and `loading` states with proper styling.
+- `ButtonLink`: Same visual treatments on top of `react-router-dom`'s `Link`. Accepts the same `variant`, `size`, and icon props (no `loading`). Import as `ButtonLink`.
+- `ButtonGroup`: Namespace with `ButtonGroup.Root` (Radix radio group) and `ButtonGroup.Item`. Items toggle via `data-state="checked"` and render `Body` typography internally. Use for segmented controls.
+
+Form Inputs
+-----------
+- `Input`: Controlled/uncontrolled standard input wrapper. Props extend `input`, plus `label`, `id` (required), `hint`, `error`, `required`. Renders a label, optional hint/error messages (`Body` captions), and encloses the native input inside a styled container.
+- `Textarea`: Mirrors `Input` API but wraps a `<textarea>`.
+- `Checkbox`: Props extend input attributes, plus required `label`, `id`, `value`. Uses an overlaid `Check` icon and visually hidden native checkbox.
+- `RadioInput`: Accepts `{ name, options, label?, hint?, error?, required? }`. `options` array expects `{ label, value, ...inputProps }`. Generates grouped radio buttons with hints/errors.
+- `Select`: Radix `Select` wrapper. Props `{ label?, id, hint?, error?, placeholder?, options, value?, onChange?, disabled?, required? }`. `options` array of `{ value: string | number, label, disabled? }`. `onChange` receives the selected value (string/number). Uses built-in trigger, dropdown, and arrow icon.
+
+General Components
+------------------
+- `Badge`: Props `{ children, variant? }`, variants: `"primary" | "secondary" | "success" | "error" | "warning"`. Internally wraps text with `Body` (`small_body`).
+- `Card`: Simple container with padding and background; accepts `{ children, className? }`.
+- `Divider`: Horizontal separator. Props `{ color? }`, default `var(--color-background-300)`.
+- `ProgressBar`: Props `{ size: number, currentStep?: number }`. Computes completion percentage as `currentStep / size`.
+- `Tooltip`: Wrapper around `react-tooltip`. Props `{ text, anchorSelect, place?, color? }`. `anchorSelect` accepts any valid DOM selector string and attaches to matching elements.
+- `Popover`: Namespace (`Popover`, `PopoverTrigger`, `PopoverContent`, `PopoverAnchor`) built on Radix Popover. `PopoverContent` accepts Radix props plus optional `className`, default `align="center"`, `sideOffset=4`.
+- `Dialog`: Namespace for Radix Dialog primitives. Includes `Dialog`, `DialogTrigger`, `DialogPortal`, `DialogOverlay`, `DialogContent`, `DialogHeader`, `DialogFooter`, `DialogTitle`, `DialogDescription`, `DialogClose`. `DialogContent` adds a close button (Lucide `XIcon`) unless `showCloseButton={false}`.
+- `Modal`: Local modal implementation (not Radix). Use `<Modal.Content setOpen={setIsOpen} title="..." />` alongside `<Modal.Buttons>`. `Content` expects `setOpen` setter and handles overlay click & close icon automatically.
+- `Command`: Namespace around `cmdk`. Use `CommandDialog` when you need an overlayed palette—internally renders the Radix dialog. Other exports: `Command`, `CommandInput`, `CommandList`, `CommandEmpty`, `CommandGroup`, `CommandSeparator`, `CommandItem`, `CommandShortcut`. `CommandInput` renders a search icon and styled input wrapper.
+- `Pagination`: Namespace with building blocks (`Pagination`, `PaginationContent`, `PaginationItem`, `PaginationLink`, `PaginationPrevious`, `PaginationNext`, `PaginationEllipsis`) plus a ready-to-use `<PaginationAll page totalPages setPage />` implementation that wires buttons, ellipses, and icon-only prev/next triggers.
+- `Table`: Collection of semantic wrappers: `Table`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableHead`, `TableCell`, `TableCaption`. Designed for composition—always wrap `Table` in a parent container if you need scrolling.
+
+Usage Patterns
+--------------
+- When building dialogs or menus, prefer the Radix-based namespaces for focus management and accessibility. Example dialog flow:
+
+```tsx
+import { useState } from "react";
+import { Button, Dialog } from "@gaia-dev/ui";
+
+function DeleteDialog() {
+  const [open, setOpen] = useState(false);
+  return (
+    <Dialog.Dialog open={open} onOpenChange={setOpen}>
+      <Dialog.DialogTrigger asChild>
+        <Button variant="secondary">Delete</Button>
+      </Dialog.DialogTrigger>
+      <Dialog.DialogContent>
+        <Dialog.DialogHeader>
+          <Dialog.DialogTitle>Confirm delete</Dialog.DialogTitle>
+          <Dialog.DialogDescription>
+            This action cannot be undone.
+          </Dialog.DialogDescription>
+        </Dialog.DialogHeader>
+      </Dialog.DialogContent>
+    </Dialog.Dialog>
+  );
+}
+```
+
+- For forms, combine input wrappers with `Title`/`Body` for headings and helper text. Example:
+
+```tsx
+import { Body, Button, Input, Select, Textarea, Title } from "@gaia-dev/ui";
+
+function ProfileForm() {
+  return (
+    <form>
+      <Title as="h2" variant="subtitle">Profile</Title>
+      <Body variant="small_body" className="form-hint">
+        All fields marked * are mandatory.
+      </Body>
+      <Input id="full-name" label="Full name" placeholder="Your name" required />
+      <Select
+        id="role"
+        label="Role"
+        options={[
+          { value: "admin", label: "Admin" },
+          { value: "member", label: "Member" },
+        ]}
+        value="member"
+        onChange={() => {}}
+      />
+      <Textarea id="bio" label="Bio" hint="Max 200 characters" rows={4} />
+      <Button type="submit" variant="primary">Save changes</Button>
+    </form>
+  );
+}
+```
+
+- Buttons auto-apply typography, so avoid wrapping children in `Title`/`Body` manually unless you need custom semantics (e.g., embed an inline `Body` for multi-line).
+- When dealing with lists or tables, rely on the provided structure to maintain consistent paddings and zebra striping from CSS modules.
+
+Do / Don't Checklist
+--------------------
+- **Do** import everything from `@gaia-dev/ui` and keep the theme stylesheet in scope.
+- **Do** propagate `className` props if you demonstrate composition with custom wrappers; highlight that they can extend styling via CSS Modules using design tokens.
+- **Do** handle `setOpen` state when showcasing `Modal.Content`. Mention `useState` patterns when relevant.
+- **Do not** suggest installing extra UI libraries (Tailwind, Chakra, Material UI, etc.).
+- **Do not** bypass components with raw HTML duplicates unless the system truly lacks an equivalent.
+- **Do not** hardcode colors, spacings, or fonts outside the token system.
+- **Do not** strip accessibility props from Radix-backed components; they already include `data-slot` hooks and ARIA roles.
+
+Additional Notes
+----------------
+- The package targets React 18+ and ships TypeScript types; type annotations in examples improve clarity.
+- Use `lucide-react` icons for call-to-action buttons or icon-only controls (`variant="icon"`).
+- When referencing pagination, clarify that page state is managed externally, typically with `useState` or via router params.
+- If you need loading indicators beyond button loading state, consider composing `Button` with `loading` prop or adding future components—avoid introducing spinners outside the design system unless specified.

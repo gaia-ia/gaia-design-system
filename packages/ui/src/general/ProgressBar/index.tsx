@@ -1,7 +1,11 @@
 import styles from "./styles.module.css";
 import type { ProgressBarProps } from "./types";
 
-export const ProgressBar = ({ size, currentStep = 1 }: ProgressBarProps) => {
+export const ProgressBar = ({
+  size,
+  currentStep = 1,
+  color = "var(--color-primary-500)",
+}: ProgressBarProps) => {
   const progressPercentage = (currentStep / size) * 100;
 
   return (
@@ -9,7 +13,7 @@ export const ProgressBar = ({ size, currentStep = 1 }: ProgressBarProps) => {
       <div className={styles.progressBarContainer}>
         <div
           className={styles.progressBar}
-          style={{ width: `${progressPercentage}%` }}
+          style={{ width: `${progressPercentage}%`, backgroundColor: color }}
         />
       </div>
     </div>

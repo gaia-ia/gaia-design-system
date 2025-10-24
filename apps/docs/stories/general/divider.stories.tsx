@@ -12,6 +12,13 @@ const meta: Meta<typeof Divider> = {
       },
       description: "The color of the divider",
     },
+    orientation: {
+      control: {
+        type: "select",
+        options: ["horizontal", "vertical"],
+      },
+      description: "The orientation of the divider",
+    },
   },
 };
 
@@ -22,5 +29,6 @@ type Story = StoryObj<typeof Divider>;
 export const Default: Story = {
   args: {
     color: "var(--color-background-300)",
+    orientation: "vertical",
   },
 };
