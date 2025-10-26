@@ -1,5 +1,5 @@
 import { Divider } from "@gaia-dev/ui";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 
 const meta: Meta<typeof Divider> = {
   title: "Components/general/Divider",
@@ -24,11 +24,15 @@ const meta: Meta<typeof Divider> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Divider>;
-
-export const Default: Story = {
-  args: {
-    color: "var(--color-background-300)",
-    orientation: "vertical",
-  },
-};
+export const Default = (arg: Meta<typeof Divider>) => (
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "48px",
+    }}
+  >
+    <Divider {...arg} />
+  </div>
+);

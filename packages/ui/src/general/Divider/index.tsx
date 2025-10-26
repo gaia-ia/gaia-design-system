@@ -1,17 +1,23 @@
+import * as SeparatorPrimitive from "@radix-ui/react-separator";
+
 import styles from "./styles.module.css";
 import type { DividerProps } from "./types";
 
 export const Divider = ({
-  color = "var(--color-background-300)",
+  color,
   orientation = "horizontal",
+  decorative = true,
+  className,
+  ...props
 }: DividerProps) => {
   return (
-    <div
-      className={styles.separator}
-      style={{
-        backgroundColor: color,
-        transform: orientation === "horizontal" ? "rotate(90deg)" : undefined,
-      }}
+    <SeparatorPrimitive.Root
+      data-slot="separator"
+      decorative={decorative}
+      orientation={orientation}
+      className={`${styles.separator} ${className || ""}`}
+      style={color ? { backgroundColor: color } : undefined}
+      {...props}
     />
   );
 };
