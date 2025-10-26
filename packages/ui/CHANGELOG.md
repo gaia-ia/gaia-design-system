@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 0.12.0
+
+### Minor Changes
+
+- refactor(divider): migrate to Radix UI Separator
+
 ## 0.11.0
 
 ### Minor Changes
