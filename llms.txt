@@ -57,7 +57,7 @@ General Components
 ------------------
 - `Badge`: Props `{ children, variant? }`, variants: `"primary" | "secondary" | "success" | "error" | "warning"`. Internally wraps text with `Body` (`small_body`).
 - `Card`: Simple container with padding and background; accepts `{ children, className? }`.
-- `Divider`: Horizontal separator. Props `{ color? }`, default `var(--color-background-300)`.
+- `Divider`: Horizontal or vertical separator (Radix Separator). Props `{ color?, orientation?: "horizontal" | "vertical", decorative? }`, default color `var(--color-background-300)`, default orientation `"horizontal"`. Vertical dividers work in flex containers via `align-self: stretch`.
 - `ProgressBar`: Props `{ size: number, currentStep?: number }`. Computes completion percentage as `currentStep / size`.
 - `Tooltip`: Wrapper around `react-tooltip`. Props `{ text, anchorSelect, place?, color? }`. `anchorSelect` accepts any valid DOM selector string and attaches to matching elements.
 - `Popover`: Namespace (`Popover`, `PopoverTrigger`, `PopoverContent`, `PopoverAnchor`) built on Radix Popover. `PopoverContent` accepts Radix props plus optional `className`, default `align="center"`, `sideOffset=4`.

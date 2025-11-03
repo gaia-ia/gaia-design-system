@@ -11,4 +11,6 @@
 .separator[data-orientation="vertical"] {
   width: 1px;
   height: 100%;
+  align-self: stretch;
+  min-height: 1rem;
 }
