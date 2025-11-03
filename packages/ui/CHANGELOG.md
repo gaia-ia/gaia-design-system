@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 0.13.0
+
+### Minor Changes
+
+- fix styles
+
 ## 0.12.0
 
 ### Minor Changes
