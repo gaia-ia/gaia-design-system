@@ -121,3 +121,11 @@ export { Body } from "./typography/Body";
 export type { BodyProps } from "./typography/Body/types";
 export { Title } from "./typography/Title";
 export type { TitleProps } from "./typography/Title/types";
+
+// Utils
+export { clsx } from "./utils/clsx";
+export { convertBytesToReadable } from "./utils/convertBytesToReadable";
+export { formatToBRLocale } from "./utils/formatToBRLocale";
+export { isImageOrVideo } from "./utils/isImageOrVideo";
+export { useIsMount } from "./utils/useIsMount";
+export { useWindowSize } from "./utils/useWindowSize";
