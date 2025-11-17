@@ -1,5 +1,16 @@
 # @gaia-dev/ui
 
+## 1.1.0
+
+### Minor Changes
+
+- • Implemented a shared clsx helper (packages/ui/src/utils/clsx.ts:1) so every component now composes its className prop the same way.
+  Buttons, inputs, tables, dialog primitives, typography elements, and other surfaces import the util and wrap their structural classes
+  with any consumer-supplied overrides (e.g., clsx(styles.container, className)), giving us cleaner conditional styling and eliminating
+  brittle string concatenation. While touching each component, I also added JSDoc blocks to the exported functions and React components
+  to spell out their intent, expected props, and return values, which means editors now surface much better inline documentation
+  alongside the existing TypeScript types.
+
 ## 1.0.0
 
 ### Major Changes
