@@ -22,6 +22,15 @@ export {
   CarouselPrevious,
 } from "./general/Carousel";
 export {
+  type ChartConfig,
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartStyle,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "./general/Charts";
+export {
   Command,
   CommandDialog,
   CommandEmpty,
