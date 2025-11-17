@@ -1,17 +1,37 @@
 import { Body } from "../../typography/Body";
+import clsx from "../../utils/clsx";
 import styles from "./styles.module.css";
 import { TextareaProps } from "./types";
 
+/**
+ * A custom styled `<textarea>` component with label, hint, and error support.
+ *
+ * @component
+ * @param {TextareaProps} props - The props to configure the textarea field.
+ * @returns {JSX.Element} A styled textarea input component with accessibility features.
+ *
+ * @example
+ * <Textarea
+ *   id="bio"
+ *   label="Biography"
+ *   placeholder="Tell us about yourself..."
+ *   hint="You can write up to 500 characters."
+ *   required
+ *   value={bio}
+ *   onChange={(e) => setBio(e.target.value)}
+ * />
+ */
 export const Textarea: React.FC<TextareaProps> = ({
   label,
   id,
   error,
   hint,
   required,
+  className,
   ...props
 }) => {
   return (
-    <div className={styles.container}>
+    <div className={clsx(styles.container, className)}>
       {label && (
         <Body as="label" htmlFor={id} className={styles.label} variant="label">
           {label}

@@ -1,11 +1,28 @@
-import { Button } from "@gaia-dev/ui";
 import { ChevronLeftIcon, ChevronRightIcon, Ellipsis } from "lucide-react";
 import * as React from "react";
 
+import { Button } from "../../buttons/Button";
+import clsx from "../../utils/clsx";
 import styles from "./styles.module.css";
 
+/**
+ * The root container for the pagination component.
+ *
+ * Adds `aria-label="pagination"` for accessibility and applies layout styles.
+ *
+ * @component
+ * @param {React.ComponentProps<"nav">} props - Native `nav` element props.
+ * @returns {JSX.Element}
+ *
+ * @example
+ * <Pagination>
+ *   <PaginationContent>
+ *     ...
+ *   </PaginationContent>
+ * </Pagination>
+ */
 export function Pagination({
-  className = "",
+  className,
   ...props
 }: React.ComponentProps<"nav">) {
   return (
@@ -13,25 +30,41 @@ export function Pagination({
       role="navigation"
       aria-label="pagination"
       data-slot="pagination"
-      className={`${styles.pagination} ${className}`}
+      className={clsx(styles.pagination, className)}
       {...props}
     />
   );
 }
 
+/**
+ * A flex container (`ul`) for pagination items.
+ *
+ * Wraps pagination buttons, ellipsis, and controls in an accessible list.
+ *
+ * @component
+ * @param {React.ComponentProps<"ul">} props - Native `ul` props.
+ * @returns {JSX.Element}
+ */
 export function PaginationContent({
-  className = "",
+  className,
   ...props
 }: React.ComponentProps<"ul">) {
   return (
     <ul
       data-slot="pagination-content"
-      className={`${styles.paginationContent} ${className}`}
+      className={clsx(styles.paginationContent, className)}
       {...props}
     />
   );
 }
 
+/**
+ * A wrapper for individual pagination elements like links or ellipsis.
+ *
+ * @component
+ * @param {React.ComponentProps<"li">} props - Native `li` props.
+ * @returns {JSX.Element}
+ */
 export function PaginationItem(props: React.ComponentProps<"li">) {
   return <li data-slot="pagination-item" {...props} />;
 }
@@ -42,8 +75,23 @@ type PaginationLinkProps = {
   children?: React.ReactNode;
 } & React.ComponentProps<typeof Button>;
 
+/**
+ * A button-like link for individual pages.
+ *
+ * Visually indicates the active page via the `isActive` prop.
+ *
+ * @component
+ * @param {PaginationLinkProps} props - Props for the pagination link.
+ * @param {boolean} [props.isActive] - Highlights the button as the current page.
+ * @param {() => void} [props.onClick] - Click handler to update the page.
+ * @param {React.ReactNode} [props.children] - Typically the page number.
+ * @returns {JSX.Element}
+ *
+ * @example
+ * <PaginationLink isActive onClick={() => setPage(3)}>3</PaginationLink>
+ */
 export function PaginationLink({
-  className = "",
+  className,
   isActive,
   children,
   ...props
@@ -53,7 +101,7 @@ export function PaginationLink({
       variant={isActive ? "outlined" : "text"}
       data-slot="pagination-link"
       data-active={isActive}
-      className={`${styles.paginationLink} ${className}`}
+      className={clsx(styles.paginationLink, className)}
       {...props}
     >
       {children}
@@ -61,8 +109,20 @@ export function PaginationLink({
   );
 }
 
+/**
+ * A button to navigate to the previous page.
+ *
+ * Automatically applies `aria-label` and left-chevron icon.
+ *
+ * @component
+ * @param {React.ComponentProps<typeof Button>} props - Button props.
+ * @returns {JSX.Element}
+ *
+ * @example
+ * <PaginationPrevious onClick={() => setPage(page - 1)} />
+ */
 export function PaginationPrevious({
-  className = "",
+  className,
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
@@ -74,14 +134,26 @@ export function PaginationPrevious({
       icon={ChevronLeftIcon}
       iconPosition="left"
       onClick={onClick}
-      className={`${styles.prevNext} ${className}`}
+      className={clsx(styles.prevNext, className)}
       {...props}
     />
   );
 }
 
+/**
+ * A button to navigate to the next page.
+ *
+ * Automatically applies `aria-label` and right-chevron icon.
+ *
+ * @component
+ * @param {React.ComponentProps<typeof Button>} props - Button props.
+ * @returns {JSX.Element}
+ *
+ * @example
+ * <PaginationNext onClick={() => setPage(page + 1)} />
+ */
 export function PaginationNext({
-  className = "",
+  className,
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
@@ -93,12 +165,24 @@ export function PaginationNext({
       icon={ChevronRightIcon}
       iconPosition="right"
       onClick={onClick}
-      className={`${styles.prevNext} ${className}`}
+      className={clsx(styles.prevNext, className)}
       {...props}
     />
   );
 }
 
+/**
+ * A non-interactive ellipsis element used when pagination range is truncated.
+ *
+ * Visually rendered as "...", and hidden from screen readers.
+ *
+ * @component
+ * @param {React.ComponentProps<"span">} props - Native span props.
+ * @returns {JSX.Element}
+ *
+ * @example
+ * <PaginationEllipsis />
+ */
 export function PaginationEllipsis({
   className = "",
   ...props
@@ -107,7 +191,7 @@ export function PaginationEllipsis({
     <span
       aria-hidden
       data-slot="pagination-ellipsis"
-      className={`${styles.ellipsis} ${className}`}
+      className={clsx(styles.ellipsis, className)}
       {...props}
     >
       <span className="sr-only">
@@ -117,6 +201,25 @@ export function PaginationEllipsis({
   );
 }
 
+/**
+ * A full-featured pagination component that renders numbered links, previous/next buttons,
+ * and automatic ellipsis for large page sets.
+ *
+ * Manages truncation logic and handles updating state via `setPage`.
+ *
+ * @component
+ * @param {Object} props
+ * @param {number} props.page - The current active page (1-based).
+ * @param {number} props.totalPages - Total number of pages to paginate.
+ * @param {React.Dispatch<React.SetStateAction<number>>} props.setPage - State setter to update the current page.
+ * @param {React.ComponentProps<"nav">} [props] - Additional props passed to the root `<Pagination />`.
+ * @returns {JSX.Element}
+ *
+ * @example
+ * const [page, setPage] = useState(1);
+ *
+ * <PaginationAll page={page} setPage={setPage} totalPages={10} />
+ */
 export function PaginationAll({
   page,
   totalPages,

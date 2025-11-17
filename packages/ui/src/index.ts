@@ -1,10 +1,7 @@
 // Buttons
 export { Button } from "./buttons/Button";
 export type { ButtonProps } from "./buttons/Button/types";
-export {
-  Item as ButtonGroupItem,
-  Root as ButtonGroupRoot,
-} from "./buttons/ButtonGroup";
+export { ButtonGroupItem, ButtonGroupRoot } from "./buttons/ButtonGroup";
 export { ButtonLink } from "./buttons/ButtonLink";
 export type { ButtonLinkProps } from "./buttons/ButtonLink/types";
 
@@ -56,10 +53,7 @@ export {
 } from "./general/Dialog";
 export { Divider } from "./general/Divider";
 export type { DividerProps } from "./general/Divider/types";
-export {
-  Buttons as ModalButtons,
-  Content as ModalContent,
-} from "./general/Modal";
+export { ModalButtons, ModalContent } from "./general/Modal";
 export type {
   ModalButtonsProps,
   ModalContentProps,
@@ -121,3 +115,11 @@ export { Body } from "./typography/Body";
 export type { BodyProps } from "./typography/Body/types";
 export { Title } from "./typography/Title";
 export type { TitleProps } from "./typography/Title/types";
+
+// Utils
+export { clsx } from "./utils/clsx";
+export { convertBytesToReadable } from "./utils/convertBytesToReadable";
+export { formatToBRLocale } from "./utils/formatToBRLocale";
+export { isImageOrVideo } from "./utils/isImageOrVideo";
+export { useIsMount } from "./utils/useIsMount";
+export { useWindowSize } from "./utils/useWindowSize";
