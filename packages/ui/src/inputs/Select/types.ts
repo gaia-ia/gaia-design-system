@@ -15,4 +15,5 @@ export interface SelectProps {
   onChange?: (value: string | number) => void;
   disabled?: boolean;
   required?: boolean;
+  className?: string;
 }

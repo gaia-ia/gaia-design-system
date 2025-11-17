@@ -45,6 +45,32 @@ function useCarousel() {
   return context;
 }
 
+/**
+ * Root Carousel component that provides scrollable carousel behavior using Embla under the hood.
+ *
+ * This component initializes the carousel, sets up scroll controls, and provides context to nested components.
+ * It supports both horizontal and vertical orientation, keyboard navigation, plugin injection, and external API access.
+ *
+ * @component
+ * @param {ComponentProps<'div'> & CarouselProps} props - Props for the Carousel container.
+ * @param {'horizontal' | 'vertical'} [props.orientation='horizontal'] - Direction of scroll.
+ * @param {CarouselOptions} [props.opts] - Embla carousel options (passed directly to `useEmblaCarousel`).
+ * @param {CarouselPlugin} [props.plugins] - Optional Embla plugins to extend functionality.
+ * @param {(api: CarouselApi) => void} [props.setApi] - Callback to expose the Embla API instance externally.
+ * @param {string} [props.className] - Optional additional class names.
+ * @param {React.ReactNode} props.children - Nested components (usually `CarouselContent`, `CarouselItem`, and nav buttons).
+ * @returns {JSX.Element} The carousel container wrapped in context.
+ *
+ * @example
+ * <Carousel opts={{ loop: true }}>
+ *   <CarouselContent>
+ *     <CarouselItem>Slide 1</CarouselItem>
+ *     <CarouselItem>Slide 2</CarouselItem>
+ *   </CarouselContent>
+ *   <CarouselPrevious />
+ *   <CarouselNext />
+ * </Carousel>
+ */
 function Carousel({
   orientation = "horizontal",
   opts,
@@ -126,6 +152,21 @@ function Carousel({
   );
 }
 
+/**
+ * Wrapper for the scrollable content of the carousel.
+ * Applies orientation-based styling and connects the carousel ref from context.
+ *
+ * @component
+ * @param {ComponentProps<'div'>} props - Standard div props.
+ * @param {string} [props.className] - Additional class names for inner carousel wrapper.
+ * @returns {JSX.Element} Scrollable carousel track container.
+ *
+ * @example
+ * <CarouselContent>
+ *   <CarouselItem>1</CarouselItem>
+ *   <CarouselItem>2</CarouselItem>
+ * </CarouselContent>
+ */
 function CarouselContent({ className = "", ...props }: ComponentProps<"div">) {
   const { carouselRef, orientation } = useCarousel();
   const axisClass =
@@ -144,6 +185,18 @@ function CarouselContent({ className = "", ...props }: ComponentProps<"div">) {
   );
 }
 
+/**
+ * Represents a single slide within the carousel.
+ * Applies orientation-specific padding and accessibility roles.
+ *
+ * @component
+ * @param {ComponentProps<'div'>} props - Standard div props.
+ * @param {string} [props.className] - Optional class names.
+ * @returns {JSX.Element} A single carousel slide.
+ *
+ * @example
+ * <CarouselItem>Slide Content</CarouselItem>
+ */
 function CarouselItem({ className = "", ...props }: ComponentProps<"div">) {
   const { orientation } = useCarousel();
   const padClass =
@@ -160,6 +213,19 @@ function CarouselItem({ className = "", ...props }: ComponentProps<"div">) {
   );
 }
 
+/**
+ * Navigation button to scroll to the previous slide.
+ * Automatically disabled when the carousel cannot scroll backward.
+ *
+ * @component
+ * @param {ComponentProps<typeof Button>} props - Props passed to the underlying `Button` component.
+ * @param {string} [props.className] - Optional additional class names.
+ * @param {'icon' | 'small' | 'large' | ...} [props.size='icon'] - Button size (inherited from design system).
+ * @returns {JSX.Element} Previous button with left arrow icon.
+ *
+ * @example
+ * <CarouselPrevious />
+ */
 function CarouselPrevious({
   className = "",
 
@@ -183,6 +249,20 @@ function CarouselPrevious({
     />
   );
 }
+
+/**
+ * Navigation button to scroll to the next slide.
+ * Automatically disabled when the carousel cannot scroll forward.
+ *
+ * @component
+ * @param {ComponentProps<typeof Button>} props - Props passed to the underlying `Button` component.
+ * @param {string} [props.className] - Optional additional class names.
+ * @param {'icon' | 'small' | 'large' | ...} [props.size='icon'] - Button size (inherited from design system).
+ * @returns {JSX.Element} Next button with right arrow icon.
+ *
+ * @example
+ * <CarouselNext />
+ */
 
 function CarouselNext({
   className = "",

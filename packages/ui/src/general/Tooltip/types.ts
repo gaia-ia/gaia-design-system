@@ -5,4 +5,5 @@ export type TooltipProps = {
   anchorSelect: string;
   place?: PlacesType;
   color?: string;
+  className?: string;
 };

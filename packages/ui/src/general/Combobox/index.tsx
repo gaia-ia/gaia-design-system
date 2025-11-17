@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { Button } from "../../buttons/Button";
 import { Body } from "../../typography/Body";
+import clsx from "../../utils/clsx";
 import {
   Command,
   CommandEmpty,
@@ -25,9 +26,52 @@ type Props = {
   hint?: string;
   error?: string;
   required?: boolean;
+  placeholder?: string;
+  className?: string;
+  noOptionsMessage?: string;
   id: string;
 };
 
+/**
+ * A controlled, accessible combobox component with searchable dropdown options.
+ *
+ * Renders a custom `Button` that opens a `Popover` containing a filterable list of selectable options.
+ * Supports labels, helper text, error messaging, and keyboard navigation. Selection is controlled via external state.
+ *
+ * @component
+ * @param {Object} props - Props for the `Combobox` component.
+ * @param {string} props.value - The currently selected option's `value`.
+ * @param {React.Dispatch<React.SetStateAction<string>>} props.setValue - State setter for updating the selected value.
+ * @param {{ value: string; label: string }[]} props.options - Array of selectable options with display labels and string values.
+ * @param {string} [props.label] - Optional label text rendered above the combobox trigger.
+ * @param {string} [props.hint] - Optional helper text rendered below the combobox.
+ * @param {string} [props.error] - Optional error message rendered below the combobox.
+ * @param {boolean} [props.required] - If true, displays a visual asterisk for required fields.
+ * @param {string} [props.placeholder] - Placeholder text inside the searchable input (defaults to `"Search options"`).
+ * @param {string} [props.noOptionsMessage] - Message to display when no options match the search (defaults to a fallback).
+ * @param {string} [props.className] - Optional class name applied to the outermost container.
+ * @param {string} props.id - Unique identifier used for accessibility bindings and DOM targeting.
+ * @returns {JSX.Element} A customizable, searchable combobox component.
+ *
+ * @example
+ * const [selected, setSelected] = useState('');
+ *
+ * <Combobox
+ *   id="country-select"
+ *   label="Country"
+ *   required
+ *   value={selected}
+ *   setValue={setSelected}
+ *   options={[
+ *     { value: "us", label: "United States" },
+ *     { value: "ca", label: "Canada" },
+ *     { value: "br", label: "Brazil" },
+ *   ]}
+ *   placeholder="Search countries..."
+ *   hint="Select your country of residence"
+ *   error={selected === "" ? "This field is required" : undefined}
+ * />
+ */
 export const Combobox: React.FC<Props> = ({
   value,
   setValue,
@@ -36,12 +80,15 @@ export const Combobox: React.FC<Props> = ({
   hint,
   error,
   required,
+  placeholder,
+  className,
+  noOptionsMessage,
   id,
 }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className={styles.container}>
+    <div className={clsx(styles.container, className)}>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <div className={styles.inputContainer}>
@@ -72,11 +119,14 @@ export const Combobox: React.FC<Props> = ({
         <PopoverContent className={styles.popover}>
           <Command className={styles.command}>
             <CommandInput
-              placeholder="Search option..."
+              placeholder={placeholder || "Search options"}
               className={styles.input}
             />
             <CommandList>
-              <CommandEmpty>No option found.</CommandEmpty>
+              <CommandEmpty>
+                {noOptionsMessage ||
+                  "No options found. Try another search term."}
+              </CommandEmpty>
               <CommandGroup>
                 {options.map((option) => (
                   <CommandItem

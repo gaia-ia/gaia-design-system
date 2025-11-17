@@ -12,4 +12,5 @@ export interface RadioInputProps {
   hint?: string;
   required?: boolean;
   options: Option[];
+  className?: string;
 }

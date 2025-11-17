@@ -1,10 +1,7 @@
 // Buttons
 export { Button } from "./buttons/Button";
 export type { ButtonProps } from "./buttons/Button/types";
-export {
-  Item as ButtonGroupItem,
-  Root as ButtonGroupRoot,
-} from "./buttons/ButtonGroup";
+export { ButtonGroupItem, ButtonGroupRoot } from "./buttons/ButtonGroup";
 export { ButtonLink } from "./buttons/ButtonLink";
 export type { ButtonLinkProps } from "./buttons/ButtonLink/types";
 
@@ -56,10 +53,7 @@ export {
 } from "./general/Dialog";
 export { Divider } from "./general/Divider";
 export type { DividerProps } from "./general/Divider/types";
-export {
-  Buttons as ModalButtons,
-  Content as ModalContent,
-} from "./general/Modal";
+export { ModalButtons, ModalContent } from "./general/Modal";
 export type {
   ModalButtonsProps,
   ModalContentProps,

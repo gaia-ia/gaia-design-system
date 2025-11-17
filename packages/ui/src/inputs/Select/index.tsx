@@ -2,9 +2,34 @@ import * as RadixSelect from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
 
 import { Body } from "../../typography/Body";
+import clsx from "../../utils/clsx";
 import styles from "./styles.module.css";
 import { SelectProps } from "./types";
 
+/**
+ * A custom select dropdown built on top of Radix UI's Select component.
+ *
+ * Supports label, placeholder, hint, error, disabled state, and validation.
+ * Ideal for selecting from a list of options using native-style behavior and keyboard navigation.
+ *
+ * @component
+ * @param {SelectProps} props - Props to configure the select behavior and presentation.
+ * @returns {JSX.Element} A custom-styled select dropdown component.
+ *
+ * @example
+ * <Select
+ *   id="status"
+ *   label="Status"
+ *   value={status}
+ *   onChange={setStatus}
+ *   options={[
+ *     { value: "active", label: "Active" },
+ *     { value: "inactive", label: "Inactive" },
+ *   ]}
+ *   placeholder="Select a status"
+ *   required
+ * />
+ */
 const Select: React.FC<SelectProps> = ({
   label,
   id,
@@ -16,6 +41,7 @@ const Select: React.FC<SelectProps> = ({
   onChange,
   disabled = false,
   required = false,
+  className,
 }) => {
   const handleValueChange = (selectedValue: string) => {
     if (onChange) {
@@ -24,7 +50,7 @@ const Select: React.FC<SelectProps> = ({
   };
 
   return (
-    <div className={styles.container}>
+    <div className={clsx(styles.container, className)}>
       {label && (
         <Body as="label" htmlFor={id} className={styles.label} variant="label">
           {label}
