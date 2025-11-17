@@ -1,5 +1,26 @@
 # @gaia-dev/ui
 
+## 1.0.0
+
+### Major Changes
+
+- Major shifts in packages/ui/src/index.ts replace the old namespace re‐exports (export \* as Foo) with direct named re‐exports (export
+  { Foo }). For the affected modules:
+
+  - ButtonGroup (packages/ui/src/index.ts:5): ButtonGroupItem and ButtonGroupRoot now re-export individual components, removing the
+    intermediate namespace.
+  - Command (packages/ui/src/index.ts:24): All command subcomponents (dialog, input, list, etc.) are exported directly, so consumers
+    import exactly what they need rather than a bundled command object.
+  - Dialog (packages/ui/src/index.ts:33) and Modal (packages/ui/src/index.ts:43): Each element—trigger, content, overlay, buttons—has
+    explicit exports, which improves tree-shaking and avoids shipping unused helpers.
+  - Pagination (packages/ui/src/index.ts:53): The pagination set now lists every exported piece (content, ellipsis, prev/next) explicitly
+    to prevent implicit namespace imports.
+  - Popover (packages/ui/src/index.ts:60): Anchor, content, and trigger are exported separately to keep bundle sizes minimal and typings
+    clearer.
+
+  Overall, the package shifts from namespace exports to direct named exports for these key component groups, leading to leaner imports
+  and clearer typing.
+
 ## 0.13.0
 
 ### Minor Changes
