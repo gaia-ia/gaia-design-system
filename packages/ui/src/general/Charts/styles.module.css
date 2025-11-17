@@ -1,0 +1,176 @@
+.chartContainer {
+  display: flex;
+  aspect-ratio: 16 / 9;
+  justify-content: center;
+  font-size: 12px; /* text-xs */
+  position: relative;
+}
+
+/* Recharts globals inside the container */
+.chartContainer :global(.recharts-layer),
+.chartContainer :global(.recharts-surface),
+.chartContainer :global(.recharts-sector) {
+  outline: none;
+}
+
+.chartContainer :global(.recharts-sector[stroke='#fff']) {
+  stroke: transparent;
+}
+
+.chartContainer :global(.recharts-dot[stroke='#fff']) {
+  stroke: transparent;
+}
+
+.chartContainer :global(.recharts-cartesian-axis-tick text) {
+  fill: var(--color-text-500);
+}
+
+.chartContainer :global(.recharts-cartesian-grid line[stroke='#ccc']),
+.chartContainer :global(.recharts-reference-line [stroke='#ccc']),
+.chartContainer :global(.recharts-polar-grid [stroke='#ccc']) {
+  stroke: var(--color-background-300);
+}
+
+.chartContainer :global(.recharts-curve.recharts-tooltip-cursor) {
+  stroke: var(--color-background-400);
+}
+
+.chartContainer :global(.recharts-rectangle.recharts-tooltip-cursor) {
+  fill: var(--color-text-400);
+  opacity: 0.1;
+}
+
+.chartContainer :global(.recharts-radial-bar-background-sector) {
+  fill: var(--color-text-400);
+  opacity: 0.2;
+}
+
+/* Tooltip */
+.tooltip {
+  display: grid;
+  min-width: 100px;
+  align-items: start;
+  gap: 0.375rem; /* 1.5 */
+  border-radius: 0.5rem; /* rounded-lg */
+  padding: 0.375rem 0.625rem; /* py-1.5 px-2.5 */
+  font-size: 12px;
+  background: var(--color-background-50);
+  color: var(--color-text-900);
+  border: 1px solid var(--color-background-300);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -2px rgb(0 0 0 / 0.05);
+}
+
+.tooltipGrid {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.tooltipLabel {
+  font-weight: 500; /* medium */
+}
+
+.tooltipRow {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.tooltipRowDotAlign {
+  align-items: center;
+}
+
+.tooltipRowIcon {
+  flex-shrink: 0;
+  border-radius: 2px;
+  border: 1px solid var(--_indicator-border, currentColor);
+  background: var(--_indicator-bg, currentColor);
+}
+
+/* indicator sizes / variants */
+.dot {
+  width: 10px;
+  height: 10px;
+}
+
+.line {
+  width: 4px;
+  height: 100%;
+}
+
+.dashed {
+  width: 0;
+  height: 0;
+  border: 1.5px dashed var(--_indicator-border, currentColor);
+  background: transparent;
+}
+
+.dashedNestFix {
+  margin-block: 0.125rem; /* my-0.5 */
+}
+
+.tooltipRowBody {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  line-height: 1;
+  gap: 0.375rem; /* 1.5 */
+}
+
+.tooltipRowBodyNestEnd {
+  align-items: end;
+}
+
+.tooltipRowBodyCenter {
+  align-items: center;
+}
+
+.tooltipRowTextGroup {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.tooltipMuted {
+  color: var(--color-text-500);
+}
+
+.tooltipValue {
+  color: var(--color-text-900);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* 4 */
+}
+
+.legendPadTop {
+  padding-top: 0.75rem; /* pt-3 */
+}
+
+.legendPadBottom {
+  padding-bottom: 0.75rem; /* pb-3 */
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--color-text-500);
+}
+
+.legendSwatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}

@@ -44,10 +44,10 @@ function CommandDialog({
         <DialogDescription>{description}</DialogDescription>
       </DialogHeader>
       <DialogContent
-        className={`${styles.commandDialogContent} ${className ?? ""}`}
+        className={`${styles.dialogContent} ${className ?? ""}`}
         showCloseButton={showCloseButton}
       >
-        <Command>{children}</Command>
+        <Command className={styles.commandScoped}>{children}</Command>
       </DialogContent>
     </Dialog>
   );
@@ -62,7 +62,7 @@ function CommandInput({
       data-slot="command-input-wrapper"
       className={styles.commandInputWrapper}
     >
-      <SearchIcon className={styles.icon} />
+      <SearchIcon className={styles.searchIcon} />
       <CommandPrimitive.Input
         data-slot="command-input"
         className={`${styles.commandInput} ${className ?? ""}`}
