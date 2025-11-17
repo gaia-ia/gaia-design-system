@@ -10,6 +10,14 @@ export { Badge } from "./general/Badge";
 export type { BadgeProps } from "./general/Badge/types";
 export { Card } from "./general/Card";
 export type { CardProps } from "./general/Card/types";
+export {
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./general/Carousel";
 export * as Command from "./general/Command";
 export * as Dialog from "./general/Dialog";
 export { Divider } from "./general/Divider";

@@ -1,0 +1,81 @@
+.root {
+  position: relative;
+}
+
+.viewport {
+  overflow: hidden;
+}
+
+.inner {
+  display: flex;
+}
+
+.innerHorizontal {
+  margin-left: -1rem;
+}
+
+.innerVertical {
+  margin-top: -1rem;
+  flex-direction: column;
+}
+
+.item {
+  min-width: 0;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: 100%;
+}
+
+.itemPadX {
+  padding-left: 1rem;
+}
+
+.itemPadY {
+  padding-top: 1rem;
+}
+
+.navBtn {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prevHorizontal {
+  top: 50%;
+  left: -3rem;
+  transform: translateY(-50%);
+}
+
+.nextHorizontal {
+  top: 50%;
+  right: -3rem;
+  transform: translateY(-50%);
+}
+
+.prevVertical {
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+}
+
+.nextVertical {
+  bottom: -3rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
