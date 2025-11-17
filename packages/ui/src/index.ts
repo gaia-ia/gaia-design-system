@@ -30,6 +30,7 @@ export {
   ChartTooltip,
   ChartTooltipContent,
 } from "./general/Charts";
+export { Combobox } from "./general/Combobox";
 export {
   Command,
   CommandDialog,
