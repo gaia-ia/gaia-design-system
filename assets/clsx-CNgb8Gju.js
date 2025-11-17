@@ -1,0 +1,1 @@
+function t(r){return typeof r=="string"||typeof r=="number"?String(r):Array.isArray(r)?r.map(t).filter(Boolean).join(" "):r&&typeof r=="object"?Object.keys(r).filter(n=>!!r[n]).join(" "):""}function o(...r){return r.map(t).filter(Boolean).join(" ")}export{o as c};
