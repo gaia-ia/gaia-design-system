@@ -1,10 +1,10 @@
-import { ButtonGroup } from "@gaia-dev/ui";
+import { ButtonGroupItem, ButtonGroupRoot } from "@gaia-dev/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 
 // O componente correto a ser usado como referência é o Root
 const meta = {
   title: "Components/buttons/ButtonGroup",
-  component: ButtonGroup.Root,
+  component: ButtonGroupRoot,
   tags: ["autodocs"],
   argTypes: {
     defaultValue: {
@@ -16,19 +16,19 @@ const meta = {
       description: "Função chamada quando o valor muda",
     },
   },
-} as Meta<typeof ButtonGroup.Root>;
+} as Meta<typeof ButtonGroupRoot>;
 
 export default meta;
 
-type Story = StoryObj<typeof ButtonGroup.Root>;
+type Story = StoryObj<typeof ButtonGroupRoot>;
 
 export const Default: Story = {
   render: (args) => (
-    <ButtonGroup.Root {...args}>
-      <ButtonGroup.Item value="option1">Opção 1</ButtonGroup.Item>
-      <ButtonGroup.Item value="option2">Opção 2</ButtonGroup.Item>
-      <ButtonGroup.Item value="option3">Opção 3</ButtonGroup.Item>
-    </ButtonGroup.Root>
+    <ButtonGroupRoot {...args}>
+      <ButtonGroupItem value="option1">Opção 1</ButtonGroupItem>
+      <ButtonGroupItem value="option2">Opção 2</ButtonGroupItem>
+      <ButtonGroupItem value="option3">Opção 3</ButtonGroupItem>
+    </ButtonGroupRoot>
   ),
   args: {
     defaultValue: "option1",

@@ -1,4 +1,4 @@
-import { Button, Modal } from "@gaia-dev/ui";
+import { Button, ModalButtons, ModalContent } from "@gaia-dev/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
@@ -14,10 +14,10 @@ const ModalExample = ({
     <div style={{ height: "200px" }}>
       <Button onClick={() => setOpen(true)}>Abrir Modal</Button>
       {open && (
-        <Modal.Content title={title} setOpen={setOpen}>
+        <ModalContent title={title} setOpen={setOpen}>
           <div>{content}</div>
           {hasButtons && (
-            <Modal.Buttons>
+            <ModalButtons>
               <Button
                 variant="secondary"
                 onClick={() => setOpen(false)}
@@ -28,9 +28,9 @@ const ModalExample = ({
               <Button variant="primary" onClick={() => setOpen(false)}>
                 Confirmar
               </Button>
-            </Modal.Buttons>
+            </ModalButtons>
           )}
-        </Modal.Content>
+        </ModalContent>
       )}
     </div>
   );
