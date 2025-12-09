@@ -75,6 +75,14 @@ const colorCategories: ColorCategory[] = [
       { cssVar: "--color-alert-error-950" },
     ],
   },
+  {
+    title: "Alert Info",
+    colors: [
+      { cssVar: "--color-alert-info-50" },
+      { cssVar: "--color-alert-info-500" },
+      { cssVar: "--color-alert-info-950" },
+    ],
+  },
 ];
 
 // Componente que exibe uma cor com seu nome e valor

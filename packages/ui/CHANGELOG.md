@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 2.0.0
+
+### Major Changes
+
+- New colors theme
+
 ## 1.1.0
 
 ### Minor Changes
