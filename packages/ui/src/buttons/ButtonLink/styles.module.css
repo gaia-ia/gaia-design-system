@@ -12,7 +12,7 @@
 /* primary */
 
 .button.primary {
-  background-color: var(--color-primary-500);
+  background-color: var(--color-primary-400);
   border: none;
 }
 
@@ -21,18 +21,22 @@
 }
 
 .button.primary span {
-  color: var(--color-fixed-white);
+  color: var(--color-text-900);
+}
+
+.button.primary:hover span {
+  color: var(--color-text-50);
 }
 
 /* secondary */
 
 .button.secondary {
-  background-color: var(--color-primary-300);
+  background-color: var(--color-background-200);
   border: none;
 }
 
 .button.secondary:hover {
-  background-color: var(--color-primary-400);
+  background-color: var(--color-background-300);
 }
 
 .button.secondary span {
@@ -43,7 +47,7 @@
 
 .button.outlined {
   background-color: transparent;
-  border: 1px solid var(--color-primary-800);
+  border: 1px solid var(--color-primary-400);
 }
 
 .button.outlined:hover span {
@@ -51,19 +55,19 @@
 }
 
 .button.outlined span {
-  color: var(--color-primary-800);
+  color: var(--color-primary-400);
 }
 
 /* text */
 
 .button.text {
   background-color: transparent;
-  color: var(--color-primary-800);
+  color: var(--color-primary-400);
   border: none;
 }
 
 .button.text span {
-  color: var(--color-primary-800);
+  color: var(--color-primary-400);
 }
 
 .button.text:hover span {
