@@ -1,4 +1,11 @@
-import { Table, TableBody, TableCell, TableHead, TableRow } from "@gaia-dev/ui";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@gaia-dev/ui";
 import type { Meta } from "@storybook/react";
 
 const meta: Meta<typeof Table> = {
@@ -11,7 +18,7 @@ export default meta;
 
 export const Default = (args: Meta<typeof Table>) => (
   <Table {...args}>
-    <TableHead>
+    <TableHeader>
       <TableRow>
         <TableHead>
           <TableCell>Name</TableCell>
@@ -19,7 +26,7 @@ export const Default = (args: Meta<typeof Table>) => (
           <TableCell>Location</TableCell>
         </TableHead>
       </TableRow>
-    </TableHead>
+    </TableHeader>
     <TableBody>
       <TableRow>
         <TableCell>John Doe</TableCell>

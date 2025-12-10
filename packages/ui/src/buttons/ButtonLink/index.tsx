@@ -58,10 +58,10 @@ export const ButtonLink: React.FC<ButtonLinkProps> = ({
     variant === "primary"
       ? "var(--color-fixed-white)"
       : variant === "secondary"
-        ? "var(--color-text-900)"
+        ? "var(--color-primary-400)"
         : variant === "icon"
           ? "var(--color-text-950)"
-          : "var(--color-primary-800)";
+          : "var(--color-primary-400)";
 
   const _iconColor = iconColor || iconColors;
 

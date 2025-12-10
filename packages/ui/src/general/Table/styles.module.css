@@ -9,6 +9,7 @@
   caption-side: bottom;
   font-size: 0.875rem;
   color: var(--color-text-900);
+  border-collapse: collapse;
 }
 
 .tableHeader tr {
@@ -41,7 +42,7 @@
   background-color: transparent !important;
 }
 
-.tableRow[data-state='selected'] {
+.tableRow[data-state="selected"] {
   background-color: var(--color-transparent-100);
 }
 
@@ -58,7 +59,7 @@
   font-weight: 500;
   white-space: nowrap;
 }
-.tableHead [role='checkbox'] {
+.tableHead [role="checkbox"] {
   padding-right: 0;
   transform: translateY(2px);
 }
@@ -69,7 +70,7 @@
   white-space: nowrap;
   height: 65px;
 }
-.tableCell [role='checkbox'] {
+.tableCell [role="checkbox"] {
   padding-right: 0;
   transform: translateY(2px);
 }
