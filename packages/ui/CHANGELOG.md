@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 2.2.0
+
+### Minor Changes
+
+- adding skeleton component and button color change
+
 ## 2.1.0
 
 ### Minor Changes
