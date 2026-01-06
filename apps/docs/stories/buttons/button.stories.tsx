@@ -8,7 +8,7 @@ const meta: Meta<typeof Button> = {
   tags: ["autodocs"],
   argTypes: {
     variant: {
-      options: ["primary", "secondary", "outlined", "text"],
+      options: ["primary", "secondary", "outlined", "text", "icon"],
       control: { type: "radio" },
       defaultValue: "primary",
     },

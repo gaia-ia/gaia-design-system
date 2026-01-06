@@ -63,17 +63,7 @@ export const Button: React.FC<ButtonProps> = ({
         ? "small_body_bold"
         : "caption_bold";
 
-  const iconColors = disabled
-    ? "var(--color-text-400)"
-    : variant === "primary"
-      ? "var(--color-fixed-white)"
-      : variant === "secondary"
-        ? "var(--color-primary-400)"
-        : variant === "icon"
-          ? "var(--color-text-950)"
-          : "var(--color-primary-400)";
-
-  const _iconColor = iconColor || iconColors;
+  const _iconColor = iconColor || "var(--color-text-900)";
 
   const buttonClasses = clsx(
     styles.button,
