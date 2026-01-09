@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 3.0.0
+
+### Major Changes
+
+- fixing buttonlink hover
+
 ## 2.3.0
 
 ### Minor Changes
