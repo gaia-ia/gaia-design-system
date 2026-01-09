@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 2.3.0
+
+### Minor Changes
+
+- button colors change
+
 ## 2.2.0
 
 ### Minor Changes

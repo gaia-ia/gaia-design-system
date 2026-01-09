@@ -77,7 +77,7 @@ export const Button: React.FC<ButtonProps> = ({
     <button className={buttonClasses} {...props} disabled={disabled || loading}>
       {loading ? (
         <>
-          <Loader color="var(--color-text-300)" className={styles.loader} />
+          <Loader color="var(--color-text-900)" className={styles.loader} />
           <Body variant={bodyVariant}>{children}</Body>
         </>
       ) : (
