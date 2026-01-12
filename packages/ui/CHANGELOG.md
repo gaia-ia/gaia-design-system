@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 3.1.0
+
+### Minor Changes
+
+- adding accordion component
+
 ## 3.0.0
 
 ### Major Changes
