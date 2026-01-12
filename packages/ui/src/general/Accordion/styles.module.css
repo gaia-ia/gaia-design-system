@@ -1,0 +1,113 @@
+/* Root */
+
+.root {
+  width: 100%;
+}
+
+/* Item */
+
+.item {
+  border-bottom: 1px solid var(--color-text-200);
+}
+
+.item:last-child {
+  border-bottom: 0;
+}
+
+/* Trigger */
+
+.header {
+  display: flex;
+}
+
+.trigger {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-radius: 0.375rem;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  color: var(--color-text-950);
+}
+
+.trigger:hover {
+  text-decoration: underline;
+}
+
+.trigger:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Focus */
+
+.trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-primary-500);
+}
+
+/* Chevron */
+
+.chevron {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  pointer-events: none;
+  transform: translateY(2px);
+  transition: transform 0.2s ease;
+  color: var(--color-text-400);
+}
+
+.trigger[data-state="open"] .chevron {
+  transform: rotate(180deg) translateY(-2px);
+}
+
+/* Content */
+
+.content {
+  overflow: hidden;
+  font-size: 0.875rem;
+}
+
+.content[data-state="open"] {
+  animation: accordionDown 0.2s ease-out;
+}
+
+.content[data-state="closed"] {
+  animation: accordionUp 0.2s ease-out;
+}
+
+.contentInner {
+  padding-bottom: 1rem;
+  color: var(--color-text-800);
+  font-size: 0.875rem;
+}
+
+/* Animations */
+
+@keyframes accordionDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordionUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}

@@ -6,6 +6,12 @@ export { ButtonLink } from "./buttons/ButtonLink";
 export type { ButtonLinkProps } from "./buttons/ButtonLink/types";
 
 // General
+export {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./general/Accordion";
 export { Badge } from "./general/Badge";
 export type { BadgeProps } from "./general/Badge/types";
 export { Card } from "./general/Card";
