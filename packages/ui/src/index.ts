@@ -12,6 +12,14 @@ export {
   AccordionItem,
   AccordionTrigger,
 } from "./general/Accordion";
+export {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage,
+} from "./general/Avatar";
 export { Badge } from "./general/Badge";
 export type { BadgeProps } from "./general/Badge/types";
 export { Card } from "./general/Card";
@@ -59,6 +67,19 @@ export {
 } from "./general/Dialog";
 export { Divider } from "./general/Divider";
 export type { DividerProps } from "./general/Divider/types";
+export {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerPortal,
+  DrawerTitle,
+  DrawerTrigger,
+  useDrawer,
+} from "./general/Drawer";
 export { ModalButtons, ModalContent } from "./general/Modal";
 export type {
   ModalButtonsProps,
