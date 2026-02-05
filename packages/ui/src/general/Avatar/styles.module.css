@@ -1,0 +1,149 @@
+.avatar {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 9999px;
+  user-select: none;
+
+  width: 2rem;
+  height: 2rem;
+}
+
+.avatar[data-size='sm'] {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.avatar[data-size='lg'] {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+
+  background: var(--color-accent-200);
+  color: var(--color-background-800);
+  font-size: 0.875rem;
+}
+
+.avatar[data-size='sm'] .fallback {
+  font-size: 0.75rem;
+}
+
+.badge {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9999px;
+  user-select: none;
+
+  background: var(--color-primary-200);
+  color: var(--color-primary-800);
+
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+.avatar[data-size='sm'] .badge {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.avatar[data-size='sm'] .badge > svg {
+  display: none;
+}
+
+.avatar[data-size='default'] .badge {
+  width: 0.625rem;
+  height: 0.625rem;
+}
+
+.avatar[data-size='default'] .badge > svg {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.avatar[data-size='lg'] .badge {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.avatar[data-size='lg'] .badge > svg {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.group {
+  display: flex;
+  margin-left: 0;
+}
+
+.group > [data-slot='avatar'] {
+  margin-left: -0.5rem;
+}
+
+.group > [data-slot='avatar'] {
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+.groupCount {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+
+  width: 2rem;
+  height: 2rem;
+
+  background: var(--color-accent-200);
+  color: var(--color-background-800);
+  font-size: 0.875rem;
+
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+.groupCount > svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.group:has([data-slot='avatar'][data-size='lg']) .groupCount {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.group:has([data-slot='avatar'][data-size='sm']) .groupCount {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.group:has([data-slot='avatar'][data-size='lg']) .groupCount > svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.group:has([data-slot='avatar'][data-size='sm']) .groupCount > svg {
+  width: 0.75rem;
+  height: 0.75rem;
+}
