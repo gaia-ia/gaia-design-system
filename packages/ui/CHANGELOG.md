@@ -1,5 +1,11 @@
 # @gaia-dev/ui
 
+## 3.2.0
+
+### Minor Changes
+
+- adding avatar and drawer components
+
 ## 3.1.0
 
 ### Minor Changes
