@@ -143,4 +143,4 @@ const Multicheck: React.FC<MulticheckProps> = ({
   );
 };
 
-export default Multicheck;
+export { Multicheck };

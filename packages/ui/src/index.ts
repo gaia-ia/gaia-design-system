@@ -131,6 +131,8 @@ export { Checkbox } from "./inputs/Checkbox";
 export type { CheckboxProps } from "./inputs/Checkbox/types";
 export { Input } from "./inputs/Input";
 export type { InputProps } from "./inputs/Input/types";
+export { Multicheck } from "./inputs/Multicheck";
+export type { MulticheckProps } from "./inputs/Multicheck/types";
 export { RadioInput } from "./inputs/RadioInput";
 export type { RadioInputProps } from "./inputs/RadioInput/types";
 export { default as Select } from "./inputs/Select";
