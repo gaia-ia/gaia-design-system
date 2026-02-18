@@ -1,0 +1,95 @@
+:global([data-radix-popper-content-wrapper]) [data-combobox-popper] {
+  pointer-events: auto;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.trigger {
+  width: 100%;
+  min-height: 2rem;
+  height: auto;
+  justify-content: space-between;
+  background: var(--color-background-100) !important;
+  padding: 10px 12px !important;
+  display: flex;
+  align-items: center;
+
+  > span {
+    display: flex;
+    width: 100%;
+  }
+}
+
+.trigger:hover {
+  background: transparent;
+}
+
+.values {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  padding-right: 0.625rem;
+  flex: 1;
+}
+
+.placeholder {
+  color: var(--color-text-400) !important;
+  font-weight: 500;
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: color-mix(in srgb, var(--color-text-800) 80%, transparent);
+}
+
+.badge {
+  border-radius: 0.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badgeRemoveBtn {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+
+  > div {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    border-radius: 50%;
+
+    &:hover {
+      background: var(--color-background-200);
+    }
+  }
+}
+
+.badgeRemoveIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.popoverContent {
+  width: var(--radix-popper-anchor-width);
+  padding: 0;
+}
+
+.itemLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemCheck {
+  margin-left: auto;
+}
