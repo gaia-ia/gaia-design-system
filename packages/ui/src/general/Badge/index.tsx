@@ -1,44 +1,87 @@
-import { Body } from "../../typography/Body";
+import { Slot } from "radix-ui";
+
 import clsx from "../../utils/clsx";
-import styles from "./styled.module.css";
+import styles from "./styles.module.css";
 import { BadgeProps } from "./types";
 
 /**
- * A styled badge component used to display concise status or label text with predefined visual variants.
+ * A flexible Badge component used to display status, labels, or small pieces of metadata.
  *
- * Wraps content inside a styled `<div>` and uses the `Body` typography component with a `small_body` variant
- * for consistent text styling. Supports theme-based variants and forwards standard HTML div attributes.
+ * The component renders a `<span>` element by default, but can render its child
+ * element instead using the `asChild` prop (via Radix UI's `Slot.Root`).
+ *
+ * Styling is controlled through the `variant` prop, which maps to CSS module styles
+ * via the `data-variant` attribute.
  *
  * @component
- * @param {BadgeProps} props - Props for the `Badge` component.
- * @param {React.ReactNode} props.children - The content displayed inside the badge (usually short text).
- * @param {'primary' | 'secondary' | 'success' | 'error' | 'warning'} [props.variant='primary'] - Visual style variant of the badge.
- * @returns {JSX.Element} A stylized badge element.
+ *
+ * @param {BadgeProps} props - Props for the Badge component.
+ * @param {"default" | "secondary" | "destructive" | "outline" | "ghost" | "link"} [props.variant="default"]
+ * Determines the visual appearance of the badge.
+ *
+ * - `"default"`: Primary badge styling.
+ * - `"secondary"`: Muted or alternative styling.
+ * - `"destructive"`: Indicates dangerous or destructive actions (e.g., errors).
+ * - `"outline"`: Transparent background with border styling.
+ * - `"ghost"`: Minimal styling with subtle emphasis.
+ * - `"link"`: Styled similarly to a link.
+ *
+ * @param {boolean} [props.asChild=false]
+ * When `true`, the Badge will render its child element as the root component
+ * instead of a `<span>`. This allows integration with other components
+ * (e.g., links or buttons) while preserving badge styling.
+ *
+ * @param {string} [props.className]
+ * Additional CSS class names to merge with the default badge styles.
+ *
+ * @returns {JSX.Element} A styled badge element.
  *
  * @example
- * <Badge>Default</Badge>
+ * // Default badge
+ * <Badge>New</Badge>
  *
  * @example
- * <Badge variant="success">Active</Badge>
+ * // Secondary badge
+ * <Badge variant="secondary">Draft</Badge>
  *
  * @example
- * <Badge variant="error" aria-label="Error status">
- *   Error
+ * // Destructive badge
+ * <Badge variant="destructive">Deleted</Badge>
+ *
+ * @example
+ * // Outline badge with custom class
+ * <Badge variant="outline" className="my-custom-class">
+ *   Beta
  * </Badge>
+ *
+ * @example
+ * // Rendering as a link using asChild
+ * <Badge asChild>
+ *   <a href="/notifications">3 Notifications</a>
+ * </Badge>
+ *
+ * @remarks
+ * - All standard `<span>` HTML attributes are supported via `React.ComponentProps<"span">`.
+ * - The component applies:
+ *   - `data-slot="badge"`
+ *   - `data-variant={variant}`
+ *   These attributes can be used for styling or testing.
  */
-export const Badge = ({
-  children,
-  variant = "primary",
+const Badge: React.FC<BadgeProps> = ({
+  className,
+  variant = "default",
+  asChild = false,
   ...props
-}: BadgeProps) => {
+}) => {
+  const Comp = asChild ? Slot.Root : "span";
   return (
-    <div
+    <Comp
+      data-slot="badge"
+      data-variant={variant}
+      className={clsx(styles.badge, className)}
       {...props}
-      className={clsx(styles.badge, styles[variant], props.className)}
-    >
-      <Body variant="small_body" className={styles.badge_text}>
-        {children}
-      </Body>
-    </div>
+    />
   );
 };
+
+export { Badge };
