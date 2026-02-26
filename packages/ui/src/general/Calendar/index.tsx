@@ -1,24 +1,92 @@
-import { clsx } from '@gaia-dev/ui';
+import { clsx } from "@gaia-dev/ui";
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-} from 'lucide-react';
-import * as React from 'react';
+} from "lucide-react";
+import * as React from "react";
 import {
   type DayButton,
   DayPicker,
-  type Locale,
   getDefaultClassNames,
-} from 'react-day-picker';
+  type Locale,
+} from "react-day-picker";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
+/**
+ * A styled wrapper around {@link https://react-day-picker.js.org/ | react-day-picker}'s {@link DayPicker}
+ * with project-specific class name wiring, navigation buttons, and chevron icons.
+ *
+ * This component forwards all props to `DayPicker`, while:
+ * - defaulting `showOutsideDays` to `true`
+ * - supporting `captionLayout` styling variants (`"label"` vs dropdown layouts)
+ * - merging `react-day-picker` default class names with local CSS module classes
+ * - overriding several `components` (Root, nav buttons, Chevron, DayButton, WeekNumber)
+ *
+ * @param props - All {@link React.ComponentProps | React props} for {@link DayPicker}.
+ * @param props.className - Additional class name applied to the calendar container.
+ * @param props.classNames - Partial overrides for `react-day-picker` class name slots (merged on top).
+ * @param props.showOutsideDays - Whether to render outside days; defaults to `true`.
+ * @param props.captionLayout - Controls the caption UI (e.g. `"label"` or dropdown variants);
+ * used here to select caption label styles. Defaults to `"label"`.
+ * @param props.locale - Locale configuration used for formatting and `data-day` attributes.
+ * @param props.formatters - Optional `react-day-picker` formatters; merged with an internal
+ * `formatMonthDropdown` implementation.
+ * @param props.components - Optional `react-day-picker` component overrides; merged on top
+ * of the internal component map (so consumer overrides can replace the defaults).
+ *
+ * @returns A `DayPicker` with consistent styling and customized subcomponents.
+ *
+ * @example
+ * // Single date selection
+ * import * as React from "react";
+ * import { Calendar } from "./Calendar";
+ *
+ * export function SingleDateCalendar() {
+ *   const [date, setDate] = React.useState<Date | undefined>();
+ *
+ *   return (
+ *     <Calendar
+ *       mode="single"
+ *       selected={date}
+ *       onSelect={setDate}
+ *     />
+ *   );
+ * }
+ *
+ * @example
+ * // Date range selection with dropdown caption
+ * import * as React from "react";
+ * import type { DateRange } from "react-day-picker";
+ * import { Calendar } from "./Calendar";
+ *
+ * export function RangeCalendar() {
+ *   const [range, setRange] = React.useState<DateRange | undefined>();
+ *
+ *   return (
+ *     <Calendar
+ *       mode="range"
+ *       selected={range}
+ *       onSelect={setRange}
+ *       captionLayout="dropdown"
+ *       numberOfMonths={2}
+ *     />
+ *   );
+ * }
+ *
+ * @remarks
+ * - `formatMonthDropdown` uses `date.toLocaleString(locale?.code, { month: "short" })`
+ *   and is merged with any consumer-provided `formatters`.
+ * - The internal `components` object is merged with the incoming `components`, so
+ *   consumer overrides take precedence.
+ * - Several `data-*` attributes are used as styling hooks (e.g. `data-slot="calendar"`).
+ */
 function Calendar({
   className,
   classNames,
   showOutsideDays = true,
-  captionLayout = 'label',
+  captionLayout = "label",
   locale,
   formatters,
   components,
@@ -27,7 +95,7 @@ function Calendar({
   const defaultClassNames = getDefaultClassNames();
 
   const captionLabelClass =
-    captionLayout === 'label'
+    captionLayout === "label"
       ? clsx(styles.captionLabel, styles.captionLabelText)
       : clsx(styles.captionLabel, styles.captionLabelDropdown);
 
@@ -38,8 +106,8 @@ function Calendar({
       captionLayout={captionLayout}
       locale={locale}
       formatters={{
-        formatMonthDropdown: date =>
-          date.toLocaleString(locale?.code, { month: 'short' }),
+        formatMonthDropdown: (date) =>
+          date.toLocaleString(locale?.code, { month: "short" }),
         ...formatters,
       }}
       classNames={{
@@ -47,7 +115,7 @@ function Calendar({
         months: clsx(
           styles.months,
           defaultClassNames.months,
-          classNames?.months
+          classNames?.months,
         ),
         month: clsx(styles.month, defaultClassNames.month, classNames?.month),
 
@@ -56,51 +124,51 @@ function Calendar({
         /* We render the actual buttons via components.PreviousMonthButton/NextMonthButton */
         button_previous: clsx(
           defaultClassNames.button_previous,
-          classNames?.button_previous
+          classNames?.button_previous,
         ),
         button_next: clsx(
           defaultClassNames.button_next,
-          classNames?.button_next
+          classNames?.button_next,
         ),
 
         month_caption: clsx(
           styles.monthCaption,
           defaultClassNames.month_caption,
-          classNames?.month_caption
+          classNames?.month_caption,
         ),
 
         dropdowns: clsx(
           styles.dropdowns,
           defaultClassNames.dropdowns,
-          classNames?.dropdowns
+          classNames?.dropdowns,
         ),
         dropdown_root: clsx(
           styles.dropdownRoot,
           defaultClassNames.dropdown_root,
-          classNames?.dropdown_root
+          classNames?.dropdown_root,
         ),
         dropdown: clsx(
           styles.dropdown,
           defaultClassNames.dropdown,
-          classNames?.dropdown
+          classNames?.dropdown,
         ),
 
         caption_label: clsx(
           captionLabelClass,
           defaultClassNames.caption_label,
-          classNames?.caption_label
+          classNames?.caption_label,
         ),
 
         table: clsx(styles.table, classNames?.table),
         weekdays: clsx(
           styles.weekdays,
           defaultClassNames.weekdays,
-          classNames?.weekdays
+          classNames?.weekdays,
         ),
         weekday: clsx(
           styles.weekday,
           defaultClassNames.weekday,
-          classNames?.weekday
+          classNames?.weekday,
         ),
 
         week: clsx(styles.week, defaultClassNames.week, classNames?.week),
@@ -108,12 +176,12 @@ function Calendar({
         week_number_header: clsx(
           styles.weekNumberHeader,
           defaultClassNames.week_number_header,
-          classNames?.week_number_header
+          classNames?.week_number_header,
         ),
         week_number: clsx(
           styles.weekNumber,
           defaultClassNames.week_number,
-          classNames?.week_number
+          classNames?.week_number,
         ),
 
         day: clsx(styles.day, defaultClassNames.day, classNames?.day),
@@ -121,34 +189,34 @@ function Calendar({
         range_start: clsx(
           styles.rangeStart,
           defaultClassNames.range_start,
-          classNames?.range_start
+          classNames?.range_start,
         ),
         range_middle: clsx(
           styles.rangeMiddle,
           defaultClassNames.range_middle,
-          classNames?.range_middle
+          classNames?.range_middle,
         ),
         range_end: clsx(
           styles.rangeEnd,
           defaultClassNames.range_end,
-          classNames?.range_end
+          classNames?.range_end,
         ),
 
         today: clsx(styles.today, defaultClassNames.today, classNames?.today),
         outside: clsx(
           styles.outside,
           defaultClassNames.outside,
-          classNames?.outside
+          classNames?.outside,
         ),
         disabled: clsx(
           styles.disabled,
           defaultClassNames.disabled,
-          classNames?.disabled
+          classNames?.disabled,
         ),
         hidden: clsx(
           styles.hidden,
           defaultClassNames.hidden,
-          classNames?.hidden
+          classNames?.hidden,
         ),
 
         ...classNames,
@@ -170,7 +238,7 @@ function Calendar({
               styles.buttonReset,
               styles.focusRing,
               styles.navButton,
-              btnClassName
+              btnClassName,
             )}
             {...btnProps}
           />
@@ -183,14 +251,14 @@ function Calendar({
               styles.buttonReset,
               styles.focusRing,
               styles.navButton,
-              btnClassName
+              btnClassName,
             )}
             {...btnProps}
           />
         ),
 
         Chevron: ({ className: iconClassName, orientation, ...iconProps }) => {
-          if (orientation === 'left') {
+          if (orientation === "left") {
             return (
               <ChevronLeftIcon
                 className={clsx(styles.chevron, styles.rtlFlip, iconClassName)}
@@ -199,7 +267,7 @@ function Calendar({
             );
           }
 
-          if (orientation === 'right') {
+          if (orientation === "right") {
             return (
               <ChevronRightIcon
                 className={clsx(styles.chevron, styles.rtlFlip, iconClassName)}
@@ -216,7 +284,7 @@ function Calendar({
           );
         },
 
-        DayButton: dayButtonProps => (
+        DayButton: (dayButtonProps) => (
           <CalendarDayButton locale={locale} {...dayButtonProps} />
         ),
 
