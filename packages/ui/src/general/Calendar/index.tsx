@@ -301,6 +301,41 @@ function Calendar({
   );
 }
 
+/**
+ * Custom day button renderer for {@link DayPicker}.
+ *
+ * Adds focus management and data attributes that reflect selection/range state,
+ * allowing CSS to target:
+ * - single selected days (not part of a range)
+ * - range start / middle / end
+ *
+ * @param props - All props forwarded from `react-day-picker`'s `DayButton`.
+ * @param props.locale - Optional locale used to format `data-day` as a locale-aware date string.
+ * @param props.day - The day object for this cell.
+ * @param props.modifiers - Modifier flags provided by `react-day-picker` (e.g. `selected`, `focused`, `range_start`).
+ * @param props.className - Additional class names merged with the base styles.
+ *
+ * @returns A `<button>` representing a day cell.
+ *
+ * @example
+ * // Used internally by <Calendar /> via DayPicker's `components.DayButton`.
+ * // If you want to use it yourself, pass it as a DayPicker component override:
+ * import { DayPicker } from "react-day-picker";
+ * import { CalendarDayButton } from "./Calendar";
+ *
+ * export function CustomDayButtonCalendar() {
+ *   return (
+ *     <DayPicker
+ *       components={{ DayButton: CalendarDayButton }}
+ *     />
+ *   );
+ * }
+ *
+ * @remarks
+ * - When `modifiers.focused` becomes true, the button is imperatively focused.
+ * - `data-selected-single` is only set when the day is selected but not a range boundary/middle.
+ * - `data-day` uses `day.date.toLocaleDateString(locale?.code)`.
+ */
 function CalendarDayButton({
   className,
   day,
