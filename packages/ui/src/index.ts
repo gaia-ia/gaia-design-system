@@ -130,6 +130,8 @@ export type { TooltipProps } from "./general/Tooltip/types";
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";
 export type { CheckboxProps } from "./inputs/Checkbox/types";
+export { DatePicker } from "./inputs/DatePicker";
+export type { DatePickerProps } from "./inputs/DatePicker/types";
 export { Input } from "./inputs/Input";
 export type { InputProps } from "./inputs/Input/types";
 export { Multicheck } from "./inputs/Multicheck";
