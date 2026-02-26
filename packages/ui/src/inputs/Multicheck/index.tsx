@@ -69,6 +69,9 @@ import { MulticheckProps } from "./types";
  * @param {string} [props.noOptionFoundText="No option found"]
  * Text shown when the search yields no results.
  *
+ * @param {number} [props.maxSelectedItems=8]
+ * Maximum number of selected items shown in the badge list.
+ *
  * @returns {JSX.Element} A multi-select combobox with searchable options and removable badges.
  *
  * @example
@@ -91,6 +94,7 @@ import { MulticheckProps } from "./types";
  *       options={options}
  *       selectedValues={selectedValues}
  *       setSelectedValues={setSelectedValues}
+ *       maxSelectedItems={2}
  *     />
  *   );
  * }
@@ -130,6 +134,7 @@ const Multicheck: React.FC<MulticheckProps> = ({
   selectedValues,
   setSelectedValues,
   maxShownItems = 8,
+  maxSelectedItems,
   label,
   options,
   searchPlaceholder = "Search...",
@@ -142,9 +147,13 @@ const Multicheck: React.FC<MulticheckProps> = ({
   const [expanded, setExpanded] = useState(false);
 
   const toggleSelection = (value: string) => {
-    setSelectedValues((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value],
-    );
+    setSelectedValues((prev) => {
+      if (prev.includes(value)) return prev.filter((v) => v !== value);
+
+      if (maxSelectedItems && prev.length >= maxSelectedItems) return prev;
+
+      return [...prev, value];
+    });
   };
 
   const removeSelection = (value: string) => {

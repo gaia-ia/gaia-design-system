@@ -13,4 +13,5 @@ export type MulticheckProps = {
   showLessText?: string;
   moreText?: string;
   noOptionFoundText?: string;
+  maxSelectedItems?: number;
 };
