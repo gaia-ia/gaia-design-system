@@ -1,5 +1,20 @@
 # @gaia-dev/ui
 
+## 3.3.0
+
+### Minor Changes
+
+- feat(ui): add Calendar, DatePicker, Switch and Multicheck input components
+
+  Added four new UI input components to the design system and exported them from the `ui` package:
+
+  - `Calendar`: a styled wrapper around `react-day-picker` with project-specific class mappings, custom navigation controls/icons, support for caption layout variants, outside days, locale-aware formatting, and extensible `classNames`, `formatters`, and `components` overrides.
+  - `DatePicker`: a popover-based date picker built on top of the new `Calendar` component, supporting both `single` and `range` selection modes, localized calendar display (`en`/`es`/`pt`), placeholders, label/hint/error states, and controlled value handling.
+  - `Switch`: a styled wrapper around Radix UI `Switch` with `default` and `sm` size variants, forwarding Radix root props and preserving controlled/uncontrolled usage patterns.
+  - `Multicheck`: a searchable multi-select combobox with badge-based selected item display, removable selections, customizable texts/placeholders, export from the package entrypoint, and support for limiting the number of selected items (`maxSelectedItems`) plus collapsed badge display (`maxShownItems`).
+
+  Also includes documentation updates/examples for `Calendar` day button behavior and `Multicheck` usage/customization.
+
 ## 3.2.0
 
 ### Minor Changes
