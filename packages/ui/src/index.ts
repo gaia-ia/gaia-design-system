@@ -22,6 +22,7 @@ export {
 } from "./general/Avatar";
 export { Badge } from "./general/Badge";
 export type { BadgeProps } from "./general/Badge/types";
+export { Calendar } from "./general/Calendar";
 export { Card } from "./general/Card";
 export type { CardProps } from "./general/Card/types";
 export {
@@ -129,12 +130,18 @@ export type { TooltipProps } from "./general/Tooltip/types";
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";
 export type { CheckboxProps } from "./inputs/Checkbox/types";
+export { DatePicker } from "./inputs/DatePicker";
+export type { DatePickerProps } from "./inputs/DatePicker/types";
 export { Input } from "./inputs/Input";
 export type { InputProps } from "./inputs/Input/types";
+export { Multicheck } from "./inputs/Multicheck";
+export type { MulticheckProps } from "./inputs/Multicheck/types";
 export { RadioInput } from "./inputs/RadioInput";
 export type { RadioInputProps } from "./inputs/RadioInput/types";
 export { default as Select } from "./inputs/Select";
 export type { SelectProps } from "./inputs/Select/types";
+export { Switch } from "./inputs/Switch";
+export type { SwitchProps } from "./inputs/Switch/types";
 export { Textarea } from "./inputs/Textarea";
 export type { TextareaProps } from "./inputs/Textarea/types";
 

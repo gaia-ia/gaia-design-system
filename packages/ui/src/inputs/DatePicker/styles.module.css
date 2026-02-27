@@ -1,0 +1,67 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.label {
+  color: var(--color-text-900);
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.required {
+  margin-left: 4px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.trigger {
+  width: 100%;
+  min-height: 2rem;
+  height: auto;
+  justify-content: space-between;
+  background: var(--color-background-100) !important;
+  padding: 10px 12px !important;
+  display: flex;
+  align-items: center;
+  border: none !important;
+  display: flex;
+  align-items: center;
+
+  > span {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+
+    > span {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+.popoverContent {
+  width: auto;
+  padding: 0;
+}
+
+.placeholder {
+  color: var(--color-text-500) !important;
+}
+
+.error {
+  color: var(--color-alert-error-500);
+}
+
+.hint {
+  color: var(--color-text-800);
+}

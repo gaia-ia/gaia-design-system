@@ -1,0 +1,396 @@
+/* Hard-coded sizing + palette. No CSS vars, no design tokens. */
+
+/* ---------- Root wrapper ---------- */
+.calendar {
+  padding: 8px;
+  border-radius: 10px;
+}
+
+/* When rendered inside common container slots, make background transparent */
+:global([data-slot='card-content']) :global([data-slot='calendar']),
+:global([data-slot='popover-content']) :global([data-slot='calendar']) {
+  background: transparent;
+}
+
+/* ---------- Layout ---------- */
+.root {
+  width: 300px;
+}
+
+.months {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .months {
+    flex-direction: row;
+  }
+}
+
+.month {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  justify-content: space-between;
+}
+
+.monthCaption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  width: 100%;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.dropdowns {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dropdownRoot {
+  position: relative;
+  border-radius: 6px;
+}
+
+.dropdown {
+  position: absolute;
+  inset: 0;
+  background: var(--color-background-950);
+  opacity: 0;
+}
+
+.captionLabel {
+  user-select: none;
+  font-weight: 600;
+}
+
+.captionLabelText {
+  font-size: 14px;
+}
+
+.captionLabelDropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.captionLabelDropdown > svg {
+  color: var(--color-text-400);
+  width: 14px;
+  height: 14px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.weekdays {
+  display: flex;
+}
+
+.weekday {
+  flex: 1;
+  color: var(--color-text-400);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12.8px; /* ~0.8rem */
+  user-select: none;
+}
+
+.week {
+  display: flex;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.weekNumberHeader {
+  width: 28px;
+  user-select: none;
+}
+
+.weekNumber {
+  font-size: 12.8px;
+  user-select: none;
+  color: var(--color-text-400);
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+/* ---------- Icon + generic button reset ---------- */
+.chevron {
+  width: 16px;
+  height: 16px;
+}
+
+.rtlFlip:dir(rtl) {
+  transform: rotate(180deg);
+}
+
+.buttonReset {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  padding: 0;
+  margin: 0;
+  text-align: inherit;
+}
+
+.buttonReset:disabled,
+.buttonReset[aria-disabled='true'] {
+  cursor: not-allowed;
+}
+
+.focusRing:focus-visible {
+  outline: 3px solid var(--color-primary-400);
+  outline-offset: 2px;
+}
+
+/* ---------- Nav buttons (replaces Button + buttonVariants) ---------- */
+.navButton {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.navButton:hover {
+  background: var(--color-background-300);
+}
+
+.navButton:disabled,
+.navButton[aria-disabled='true'] {
+  opacity: 0.5;
+}
+
+/* ---------- Day cell wrapper (td) ---------- */
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  text-align: center;
+  border-radius: 6px;
+  aspect-ratio: 1 / 1;
+  user-select: none;
+}
+
+/* When the day cell is selected, DayPicker often expects the button inside to be squared off */
+.day[data-selected='true'] :global(button) {
+  border-radius: 0;
+}
+
+/* Left rounding for selected ranges (no week numbers) */
+.day:first-child[data-selected='true'] :global(button) {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+/* Left rounding when week numbers are shown (first day may be 2nd td) */
+:global(.rdp-weeknumber) + .day[data-selected='true'] :global(button),
+.day:nth-child(2)[data-selected='true'] :global(button) {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+/* Right rounding for selected ranges */
+.day:last-child[data-selected='true'] :global(button) {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+/* ---------- Range cells (td) ---------- */
+.rangeStart {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  background: var(--color-background-200);
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+
+.rangeStart::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  background: var(--color-background-200);
+}
+
+.rangeMiddle {
+  border-radius: 0;
+}
+
+.rangeEnd {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background: var(--color-background-200);
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+
+.rangeEnd::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 16px;
+  background: var(--color-background-200);
+}
+
+.today {
+  background: var(--color-background-200);
+  color: var(--color-text-950);
+  border-radius: 6px;
+}
+
+.outside {
+  color: var(--color-text-400);
+}
+
+.outside[aria-selected='true'] {
+  color: var(--color-text-400);
+}
+
+.disabled {
+  color: var(--color-text-400);
+  opacity: 0.5;
+}
+
+/* ---------- Week number cell wrapper ---------- */
+.weekNumberCell {
+  display: flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* ---------- Day button (actual clickable) ---------- */
+.dayButton {
+  /* reset */
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+
+  position: relative;
+  isolation: isolate;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-width: 28px;
+  aspect-ratio: 1 / 1;
+
+  border-radius: 8px;
+  cursor: pointer !important;
+
+  font-weight: 500;
+  line-height: 1;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.dayButton:hover {
+  background: var(--color-background-300);
+}
+
+.dayButton:disabled,
+.dayButton[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.dayButton:disabled:hover,
+.dayButton[aria-disabled='true'] {
+  background: transparent;
+}
+
+.dayButton > span {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Selected single (not range) */
+.dayButton[data-selected-single='true'] {
+  background: var(--color-primary-400);
+  color: var(--color-text-950);
+  border-radius: 6px !important;
+}
+
+/* Range middle */
+.dayButton[data-range-middle='true'] {
+  background: var(--color-primary-100);
+  color: var(--color-text-950);
+  border-radius: 0;
+}
+
+/* Range start/end */
+.dayButton[data-range-start='true'],
+.dayButton[data-range-end='true'] {
+  background: var(--color-primary-400);
+  color: var(--color-text-950);
+}
+
+.dayButton[data-range-start='true'] {
+  border-top-left-radius: 6px !important;
+  border-bottom-left-radius: 6px !important;
+}
+
+.dayButton[data-range-end='true'] {
+  border-top-right-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+}

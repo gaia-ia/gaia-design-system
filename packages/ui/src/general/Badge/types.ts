@@ -1,6 +1,12 @@
-import { HTMLAttributes } from "react";
+type BadgeVariant =
+  | "default"
+  | "secondary"
+  | "destructive"
+  | "outline"
+  | "ghost"
+  | "link";
 
-export interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  variant?: "primary" | "secondary" | "success" | "error" | "warning";
+export interface BadgeProps extends React.ComponentProps<"span"> {
+  variant?: BadgeVariant;
+  asChild?: boolean;
 }
