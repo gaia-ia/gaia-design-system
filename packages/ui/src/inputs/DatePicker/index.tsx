@@ -122,7 +122,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   return (
     <div className={clsx(styles.container, className)}>
       {label && (
-        <Body variant="label" className={styles.label} htmlFor={id}>
+        <Body variant="label" className={styles.label} htmlFor={id} as="label">
           {label}
           {required && <span className={styles.required}>*</span>}
         </Body>
