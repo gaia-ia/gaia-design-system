@@ -67,6 +67,7 @@
     align-items: center;
     padding: 2px;
     border-radius: 50%;
+    cursor: pointer;
 
     &:hover {
       background: var(--color-background-200);
