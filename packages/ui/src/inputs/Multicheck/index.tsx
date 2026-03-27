@@ -190,7 +190,9 @@ const Multicheck: React.FC<MulticheckProps> = ({
 
                     return (
                       <Badge key={val} className={styles.badge}>
-                        {framework.label}
+                        <span className={styles.badgeLabel}>
+                          {framework.label}
+                        </span>
                         <div
                           className={styles.badgeRemoveBtn}
                           onClick={(e) => {
