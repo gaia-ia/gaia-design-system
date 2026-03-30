@@ -132,6 +132,8 @@ export type {
   THProps,
   TRProps,
 } from "./general/Table/types";
+export { Tabs, TabsContent, TabsList, TabsTrigger } from "./general/Tabs";
+export type { TabsListProps, TabsProps } from "./general/Tabs/types";
 export { Tooltip } from "./general/Tooltip";
 export type { TooltipProps } from "./general/Tooltip/types";
 

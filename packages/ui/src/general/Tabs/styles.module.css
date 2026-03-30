@@ -1,0 +1,144 @@
+.root {
+  display: flex;
+  gap: 8px;
+}
+
+.root[data-orientation='horizontal'] {
+  flex-direction: column;
+}
+
+.list {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.list[data-variant='default'] {
+  background: var(--color-background-100);
+}
+
+.list[data-variant='line'] {
+  gap: 4px;
+  border-radius: 0;
+  background: transparent;
+}
+
+.root[data-orientation='horizontal'] .list {
+  height: 32px;
+}
+
+.root[data-orientation='vertical'] .list {
+  height: fit-content;
+  flex-direction: column;
+}
+
+.trigger {
+  position: relative;
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: calc(100% - 1px);
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 2px 6px;
+  background: transparent;
+  color: var(--color-text-400);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    opacity 160ms ease;
+}
+
+.root[data-orientation='vertical'] .trigger {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.trigger:hover {
+  color: var(--color-text-800);
+}
+
+.trigger:disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.trigger:focus-visible {
+  outline: 1px solid var(--color-primary-400);
+  border-color: var(--color-primary-400);
+}
+
+.trigger[data-state='active'] {
+  background: var(--color-background-50);
+  color: var(--color-text-900);
+}
+
+.list[data-variant='default'] .trigger[data-state='active'] {
+  box-shadow: color-mix(in srgb, var(--color-primary-400) 50%, transparent);
+}
+
+.list[data-variant='line'] .trigger {
+  background: transparent;
+}
+
+.list[data-variant='line'] .trigger[data-state='active'] {
+  background: transparent;
+  box-shadow: none;
+}
+
+.trigger::after {
+  content: '';
+  position: absolute;
+  background: var(--color-background-900);
+  opacity: 0;
+  transition: opacity 160ms ease;
+  height: 2px;
+  width: 100%;
+}
+
+.root[data-orientation='horizontal'] .trigger::after {
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 2px;
+}
+
+.root[data-orientation='vertical'] .trigger::after {
+  top: 0;
+  bottom: 0;
+  right: -0.25rem;
+  width: 2px;
+  height: 100%;
+}
+
+.list[data-variant='line'] .trigger[data-state='active']::after {
+  opacity: 1;
+}
+
+.trigger svg {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.trigger svg:not([class*='size-']) {
+  width: 16px;
+  height: 16px;
+}
+
+.content {
+  flex: 1;
+  outline: none;
+  font-size: 14px;
+}
