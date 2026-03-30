@@ -3,8 +3,16 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Cookie, Croissant, Pizza } from "lucide-react";
 
 const meta: Meta<typeof ButtonLink> = {
-  title: "Components/buttons/ButtonLink",
+  title: "Components/buttons/ButtonLink [Deprecated]",
   component: ButtonLink,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          '⚠️ **Deprecated:** Use `<Button asChild><Link to="...">...</Link></Button>` instead.',
+      },
+    },
+  },
   tags: ["autodocs"],
   argTypes: {
     children: {
@@ -35,9 +43,9 @@ const meta: Meta<typeof ButtonLink> = {
       options: ["Sem Ícone", "Pizza", "Cookie", "Croissant"],
       mapping: {
         "Sem Ícone": undefined,
-        "Pizza": Pizza,
-        "Cookie": Cookie,
-        "Croissant": Croissant,
+        Pizza: Pizza,
+        Cookie: Cookie,
+        Croissant: Croissant,
       },
       control: { type: "radio" },
       defaultValue: undefined,

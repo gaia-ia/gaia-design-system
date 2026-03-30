@@ -35,6 +35,8 @@ import { ButtonLinkProps } from "./types";
  * <ButtonLink to="/signup" size="extra_large" icon={FiArrowRight} iconPosition="right">
  *   Get Started
  * </ButtonLink>
+ *
+ * @deprecated Use `<Button asChild><Link to="...">...</Link></Button>` instead.
  */
 export const ButtonLink: React.FC<ButtonLinkProps> = ({
   children,
