@@ -13,6 +13,7 @@ import {
   Upload,
 } from "lucide-react";
 import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 import styles from "./styles.module.css";
 
@@ -214,5 +215,17 @@ export const Disabled: Story = {
   args: {
     children: "Disabled",
     disabled: true,
+  },
+};
+
+export const AsChildLink: Story = {
+  args: {
+    asChild: true,
+    variant: "default",
+    children: (
+      <RouterLink to="https://google.com" target="_blank">
+        Navigate to Google
+      </RouterLink>
+    ),
   },
 };
