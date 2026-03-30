@@ -80,14 +80,14 @@ function CommandDialog({
 }) {
   return (
     <Dialog {...props}>
-      <DialogHeader className="sr-only">
-        <DialogTitle>{title}</DialogTitle>
-        <DialogDescription>{description}</DialogDescription>
-      </DialogHeader>
       <DialogContent
         className={clsx(styles.dialogContent, className)}
         showCloseButton={showCloseButton}
       >
+        <DialogHeader className={styles.srOnly}>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
+        </DialogHeader>
         <Command className={styles.commandScoped}>{children}</Command>
       </DialogContent>
     </Dialog>
