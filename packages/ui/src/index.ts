@@ -42,7 +42,6 @@ export {
   CarouselPrevious,
 } from "./general/Carousel";
 export {
-  type ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
@@ -50,6 +49,17 @@ export {
   ChartTooltip,
   ChartTooltipContent,
 } from "./general/Charts";
+export type {
+  ChartConfig,
+  ChartContextProps,
+  ExtraTooltipProps,
+  FillColorish,
+  LegendExtras,
+  PayloadLike,
+  RLegendItem,
+  RTooltipItem,
+  RValue,
+} from "./general/Charts/types";
 export { Combobox } from "./general/Combobox";
 export {
   Command,
