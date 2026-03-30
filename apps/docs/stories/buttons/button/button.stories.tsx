@@ -12,7 +12,6 @@ import {
   Trash2,
   Upload,
 } from "lucide-react";
-import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import styles from "./styles.module.css";
@@ -32,7 +31,6 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 const ButtonDecorator = (Story: StoryFn, context: StoryContext) => {
-  const [isLoading, setIsLoading] = useState(false);
   const { icon, ...restArgs } = context.args;
   const selectedIcon = iconMap[icon as string] ?? null;
 
@@ -45,8 +43,7 @@ const ButtonDecorator = (Story: StoryFn, context: StoryContext) => {
           args={{
             ...restArgs,
             children,
-            loading: isLoading,
-            onClick: () => setIsLoading(true),
+            onClick: () => window.alert("Clicked!"),
           }}
         />
       </div>
@@ -55,8 +52,7 @@ const ButtonDecorator = (Story: StoryFn, context: StoryContext) => {
           args={{
             ...restArgs,
             children,
-            loading: isLoading,
-            onClick: () => setIsLoading(true),
+            onClick: () => window.alert("Clicked!"),
           }}
         />
       </div>
