@@ -98,7 +98,7 @@ export function PaginationLink({
 }: PaginationLinkProps) {
   return (
     <Button
-      variant={isActive ? "outline" : "ghost"}
+      variant={isActive ? "secondary" : "ghost"}
       data-slot="pagination-link"
       data-active={isActive}
       className={clsx(styles.paginationLink, className)}

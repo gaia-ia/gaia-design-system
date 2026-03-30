@@ -43,6 +43,7 @@ export const ModalContent: React.FC<ModalContentProps> = ({
           <Title variant="subtitle">{title}</Title>
           <Button
             size="icon"
+            variant="ghost"
             onClick={() => setOpen(false)}
             className={styles.close_button}
           >
