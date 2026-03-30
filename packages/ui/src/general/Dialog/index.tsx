@@ -2,6 +2,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
 import * as React from "react";
 
+import { Button } from "../../buttons/Button";
 import clsx from "../../utils/clsx";
 import styles from "./styles.module.css";
 
@@ -141,8 +142,11 @@ function DialogContent({
           <DialogPrimitive.Close
             data-slot="dialog-close"
             className={styles.dialogClose}
+            asChild
           >
-            <XIcon />
+            <Button variant="ghost" size="icon">
+              <XIcon />
+            </Button>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Content>

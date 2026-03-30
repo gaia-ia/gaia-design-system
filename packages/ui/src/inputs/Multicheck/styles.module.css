@@ -36,6 +36,8 @@
   gap: 0.25rem;
   padding-right: 0.625rem;
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .placeholder {
@@ -52,7 +54,13 @@
   border-radius: 0.125rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  max-width: 100%;
+}
+
+.badgeLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .badgeRemoveBtn {
@@ -67,6 +75,7 @@
     align-items: center;
     padding: 2px;
     border-radius: 50%;
+    cursor: pointer;
 
     &:hover {
       background: var(--color-background-200);

@@ -42,11 +42,13 @@ export const ModalContent: React.FC<ModalContentProps> = ({
         <div className={styles.header}>
           <Title variant="subtitle">{title}</Title>
           <Button
-            variant="icon"
-            icon={X}
+            size="icon"
+            variant="ghost"
             onClick={() => setOpen(false)}
             className={styles.close_button}
-          />
+          >
+            <X size={16} />
+          </Button>
         </div>
         <div className={styles.content}>{children}</div>
       </div>

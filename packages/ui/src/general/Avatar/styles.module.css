@@ -10,12 +10,12 @@
   height: 2rem;
 }
 
-.avatar[data-size='sm'] {
+.avatar[data-size="sm"] {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.avatar[data-size='lg'] {
+.avatar[data-size="lg"] {
   width: 2.5rem;
   height: 2.5rem;
 }
@@ -40,7 +40,7 @@
   font-size: 0.875rem;
 }
 
-.avatar[data-size='sm'] .fallback {
+.avatar[data-size="sm"] .fallback {
   font-size: 0.75rem;
 }
 
@@ -63,31 +63,31 @@
   box-shadow: 0 0 0 2px #ffffff;
 }
 
-.avatar[data-size='sm'] .badge {
+.avatar[data-size="sm"] .badge {
   width: 0.5rem;
   height: 0.5rem;
 }
 
-.avatar[data-size='sm'] .badge > svg {
+.avatar[data-size="sm"] .badge > svg {
   display: none;
 }
 
-.avatar[data-size='default'] .badge {
+.avatar[data-size="default"] .badge {
   width: 0.625rem;
   height: 0.625rem;
 }
 
-.avatar[data-size='default'] .badge > svg {
+.avatar[data-size="default"] .badge > svg {
   width: 0.5rem;
   height: 0.5rem;
 }
 
-.avatar[data-size='lg'] .badge {
+.avatar[data-size="lg"] .badge {
   width: 0.75rem;
   height: 0.75rem;
 }
 
-.avatar[data-size='lg'] .badge > svg {
+.avatar[data-size="lg"] .badge > svg {
   width: 0.5rem;
   height: 0.5rem;
 }
@@ -97,12 +97,12 @@
   margin-left: 0;
 }
 
-.group > [data-slot='avatar'] {
+.group > [data-slot="avatar"] {
   margin-left: -0.5rem;
 }
 
-.group > [data-slot='avatar'] {
-  box-shadow: 0 0 0 2px #ffffff;
+.group > [data-slot="avatar"] {
+  box-shadow: 0 0 0 2px var(--color-background-800);
 }
 
 .groupCount {
@@ -120,7 +120,7 @@
   color: var(--color-background-800);
   font-size: 0.875rem;
 
-  box-shadow: 0 0 0 2px #ffffff;
+  box-shadow: 0 0 0 2px var(--color-background-800);
 }
 
 .groupCount > svg {
@@ -128,22 +128,22 @@
   height: 1rem;
 }
 
-.group:has([data-slot='avatar'][data-size='lg']) .groupCount {
+.group:has([data-slot="avatar"][data-size="lg"]) .groupCount {
   width: 2.5rem;
   height: 2.5rem;
 }
 
-.group:has([data-slot='avatar'][data-size='sm']) .groupCount {
+.group:has([data-slot="avatar"][data-size="sm"]) .groupCount {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.group:has([data-slot='avatar'][data-size='lg']) .groupCount > svg {
+.group:has([data-slot="avatar"][data-size="lg"]) .groupCount > svg {
   width: 1.25rem;
   height: 1.25rem;
 }
 
-.group:has([data-slot='avatar'][data-size='sm']) .groupCount > svg {
+.group:has([data-slot="avatar"][data-size="sm"]) .groupCount > svg {
   width: 0.75rem;
   height: 0.75rem;
 }

@@ -17,6 +17,7 @@
 .innerVertical {
   margin-top: -1rem;
   flex-direction: column;
+  height: 100%;
 }
 
 .item {

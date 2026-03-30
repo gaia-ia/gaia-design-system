@@ -18,6 +18,7 @@ const config = {
   async viteFinal(config, { configType }) {
     return {
       ...config,
+      base: configType === 'PRODUCTION' ? '/gaia-design-system/' : '/',
       define: { "process.env": {} },
       resolve: {
         alias: [

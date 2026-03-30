@@ -1,176 +1,237 @@
 .button {
-  display: flex;
+  display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  gap: 6px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background-clip: padding-box;
+  white-space: nowrap;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  outline: none;
+  user-select: none;
+  text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 120ms ease,
+    opacity 160ms ease;
 }
 
-/* primary */
-
-.button.primary {
-  background-color: var(--color-primary-400);
-  border: none;
+.button svg {
+  pointer-events: none;
+  flex-shrink: 0;
 }
 
-.button.primary:hover:enabled {
-  background-color: var(--color-primary-300);
+.button svg:not([class*="size-"]) {
+  width: 16px;
+  height: 16px;
 }
 
-.button.primary span,
-.button.primary:hover:enabled span {
-  color: var(--color-text-900);
+.button:focus-visible {
+  border-color: var(--color-primary-400);
+  outline: 2px solid var(--color-primary-400);
 }
 
-/* secondary */
-
-.button.secondary {
-  background-color: var(--color-background-200);
-  border: none;
+.button:active:not([aria-haspopup]) {
+  transform: translateY(1px);
 }
 
-.button.secondary:hover:enabled {
-  background-color: var(--color-background-300);
-}
-
-.button.secondary span {
-  color: var(--color-text-900);
-}
-
-/* outlined */
-
-.button.outlined {
-  background-color: transparent;
-  border: 1px solid var(--color-text-900);
-}
-
-.button.outlined:hover:enabled span {
-  text-decoration: underline;
-}
-
-.button.outlined span {
-  color: var(--color-text-900);
-}
-
-/* text */
-
-.button.text {
-  background-color: transparent;
-  color: var(--color-text-900);
-  border: none;
-}
-
-.button.text span {
-  color: var(--color-text-900);
-}
-
-.button.text:hover:enabled span {
-  text-decoration: underline;
-}
-
-/* icon */
-
-.button.icon {
-  width: fit-content;
-  padding-left: 0;
-  padding-right: 0;
-  background-color: transparent;
-  border: none;
-}
-
-.button.icon:hover:enabled {
-  background-color: var(--color-primary-50);
-}
-
-.button.icon span {
-  display: none;
-}
-
-/* disabled */
 .button:disabled {
-  background-color: var(--color-background-400);
-  border: none;
-  cursor: not-allowed;
-  opacity: 0.4;
+  pointer-events: none;
+  opacity: 0.5;
 }
 
-.button:disabled span {
+.button[aria-invalid="true"] {
+  border-color: var(--color-alert-error-500);
+}
+
+/* -------------------- Variants -------------------- */
+
+.variantDefault {
+  background: var(--color-primary-400);
   color: var(--color-text-900);
 }
 
-@-webkit-keyframes rotating /* Safari and Chrome */ {
-  from {
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@keyframes rotating {
-  from {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+.variantDefault:is(a):hover,
+.variantDefault a:hover,
+.variantDefault:hover {
+  background: var(--color-primary-300);
 }
 
-.button.loading svg {
-  /* rotate animation */
-  -webkit-animation: rotating 2s linear infinite;
-  -moz-animation: rotating 2s linear infinite;
-  -ms-animation: rotating 2s linear infinite;
-  -o-animation: rotating 2s linear infinite;
-  animation: rotating 2s linear infinite;
+.variantOutline {
+  border-color: var(--color-text-900);
+  background: transparent;
+  color: var(--color-text-900);
 }
 
-/* sizes */
-
-.button.extra_large,
-.button.large {
-  padding: 8px 16px;
-  gap: 12px;
+.variantOutline:hover,
+.variantOutline[aria-expanded="true"] {
+  background: var(--color-background-300);
+  text-decoration: underline;
 }
 
-.button.extra_large svg {
+.variantSecondary {
+  background: var(--color-background-400);
+  color: var(--color-text-900);
+}
+
+.variantSecondary:hover,
+.variantSecondary[aria-expanded="true"] {
+  background: var(--color-background-300);
+}
+
+.variantGhost {
+  background: transparent;
+  color: var(--color-text-900);
+}
+
+.variantGhost:hover,
+.variantGhost[aria-expanded="true"] {
+  background: var(--color-background-300);
+  color: var(--color-text-900);
+}
+
+.variantDestructive {
+  background: var(--color-alert-error-50);
+  color: var(--color-text-900);
+}
+
+.variantDestructive:hover {
+  background: color-mix(
+    in srgb,
+    var(--color-alert-error-50) 50%,
+    var(--color-background-50)
+  );
+}
+
+.variantLink {
+  background: transparent;
+  color: var(--color-primary-400);
+  text-underline-offset: 4px;
+}
+
+.variantLink:hover {
+  text-decoration: underline;
+}
+
+/* -------------------- Sizes -------------------- */
+
+.sizeDefault {
+  height: 32px;
+  padding-inline: 10px;
+  gap: 6px;
+}
+
+.sizeXs {
+  height: 24px;
+  padding-inline: 8px;
+  gap: 4px;
+  font-size: 0.75rem;
+  border-radius: 10px;
+}
+
+.sizeXs svg:not([class*="size-"]) {
+  width: 12px;
+  height: 12px;
+}
+
+.sizeSm {
+  height: 28px;
+  padding-inline: 10px;
+  gap: 4px;
+  font-size: 0.8rem;
+  border-radius: 12px;
+}
+
+.sizeSm svg:not([class*="size-"]) {
+  width: 14px;
+  height: 14px;
+}
+
+.sizeLg {
+  height: 36px;
+  padding-inline: 10px;
+  gap: 6px;
+}
+
+.sizeIcon {
+  width: 32px;
+  height: 32px;
+  padding-inline: 10px;
+}
+
+.sizeIconXs {
   width: 24px;
   height: 24px;
+  padding-inline: 8px;
+  border-radius: 10px;
 }
 
-.button.large svg {
-  width: 20px;
-  height: 20px;
+.sizeIconXs svg:not([class*="size-"]) {
+  width: 12px;
+  height: 12px;
 }
 
-.button.small {
-  padding: 6px 16px;
-  gap: 10px;
+.sizeIconSm {
+  width: 28px;
+  height: 28px;
+  padding-inline: 10px;
+  border-radius: 12px;
 }
 
-.button.small svg {
-  width: 18px;
-  height: 18px;
+.sizeIconLg {
+  width: 36px;
+  height: 36px;
+  padding-inline: 12px;
 }
 
-.button.icon {
-  padding: 0;
+/* -------------------- Icon-aware padding -------------------- */
+
+.button[data-size="default"]:has([data-icon="inline-start"]) {
+  padding-inline-start: 8px;
 }
 
-.button.icon svg {
-  width: 24px;
-  height: 24px;
+.button[data-size="default"]:has([data-icon="inline-end"]) {
+  padding-inline-end: 8px;
+}
+
+.button[data-size="xs"]:has([data-icon="inline-start"]) {
+  padding-inline-start: 6px;
+}
+
+.button[data-size="xs"]:has([data-icon="inline-end"]) {
+  padding-inline-end: 6px;
+}
+
+.button[data-size="sm"]:has([data-icon="inline-start"]) {
+  padding-inline-start: 6px;
+}
+
+.button[data-size="sm"]:has([data-icon="inline-end"]) {
+  padding-inline-end: 6px;
+}
+
+.button[data-size="lg"]:has([data-icon="inline-start"]) {
+  padding-inline-start: 12px;
+}
+
+.button[data-size="lg"]:has([data-icon="inline-end"]) {
+  padding-inline-end: 12px;
+}
+
+/* -------------------- Group context -------------------- */
+
+[data-slot="button-group"] .sizeXs,
+[data-slot="button-group"] .sizeSm,
+[data-slot="button-group"] .sizeIconXs,
+[data-slot="button-group"] .sizeIconSm {
+  border-radius: 8px;
 }

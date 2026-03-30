@@ -1,6 +1,5 @@
 import {
   ComponentProps,
-  ComponentType,
   createContext,
   CSSProperties,
   ReactNode,
@@ -10,63 +9,19 @@ import {
 } from "react";
 import * as RechartsPrimitive from "recharts";
 
+import { THEMES } from "./constants";
 import styles from "./styles.module.css";
-
-/* -------------------------------------------------------
-   Local Recharts-compatible types for content components
-------------------------------------------------------- */
-type RName = string | number;
-type RValue = number | string | Array<number | string>;
-
-type RTooltipItem = {
-  name?: RName;
-  value?: RValue;
-  dataKey?: string | number;
-  payload?: Record<string, unknown>;
-  color?: string;
-};
-
-type RLegendItem = {
-  value?: string | number;
-  dataKey?: string | number;
-  color?: string;
-};
-
-type TooltipFormatter = (
-  value: RValue,
-  name: RName,
-  item: RTooltipItem,
-  index: number,
-  payload: RTooltipItem["payload"],
-) => ReactNode;
-
-type TooltipLabelFormatter = (
-  label: RName | ReactNode,
-  payload: ReadonlyArray<RTooltipItem>,
-) => ReactNode;
-
-/* -------------------------------------------------------
-   Theme plumbing
-------------------------------------------------------- */
-// Format: { THEME_NAME: CSS_SELECTOR }
-const THEMES = { light: "", dark: ".dark" } as const;
-
-export type ChartConfig = {
-  [k in string]: {
-    label?: ReactNode;
-    icon?: ComponentType;
-  } & (
-    | { color?: string; theme?: never }
-    | { color?: never; theme: Record<keyof typeof THEMES, string> }
-  );
-};
-
-/* -------------------------------------------------------
-   Context
-------------------------------------------------------- */
-type ChartContextProps = {
-  config: ChartConfig;
-};
+import {
+  ChartConfig,
+  ChartContextProps,
+  ExtraTooltipProps,
+  FillColorish,
+  LegendExtras,
+  PayloadLike,
+  RLegendItem,
+  RTooltipItem,
+  RValue,
+} from "./types";
 
 const ChartContext = createContext<ChartContextProps | null>(null);
 
@@ -87,15 +42,9 @@ function useChart() {
   return context;
 }
 
-/* -------------------------------------------------------
-   Utils
-------------------------------------------------------- */
 function joinClassNames(...parts: Array<string | undefined | null | false>) {
   return parts.filter(Boolean).join(" ");
 }
-
-type PayloadLike = Record<string, unknown>;
-type FillColorish = { fill?: string; color?: string };
 
 /**
  * A wrapper component that sets up a styled chart environment with theme-aware colors,
@@ -194,31 +143,7 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   return <style dangerouslySetInnerHTML={{ __html: css }} />;
 };
 
-/* -------------------------------------------------------
-   Tooltip
-------------------------------------------------------- */
 const ChartTooltip = RechartsPrimitive.Tooltip;
-
-type ExtraTooltipProps = ComponentProps<"div"> & {
-  /** Recharts passes these to content components */
-  active?: boolean;
-  payload?: ReadonlyArray<RTooltipItem>;
-  label?: RName;
-
-  /** Our extras */
-  hideLabel?: boolean;
-  hideIndicator?: boolean;
-  indicator?: "line" | "dot" | "dashed";
-  nameKey?: string;
-  labelKey?: string;
-
-  /** Recharts-compatible formatters */
-  formatter?: TooltipFormatter;
-  labelFormatter?: TooltipLabelFormatter;
-
-  /** Force indicator color */
-  color?: string;
-};
 
 /**
  * A custom tooltip content renderer for Recharts, designed to respect contextual chart configuration
@@ -395,19 +320,7 @@ function ChartTooltipContent({
   );
 }
 
-/* -------------------------------------------------------
-   Legend
-------------------------------------------------------- */
 const ChartLegend = RechartsPrimitive.Legend;
-
-type LegendExtras = ComponentProps<"div"> & {
-  hideIcon?: boolean;
-  nameKey?: string;
-
-  /** Recharts passes this to custom content */
-  payload?: ReadonlyArray<RLegendItem>;
-  verticalAlign?: "top" | "middle" | "bottom";
-};
 
 /**
  * A custom legend renderer for Recharts that uses chart config context for label text and optional icons.
@@ -475,9 +388,6 @@ function ChartLegendContent({
   );
 }
 
-/* -------------------------------------------------------
-   Helpers
-------------------------------------------------------- */
 function getPayloadConfigFromPayload(
   config: ChartConfig,
   payload: unknown,
@@ -522,9 +432,6 @@ function formatValueForDisplay(value: RValue): string {
   return typeof value === "number" ? value.toLocaleString() : String(value);
 }
 
-/* -------------------------------------------------------
-   Exports
-------------------------------------------------------- */
 export {
   ChartContainer,
   ChartLegend,

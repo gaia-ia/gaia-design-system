@@ -1,6 +1,14 @@
 // Buttons
 export { Button } from "./buttons/Button";
-export type { ButtonProps } from "./buttons/Button/types";
+export {
+  buttonSizeClasses,
+  buttonVariantClasses,
+} from "./buttons/Button/constants";
+export type {
+  ButtonProps,
+  ButtonSize,
+  ButtonVariant,
+} from "./buttons/Button/types";
 export { ButtonGroupItem, ButtonGroupRoot } from "./buttons/ButtonGroup";
 export { ButtonLink } from "./buttons/ButtonLink";
 export type { ButtonLinkProps } from "./buttons/ButtonLink/types";
@@ -34,7 +42,6 @@ export {
   CarouselPrevious,
 } from "./general/Carousel";
 export {
-  type ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
@@ -42,7 +49,17 @@ export {
   ChartTooltip,
   ChartTooltipContent,
 } from "./general/Charts";
-export { Combobox } from "./general/Combobox";
+export type {
+  ChartConfig,
+  ChartContextProps,
+  ExtraTooltipProps,
+  FillColorish,
+  LegendExtras,
+  PayloadLike,
+  RLegendItem,
+  RTooltipItem,
+  RValue,
+} from "./general/Charts/types";
 export {
   Command,
   CommandDialog,
@@ -124,6 +141,8 @@ export type {
   THProps,
   TRProps,
 } from "./general/Table/types";
+export { Tabs, TabsContent, TabsList, TabsTrigger } from "./general/Tabs";
+export type { TabsListProps, TabsProps } from "./general/Tabs/types";
 export { Tooltip } from "./general/Tooltip";
 export type { TooltipProps } from "./general/Tooltip/types";
 

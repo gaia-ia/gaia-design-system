@@ -157,27 +157,31 @@ function Carousel({
  * Applies orientation-based styling and connects the carousel ref from context.
  *
  * @component
- * @param {ComponentProps<'div'>} props - Standard div props.
+ * @param {ComponentProps<'div'> & { height?: string | number }} props - Standard div props.
  * @param {string} [props.className] - Additional class names for inner carousel wrapper.
+ * @param {string | number} [props.height='12rem'] - Height of the viewport when orientation is vertical.
  * @returns {JSX.Element} Scrollable carousel track container.
  *
  * @example
- * <CarouselContent>
+ * <CarouselContent height="300px">
  *   <CarouselItem>1</CarouselItem>
  *   <CarouselItem>2</CarouselItem>
  * </CarouselContent>
  */
-function CarouselContent({ className = "", ...props }: ComponentProps<"div">) {
+function CarouselContent({
+  className = "",
+  height = "300px",
+  ...props
+}: ComponentProps<"div"> & { height?: string | number }) {
   const { carouselRef, orientation } = useCarousel();
-  const axisClass =
-    orientation === "horizontal"
-      ? styles.innerHorizontal
-      : styles.innerVertical;
+  const isVertical = orientation === "vertical";
+  const axisClass = isVertical ? styles.innerVertical : styles.innerHorizontal;
 
   return (
     <div
       ref={carouselRef}
-      className={styles.viewport}
+      className={`${styles.viewport} ${isVertical ? styles.viewportVertical : ""}`}
+      style={isVertical ? { height } : undefined}
       data-slot="carousel-content"
     >
       <div className={`${styles.inner} ${axisClass} ${className}`} {...props} />
@@ -239,14 +243,14 @@ function CarouselPrevious({
   return (
     <Button
       data-slot="carousel-previous"
-      variant="icon"
-      icon={ArrowLeft}
       size={size}
       className={`${styles.navBtn} ${posClass} ${className}`}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
-    />
+    >
+      <ArrowLeft size={16} />
+    </Button>
   );
 }
 
@@ -276,14 +280,14 @@ function CarouselNext({
   return (
     <Button
       data-slot="carousel-next"
-      variant="icon"
-      icon={ArrowRight}
       size={size}
       className={`${styles.navBtn} ${posClass} ${className}`}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
-    />
+    >
+      <ArrowRight size={16} />
+    </Button>
   );
 }
 

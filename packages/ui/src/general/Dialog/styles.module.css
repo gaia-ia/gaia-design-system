@@ -14,7 +14,7 @@
   display: grid;
   width: 100%;
   max-width: calc(100% - 2rem);
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
   gap: 1rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-background-200);
@@ -105,10 +105,10 @@
 
 @keyframes zoomIn {
   from {
-    transform: scale(0.95);
+    transform: translate(-50%, -50%) scale(0.95);
   }
   to {
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 

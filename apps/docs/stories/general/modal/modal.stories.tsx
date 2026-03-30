@@ -25,9 +25,7 @@ const ModalExample = ({
               >
                 Cancelar
               </Button>
-              <Button variant="primary" onClick={() => setOpen(false)}>
-                Confirmar
-              </Button>
+              <Button onClick={() => setOpen(false)}>Confirmar</Button>
             </ModalButtons>
           )}
         </ModalContent>

@@ -1,6 +1,9 @@
 import { LucideIcon } from "lucide-react";
 import { LinkProps } from "react-router-dom";
 
+/**
+ * @deprecated Use `ButtonProps` with `asChild` and a `<Link>` child instead.
+ */
 export interface ButtonLinkProps extends LinkProps {
   children?: React.ReactNode;
   variant?: "primary" | "secondary" | "outlined" | "text" | "icon";
