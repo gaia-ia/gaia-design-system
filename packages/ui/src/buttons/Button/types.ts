@@ -1,13 +1,11 @@
-import { LucideIcon } from "lucide-react";
+import { buttonSizeClasses, buttonVariantClasses } from "./constants";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: React.ReactNode;
-  variant?: "primary" | "secondary" | "outlined" | "text" | "icon";
-  iconColor?: string;
-  iconSize?: number;
-  size?: "extra_large" | "large" | "small" | "icon";
-  icon?: LucideIcon;
-  iconPosition?: "left" | "right";
-  loading?: boolean;
-}
+export type ButtonVariant = keyof typeof buttonVariantClasses;
+export type ButtonSize = keyof typeof buttonSizeClasses;
+
+export type ButtonProps = React.ComponentProps<"button"> & {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  asChild?: boolean;
+  className?: string;
+};

@@ -98,7 +98,7 @@ export function PaginationLink({
 }: PaginationLinkProps) {
   return (
     <Button
-      variant={isActive ? "outlined" : "text"}
+      variant={isActive ? "outline" : "ghost"}
       data-slot="pagination-link"
       data-active={isActive}
       className={clsx(styles.paginationLink, className)}
@@ -129,14 +129,14 @@ export function PaginationPrevious({
   return (
     <Button
       aria-label="Go to previous page"
-      size="large"
-      variant="text"
-      icon={ChevronLeftIcon}
-      iconPosition="left"
+      size="lg"
+      variant="ghost"
       onClick={onClick}
       className={clsx(styles.prevNext, className)}
       {...props}
-    />
+    >
+      <ChevronLeftIcon size={16} />
+    </Button>
   );
 }
 
@@ -160,14 +160,14 @@ export function PaginationNext({
   return (
     <Button
       aria-label="Go to next page"
-      size="large"
-      variant="text"
-      icon={ChevronRightIcon}
-      iconPosition="right"
+      size="lg"
+      variant="ghost"
       onClick={onClick}
       className={clsx(styles.prevNext, className)}
       {...props}
-    />
+    >
+      <ChevronRightIcon size={16} />
+    </Button>
   );
 }
 

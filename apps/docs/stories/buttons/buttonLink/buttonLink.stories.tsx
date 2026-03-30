@@ -35,9 +35,9 @@ const meta: Meta<typeof ButtonLink> = {
       options: ["Sem Ícone", "Pizza", "Cookie", "Croissant"],
       mapping: {
         "Sem Ícone": undefined,
-        Pizza,
-        Cookie,
-        Croissant,
+        "Pizza": Pizza,
+        "Cookie": Cookie,
+        "Croissant": Croissant,
       },
       control: { type: "radio" },
       defaultValue: undefined,

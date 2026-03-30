@@ -1,6 +1,14 @@
 // Buttons
 export { Button } from "./buttons/Button";
-export type { ButtonProps } from "./buttons/Button/types";
+export {
+  buttonSizeClasses,
+  buttonVariantClasses,
+} from "./buttons/Button/constants";
+export type {
+  ButtonProps,
+  ButtonSize,
+  ButtonVariant,
+} from "./buttons/Button/types";
 export { ButtonGroupItem, ButtonGroupRoot } from "./buttons/ButtonGroup";
 export { ButtonLink } from "./buttons/ButtonLink";
 export type { ButtonLinkProps } from "./buttons/ButtonLink/types";

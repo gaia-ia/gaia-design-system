@@ -104,15 +104,15 @@ export const Combobox: React.FC<Props> = ({
               role="combobox"
               aria-expanded={open}
               className={`${styles.button} ${value ? "" : styles.empty}`}
-              icon={ChevronsUpDown}
-              iconColor="var(--color-text-600)"
-              iconPosition="right"
+              size="icon"
               id={id}
               type="button"
             >
               {value
                 ? options.find((option) => option.value === value)?.label
                 : "Select option..."}
+
+              <ChevronsUpDown size={16} />
             </Button>
           </div>
         </PopoverTrigger>

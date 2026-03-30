@@ -239,14 +239,14 @@ function CarouselPrevious({
   return (
     <Button
       data-slot="carousel-previous"
-      variant="icon"
-      icon={ArrowLeft}
       size={size}
       className={`${styles.navBtn} ${posClass} ${className}`}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
-    />
+    >
+      <ArrowLeft size={16} />
+    </Button>
   );
 }
 
@@ -276,14 +276,14 @@ function CarouselNext({
   return (
     <Button
       data-slot="carousel-next"
-      variant="icon"
-      icon={ArrowRight}
       size={size}
       className={`${styles.navBtn} ${posClass} ${className}`}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
-    />
+    >
+      <ArrowRight size={16} />
+    </Button>
   );
 }
 
