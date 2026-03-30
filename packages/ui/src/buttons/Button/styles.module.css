@@ -50,7 +50,7 @@
 }
 
 .button[aria-invalid="true"] {
-  border-color: var(--color-error-500);
+  border-color: var(--color-alert-error-500);
 }
 
 /* -------------------- Variants -------------------- */

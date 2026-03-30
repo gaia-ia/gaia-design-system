@@ -60,7 +60,6 @@ export type {
   RTooltipItem,
   RValue,
 } from "./general/Charts/types";
-export { Combobox } from "./general/Combobox";
 export {
   Command,
   CommandDialog,
