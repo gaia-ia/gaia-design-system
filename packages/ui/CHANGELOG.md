@@ -1,5 +1,94 @@
 # @gaia-dev/ui
 
+## 4.0.0
+
+### Major Changes
+
+- The `Button` component was significantly refactored to be simpler, more composable, and aligned with the Radix UI pattern used across the design system. The new implementation delegates render control to the consumer via the `asChild` prop and removes built-in complexity (loading states, icon management, typography coupling).
+
+  ***
+
+  - Extracted variant/size class mappings into a separate `constants.ts` file (`buttonVariantClasses`, `buttonSizeClasses`)
+  - Replaced manual class mapping logic with a DRY, map-based approach
+  - Added `React.forwardRef` for proper ref forwarding
+  - Integrated Radix UI `Slot` to support `asChild` composition
+  - Complete CSS rewrite: better organized variant/size sections
+  - Added icon-aware padding via the CSS `:has()` selector — no more explicit icon props needed
+  - Expanded size options: `xs`, `icon-xs`, `icon-sm`, `icon-lg`
+  - Added `focus-visible`, `disabled`, and `:invalid` state styles
+  - `ButtonVariant` and `ButtonSize` are now derived from `buttonVariantClasses` / `buttonSizeClasses` keys — single source of truth
+  - `ButtonProps` now cleanly extends `React.ComponentPropsWithoutRef<"button">`
+
+  ***
+
+  > **Severity: Major** — These changes require updates in all consuming apps (`gaia-app-front`, `brandsync-app-front`, `cria-app-front`, etc.)
+
+  | Prop           | Reason Removed                                 | Migration                                                       |
+  | -------------- | ---------------------------------------------- | --------------------------------------------------------------- |
+  | `icon`         | Icons are now passed as children               | Pass `<Icon />` directly as a child                             |
+  | `iconPosition` | Controlled by children order                   | Order children as needed (`<Icon /> Label` or `Label <Icon />`) |
+  | `loading`      | Removed built-in loading state                 | Implement loading logic in the consumer component               |
+  | `iconSize`     | CSS `:has()` handles icon sizing automatically | Remove the prop                                                 |
+  | `iconColor`    | CSS handles icon color via variant tokens      | Remove the prop                                                 |
+
+  **Before:**
+
+  ```tsx
+  <Button
+    icon={<Spinner />}
+    iconPosition="left"
+    loading={isLoading}
+    iconSize={16}
+    iconColor="white"
+    variant="default"
+  >
+    Save
+  </Button>
+  ```
+
+  **After:**
+
+  ```tsx
+  // Loading state is handled by the consumer
+  <Button variant="default" disabled={isLoading}>
+    {isLoading ? <Spinner /> : null}
+    Save
+  </Button>
+  ```
+
+  **Using `asChild` to render as a link:**
+
+  ```tsx
+  // New — render as <a> without wrapping element
+  <Button asChild variant="link">
+    <a href="/dashboard">Go to Dashboard</a>
+  </Button>
+  ```
+
+  ***
+
+  ```ts
+  type ButtonProps = {
+    variant?:
+      | "default"
+      | "outline"
+      | "secondary"
+      | "ghost"
+      | "destructive"
+      | "link";
+    size?:
+      | "default"
+      | "xs"
+      | "sm"
+      | "lg"
+      | "icon"
+      | "icon-xs"
+      | "icon-sm"
+      | "icon-lg";
+    asChild?: boolean; // Renders as child element using Radix Slot
+  } & React.ComponentPropsWithoutRef<"button">;
+  ```
+
 ## 3.3.0
 
 ### Minor Changes
