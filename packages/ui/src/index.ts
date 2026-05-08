@@ -192,6 +192,8 @@ export { RadioInput } from "./inputs/RadioInput";
 export type { RadioInputProps } from "./inputs/RadioInput/types";
 export { default as Select } from "./inputs/Select";
 export type { SelectProps } from "./inputs/Select/types";
+export { Slider } from "./inputs/Slider";
+export type { SliderProps } from "./inputs/Slider/types";
 export { Switch } from "./inputs/Switch";
 export type { SwitchProps } from "./inputs/Switch/types";
 export { Textarea } from "./inputs/Textarea";

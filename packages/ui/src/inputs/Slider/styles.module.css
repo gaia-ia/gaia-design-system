@@ -1,0 +1,90 @@
+/* SliderPrimitive.Root — slider container */
+.root {
+  position: relative;
+  display: flex;
+  width: 100%;
+  touch-action: none;
+  align-items: center;
+  user-select: none;
+}
+
+.root[data-disabled] {
+  opacity: 0.5;
+}
+
+.root[data-orientation="vertical"] {
+  height: 100%;
+  min-height: 10rem;
+  width: auto;
+  flex-direction: column;
+}
+
+/* SliderPrimitive.Track — the background rail */
+.track {
+  position: relative;
+  flex-grow: 1;
+  overflow: hidden;
+  border-radius: 9999px;
+  background-color: var(--color-background-300);
+}
+
+.track[data-orientation="horizontal"] {
+  height: 4px;
+  width: 100%;
+}
+
+.track[data-orientation="vertical"] {
+  height: 100%;
+  width: 4px;
+}
+
+/* SliderPrimitive.Range — the filled portion */
+.range {
+  position: absolute;
+  background-color: var(--color-primary-400);
+  user-select: none;
+}
+
+.range[data-orientation="horizontal"] {
+  height: 100%;
+}
+
+.range[data-orientation="vertical"] {
+  width: 100%;
+}
+
+/* SliderPrimitive.Thumb — draggable handle */
+.thumb {
+  position: relative;
+  display: block;
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  border: 1px solid var(--color-primary-400);
+  background-color: var(--color-primary-400);
+  transition:
+    color 150ms ease,
+    box-shadow 150ms ease;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* Expanded hit area */
+.thumb::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+
+.thumb:hover,
+.thumb:focus-visible,
+.thumb:active {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-400) 50%, transparent);
+  outline: none;
+}
+
+.thumb[data-disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
