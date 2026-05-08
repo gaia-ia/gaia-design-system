@@ -138,6 +138,11 @@ export {
 } from "./general/Popover";
 export { ProgressBar } from "./general/ProgressBar";
 export type { ProgressBarProps } from "./general/ProgressBar/types";
+export { ScrollArea, ScrollBar } from "./general/ScrollArea";
+export type {
+  ScrollAreaProps,
+  ScrollBarProps,
+} from "./general/ScrollArea/types";
 export {
   Sheet,
   SheetClose,

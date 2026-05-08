@@ -1,0 +1,54 @@
+/* Generated from ScrollArea/index.tsx */
+
+/* ScrollAreaPrimitive.Root — scroll area container */
+.root {
+  position: relative;
+}
+
+/* ScrollAreaPrimitive.Viewport — scrollable content area */
+.viewport {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  transition-property: color, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.viewport:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent-400) 50%, transparent);
+  outline-width: 1px;
+}
+
+/* ScrollAreaPrimitive.ScrollAreaScrollbar — scrollbar track */
+.scrollbar {
+  display: flex;
+  touch-action: none;
+  padding: 1px;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  user-select: none;
+}
+
+.scrollbar[data-orientation="horizontal"] {
+  height: 10px;
+  flex-direction: column;
+  border-top: 1px solid transparent;
+}
+
+.scrollbar[data-orientation="vertical"] {
+  height: 100%;
+  width: 10px;
+  border-left: 1px solid transparent;
+}
+
+/* ScrollAreaPrimitive.ScrollAreaThumb — draggable thumb */
+.thumb {
+  position: relative;
+  flex: 1 1 0%;
+  border-radius: 9999px;
+  background-color: var(--color-background-300);
+}
