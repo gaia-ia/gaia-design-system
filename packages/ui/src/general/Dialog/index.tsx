@@ -4,6 +4,7 @@ import * as React from "react";
 
 import { Button } from "../../buttons/Button";
 import clsx from "../../utils/clsx";
+import { usePortalContainer } from "../../utils/portalContainer";
 import styles from "./styles.module.css";
 
 /**
@@ -55,7 +56,14 @@ function DialogTrigger(
 function DialogPortal(
   props: React.ComponentProps<typeof DialogPrimitive.Portal>,
 ) {
-  return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />;
+  const container = usePortalContainer();
+  return (
+    <DialogPrimitive.Portal
+      data-slot="dialog-portal"
+      container={container ?? undefined}
+      {...props}
+    />
+  );
 }
 
 /**

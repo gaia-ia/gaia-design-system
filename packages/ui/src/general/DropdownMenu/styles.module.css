@@ -1,0 +1,396 @@
+/* DropdownMenuContent — floating menu panel */
+.content {
+  z-index: 50;
+  max-height: var(--radix-dropdown-menu-content-available-height);
+  width: fit-content;
+  min-width: 128px;
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 8px;
+  background-color: var(--color-background-50);
+  padding: 4px;
+  color: var(--color-text-900);
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.content[data-state="open"] {
+  animation: contentShow 100ms ease-out;
+}
+
+.content[data-state="open"][data-side="bottom"] {
+  animation: contentShowFromTop 100ms ease-out;
+}
+
+.content[data-state="open"][data-side="top"] {
+  animation: contentShowFromBottom 100ms ease-out;
+}
+
+.content[data-state="open"][data-side="left"] {
+  animation: contentShowFromRight 100ms ease-out;
+}
+
+.content[data-state="open"][data-side="right"] {
+  animation: contentShowFromLeft 100ms ease-out;
+}
+
+.content[data-state="closed"] {
+  overflow: hidden;
+  animation: contentHide 100ms ease-in;
+}
+
+/* DropdownMenuItem — interactive menu item */
+.item {
+  position: relative;
+  display: flex;
+  cursor: default;
+  align-items: center;
+  gap: 6px;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: none;
+  user-select: none;
+}
+
+.item:focus {
+  background-color: var(--color-background-200);
+  color: var(--color-text-900);
+}
+
+.item:not([data-variant="destructive"]):focus * {
+  color: var(--color-text-900);
+}
+
+.item[data-inset] {
+  padding-left: 28px;
+}
+
+.item[data-variant="destructive"] {
+  color: var(--color-alert-error-500);
+}
+
+.item[data-variant="destructive"] svg {
+  color: var(--color-alert-error-500);
+}
+
+.item[data-variant="destructive"]:focus {
+  background-color: rgba(217, 74, 74, 0.1);
+  color: var(--color-alert-error-500);
+}
+
+.item[data-disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.item svg {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.item svg:not([class*='size-']) {
+  width: 16px;
+  height: 16px;
+}
+
+/* DropdownMenuShortcut — keyboard hint span inside an item */
+.shortcut {
+  margin-left: auto;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--color-text-600);
+}
+
+.item:focus .shortcut {
+  color: var(--color-text-900);
+}
+
+/* DropdownMenuCheckboxItem — checkable menu item */
+.checkboxItem {
+  position: relative;
+  display: flex;
+  cursor: default;
+  align-items: center;
+  gap: 6px;
+  border-radius: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-right: 32px;
+  padding-left: 6px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: none;
+  user-select: none;
+}
+
+.checkboxItem:focus {
+  background-color: var(--color-background-200);
+  color: var(--color-text-900);
+}
+
+.checkboxItem:focus * {
+  color: var(--color-text-900);
+}
+
+.checkboxItem[data-inset] {
+  padding-left: 28px;
+}
+
+.checkboxItem[data-disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.checkboxItem svg {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.checkboxItem svg:not([class*='size-']) {
+  width: 16px;
+  height: 16px;
+}
+
+/* DropdownMenuRadioItem — radio-style menu item */
+.radioItem {
+  position: relative;
+  display: flex;
+  cursor: default;
+  align-items: center;
+  gap: 6px;
+  border-radius: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-right: 32px;
+  padding-left: 6px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: none;
+  user-select: none;
+}
+
+.radioItem:focus {
+  background-color: var(--color-background-200);
+  color: var(--color-text-900);
+}
+
+.radioItem:focus * {
+  color: var(--color-text-900);
+}
+
+.radioItem[data-inset] {
+  padding-left: 28px;
+}
+
+.radioItem[data-disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.radioItem svg {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.radioItem svg:not([class*='size-']) {
+  width: 16px;
+  height: 16px;
+}
+
+/* Indicator wrapper span inside checkbox/radio items */
+.indicatorWrapper {
+  pointer-events: none;
+  position: absolute;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* DropdownMenuLabel — non-interactive group label */
+.label {
+  padding: 4px 6px;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  color: var(--color-text-600);
+}
+
+.label[data-inset] {
+  padding-left: 28px;
+}
+
+/* DropdownMenuSeparator — horizontal rule between groups */
+.separator {
+  margin: 4px -4px;
+  height: 1px;
+  background-color: var(--color-background-300);
+}
+
+/* DropdownMenuSubTrigger — item that opens a sub-menu */
+.subTrigger {
+  display: flex;
+  cursor: default;
+  align-items: center;
+  gap: 6px;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: none;
+  user-select: none;
+}
+
+.subTrigger:focus {
+  background-color: var(--color-background-200);
+  color: var(--color-text-900);
+}
+
+.subTrigger:not([data-variant="destructive"]):focus * {
+  color: var(--color-text-900);
+}
+
+.subTrigger[data-inset] {
+  padding-left: 28px;
+}
+
+.subTrigger[data-state="open"] {
+  background-color: var(--color-background-200);
+  color: var(--color-text-900);
+}
+
+.subTrigger svg {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.subTrigger svg:not([class*='size-']) {
+  width: 16px;
+  height: 16px;
+}
+
+/* ChevronRight icon in SubTrigger */
+.chevron {
+  margin-left: auto;
+}
+
+/* DropdownMenuSubContent — sub-menu content panel */
+.subContent {
+  z-index: 50;
+  width: fit-content;
+  min-width: 96px;
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: var(--color-background-50);
+  padding: 4px;
+  color: var(--color-text-900);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.subContent[data-state="open"] {
+  animation: contentShow 100ms ease-out;
+}
+
+.subContent[data-state="open"][data-side="bottom"] {
+  animation: contentShowFromTop 100ms ease-out;
+}
+
+.subContent[data-state="open"][data-side="top"] {
+  animation: contentShowFromBottom 100ms ease-out;
+}
+
+.subContent[data-state="open"][data-side="left"] {
+  animation: contentShowFromRight 100ms ease-out;
+}
+
+.subContent[data-state="open"][data-side="right"] {
+  animation: contentShowFromLeft 100ms ease-out;
+}
+
+.subContent[data-state="closed"] {
+  animation: contentHide 100ms ease-in;
+}
+
+/* ─── Dark Mode ─── */
+@media (prefers-color-scheme: dark) {
+  .item[data-variant="destructive"]:focus {
+    background-color: rgba(217, 74, 74, 0.2);
+  }
+}
+
+/* ─── Animations ─── */
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes contentHide {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes contentShowFromTop {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes contentShowFromBottom {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes contentShowFromRight {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+}
+
+@keyframes contentShowFromLeft {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+}

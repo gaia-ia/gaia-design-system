@@ -98,6 +98,23 @@ export {
   DrawerTrigger,
   useDrawer,
 } from "./general/Drawer";
+export {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "./general/DropdownMenu";
 export { ModalButtons, ModalContent } from "./general/Modal";
 export type {
   ModalButtonsProps,
@@ -175,5 +192,9 @@ export { clsx } from "./utils/clsx";
 export { convertBytesToReadable } from "./utils/convertBytesToReadable";
 export { formatToBRLocale } from "./utils/formatToBRLocale";
 export { isImageOrVideo } from "./utils/isImageOrVideo";
+export {
+  PortalContainerProvider,
+  usePortalContainer,
+} from "./utils/portalContainer";
 export { useIsMount } from "./utils/useIsMount";
 export { useWindowSize } from "./utils/useWindowSize";
