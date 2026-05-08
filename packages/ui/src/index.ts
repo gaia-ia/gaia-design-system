@@ -138,6 +138,17 @@ export {
 } from "./general/Popover";
 export { ProgressBar } from "./general/ProgressBar";
 export type { ProgressBarProps } from "./general/ProgressBar/types";
+export {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./general/Sheet";
+export type { SheetContentProps } from "./general/Sheet/types";
 export { Skeleton } from "./general/Skeleton";
 export {
   Table,

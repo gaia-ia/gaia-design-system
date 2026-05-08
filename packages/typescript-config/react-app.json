@@ -11,6 +11,6 @@
     "module": "esnext",
     "noEmit": true,
     "resolveJsonModule": true,
-    "target": "es5"
+    "target": "ES2017"
   }
 }
