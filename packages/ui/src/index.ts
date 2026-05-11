@@ -227,6 +227,33 @@ export type {
 } from "./inputs/Combobox/types";
 export { DatePicker } from "./inputs/DatePicker";
 export type { DatePickerProps } from "./inputs/DatePicker/types";
+export {
+  FileUpload,
+  FileUploadClear,
+  FileUploadDropzone,
+  FileUploadItem,
+  FileUploadItemDelete,
+  FileUploadItemMetadata,
+  FileUploadItemPreview,
+  FileUploadItemProgress,
+  FileUploadList,
+  FileUploadTrigger,
+} from "./inputs/FileUpload";
+export type {
+  FileUploadClearProps,
+  FileUploadDropzoneProps,
+  FileUploadItemDeleteProps,
+  FileUploadItemMetadataProps,
+  FileUploadItemPreviewProps,
+  FileUploadItemProgressProps,
+  FileUploadItemProps,
+  FileUploadListProps,
+  FileUploadProps,
+  FileUploadStatus,
+  FileUploadTriggerProps,
+  FileUploadUploadHelpers,
+  FileWithState,
+} from "./inputs/FileUpload/types";
 export { Input } from "./inputs/Input";
 export type { InputProps } from "./inputs/Input/types";
 export { Multicheck } from "./inputs/Multicheck";
