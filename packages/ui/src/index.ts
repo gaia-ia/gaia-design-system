@@ -30,6 +30,16 @@ export {
 } from "./general/Avatar";
 export { Badge } from "./general/Badge";
 export type { BadgeProps } from "./general/Badge/types";
+export {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "./general/Breadcrumb";
+export type { BreadcrumbLinkProps } from "./general/Breadcrumb/types";
 export { Calendar } from "./general/Calendar";
 export { Card } from "./general/Card";
 export type { CardProps } from "./general/Card/types";
