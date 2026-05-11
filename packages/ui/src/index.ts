@@ -218,6 +218,12 @@ export type { TooltipProps } from "./general/Tooltip/types";
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";
 export type { CheckboxProps } from "./inputs/Checkbox/types";
+export { ColorPicker, ColorPickerSwatch } from "./inputs/ColorPicker";
+export type {
+  ColorFormat,
+  ColorPickerProps,
+  ColorPickerSwatchProps,
+} from "./inputs/ColorPicker/types";
 export { Combobox, ComboboxMulti } from "./inputs/Combobox";
 export type {
   ComboboxMultiProps,
