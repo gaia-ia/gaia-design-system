@@ -125,6 +125,23 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "./general/DropdownMenu";
+export {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuGroup,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuPortal,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from "./general/ContextMenu";
 export { ModalButtons, ModalContent } from "./general/Modal";
 export type {
   ModalButtonsProps,
