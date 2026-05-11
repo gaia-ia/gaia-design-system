@@ -209,6 +209,13 @@ export type { TooltipProps } from "./general/Tooltip/types";
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";
 export type { CheckboxProps } from "./inputs/Checkbox/types";
+export { Combobox, ComboboxMulti } from "./inputs/Combobox";
+export type {
+  ComboboxMultiProps,
+  ComboboxOption,
+  ComboboxOptionGroup,
+  ComboboxProps,
+} from "./inputs/Combobox/types";
 export { DatePicker } from "./inputs/DatePicker";
 export type { DatePickerProps } from "./inputs/DatePicker/types";
 export { Input } from "./inputs/Input";
