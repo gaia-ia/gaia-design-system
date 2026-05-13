@@ -1,9 +1,37 @@
-import { ColorPicker, ColorPickerSwatch } from "@gaia-dev/ui";
+import {
+  ColorPicker,
+  ColorPickerSwatch,
+  PortalContainerProvider,
+} from "@gaia-dev/ui";
 import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { StoryContext } from "@storybook/react";
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 
 import styles from "./styles.module.css";
+
+const ThemePanel = ({
+  theme,
+  label,
+  value,
+  children,
+}: {
+  theme: "light" | "dark";
+  label: string;
+  value: string;
+  children: ReactNode;
+}) => {
+  const [container, setContainer] = useState<HTMLElement | null>(null);
+  return (
+    <PortalContainerProvider value={container}>
+      <div ref={setContainer} className={`${styles.panel} ${styles[theme]}`}>
+        <span className={styles.label}>{label}</span>
+        {children}
+        <span className={styles.preview} style={{ background: value }} />
+        <code className={styles.code}>{value}</code>
+      </div>
+    </PortalContainerProvider>
+  );
+};
 
 const ThemeDecorator = (Story: StoryFn, context: StoryContext) => {
   const [value, setValue] = useState<string>(
@@ -13,18 +41,12 @@ const ThemeDecorator = (Story: StoryFn, context: StoryContext) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={`${styles.panel} ${styles.light}`}>
-        <span className={styles.label}>Tema Claro</span>
+      <ThemePanel theme="light" label="Tema Claro" value={value}>
         <Story args={sharedArgs} />
-        <span className={styles.preview} style={{ background: value }} />
-        <code className={styles.code}>{value}</code>
-      </div>
-      <div className={`${styles.panel} ${styles.dark}`}>
-        <span className={styles.label}>Tema Escuro</span>
+      </ThemePanel>
+      <ThemePanel theme="dark" label="Tema Escuro" value={value}>
         <Story args={sharedArgs} />
-        <span className={styles.preview} style={{ background: value }} />
-        <code className={styles.code}>{value}</code>
-      </div>
+      </ThemePanel>
     </div>
   );
 };

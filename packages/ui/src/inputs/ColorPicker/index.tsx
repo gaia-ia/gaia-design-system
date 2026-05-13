@@ -243,7 +243,7 @@ interface ColorPickerBodyProps {
 
 function ColorPickerBody(props: ColorPickerBodyProps) {
   return (
-    <>
+    <div className={styles.body}>
       <ColorPickerSurface
         color={props.color}
         onChange={props.onColorChange}
@@ -261,7 +261,7 @@ function ColorPickerBody(props: ColorPickerBodyProps) {
         onColorChange={props.onColorChange}
         onFormatChange={props.onFormatChange}
       />
-    </>
+    </div>
   );
 }
 
