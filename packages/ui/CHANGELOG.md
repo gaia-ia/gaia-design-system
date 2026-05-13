@@ -1,5 +1,35 @@
 # @gaia-dev/ui
 
+## 4.1.0
+
+### Minor Changes
+
+- Nine new components were added to expand coverage of layout primitives and form inputs. All components follow the existing conventions (Radix UI primitives where applicable, CSS Modules with design tokens, JSDoc, and `ComponentNameProps` types) and are re-exported from `packages/ui/src/index.ts`.
+
+  ***
+
+  **General**
+
+  - `Breadcrumb` — navigation trail with separator and ellipsis support
+  - `ContextMenu` — right-click menu built on Radix `ContextMenu`
+  - `Resizable` — resizable panel groups with drag handles
+  - `ScrollArea` — styled scroll container with custom scrollbars
+  - `Sheet` — side-anchored drawer/overlay
+
+  **Inputs**
+
+  - `ColorPicker` — color selection input with hex/rgb utilities (`colorUtils.ts`)
+  - `Combobox` — searchable select built on `cmdk`
+  - `FileUpload` — file picker with drag-and-drop and shared context
+  - `Slider` — range input built on Radix `Slider`
+
+  ***
+
+  **Fixes**
+
+  - Adjusted `Breadcrumb` separator alignment
+  - Tightened `ColorPicker` internal spacing
+
 ## 4.0.0
 
 ### Major Changes
