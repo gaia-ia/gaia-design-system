@@ -40,6 +40,11 @@
   color: var(--color-text-900);
 }
 
+.separator {
+  display: flex;
+  align-items: center;
+}
+
 .separator > svg {
   width: 0.875rem;
   height: 0.875rem;
