@@ -1,0 +1,226 @@
+/* Generated from Sheet component */
+
+/* SheetPrimitive.Overlay — backdrop */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+@supports (backdrop-filter: blur(2px)) {
+  .overlay {
+    backdrop-filter: blur(2px);
+  }
+}
+
+.overlay[data-state='open'],
+.overlay[data-open] {
+  animation: fadeIn 150ms ease-out;
+}
+
+.overlay[data-state='closed'],
+.overlay[data-closed] {
+  animation: fadeOut 150ms ease-out;
+}
+
+/* SheetPrimitive.Content — sliding panel */
+.content {
+  position: fixed;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--color-background-50);
+  background-clip: padding-box;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-text-900);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  transition-property: color, background-color, border-color, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.content[data-side='bottom'] {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: auto;
+  border-top: 1px solid var(--color-background-200);
+}
+
+.content[data-side='left'] {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 75%;
+  border-right: 1px solid var(--color-background-200);
+}
+
+.content[data-side='right'] {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 75%;
+  border-left: 1px solid var(--color-background-200);
+}
+
+.content[data-side='top'] {
+  left: 0;
+  right: 0;
+  top: 0;
+  height: auto;
+  border-bottom: 1px solid var(--color-background-200);
+}
+
+.content[data-state='open'],
+.content[data-open] {
+  animation: fadeIn 200ms ease-in-out;
+}
+
+.content[data-state='closed'],
+.content[data-closed] {
+  animation: fadeOut 200ms ease-in-out;
+}
+
+.content[data-side='bottom'][data-state='open'],
+.content[data-side='bottom'][data-open] {
+  animation: slideInFromBottom 200ms ease-in-out;
+}
+
+.content[data-side='left'][data-state='open'],
+.content[data-side='left'][data-open] {
+  animation: slideInFromLeft 200ms ease-in-out;
+}
+
+.content[data-side='right'][data-state='open'],
+.content[data-side='right'][data-open] {
+  animation: slideInFromRight 200ms ease-in-out;
+}
+
+.content[data-side='top'][data-state='open'],
+.content[data-side='top'][data-open] {
+  animation: slideInFromTop 200ms ease-in-out;
+}
+
+.content[data-side='bottom'][data-state='closed'],
+.content[data-side='bottom'][data-closed] {
+  animation: slideOutToBottom 200ms ease-in-out;
+}
+
+.content[data-side='left'][data-state='closed'],
+.content[data-side='left'][data-closed] {
+  animation: slideOutToLeft 200ms ease-in-out;
+}
+
+.content[data-side='right'][data-state='closed'],
+.content[data-side='right'][data-closed] {
+  animation: slideOutToRight 200ms ease-in-out;
+}
+
+.content[data-side='top'][data-state='closed'],
+.content[data-side='top'][data-closed] {
+  animation: slideOutToTop 200ms ease-in-out;
+}
+
+/* Button — close icon positioned in top-right corner */
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+/* <div> — header with title and description */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px;
+}
+
+/* <div> — footer with action buttons */
+.footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+/* SheetPrimitive.Title — sheet heading */
+.title {
+  /* TODO: cn-font-heading is a custom class — verify font-family in your global CSS */
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  color: var(--color-text-950);
+}
+
+/* SheetPrimitive.Description — sheet subtitle */
+.description {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-text-500);
+}
+
+/* ─── Responsive ─── */
+@media (min-width: 640px) {
+  .content[data-side='left'],
+  .content[data-side='right'] {
+    max-width: 24rem;
+  }
+}
+
+/* ─── Keyframes ─── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes slideInFromBottom {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+  from { transform: translateX(-40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromRight {
+  from { transform: translateX(40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromTop {
+  from { transform: translateY(-40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideOutToBottom {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(40px); opacity: 0; }
+}
+
+@keyframes slideOutToLeft {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-40px); opacity: 0; }
+}
+
+@keyframes slideOutToRight {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(40px); opacity: 0; }
+}
+
+@keyframes slideOutToTop {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-40px); opacity: 0; }
+}

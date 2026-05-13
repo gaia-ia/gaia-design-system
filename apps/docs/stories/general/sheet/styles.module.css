@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.dark,
+.light {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  background-color: var(--color-background-100);
+  width: 100%;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.light {
+  color-scheme: light;
+}

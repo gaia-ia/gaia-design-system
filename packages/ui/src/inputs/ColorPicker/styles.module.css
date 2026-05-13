@@ -1,0 +1,341 @@
+/* Container & label, matching Select/DatePicker structure */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-700);
+}
+
+.required {
+  color: var(--color-alert-error-500);
+  margin-left: 2px;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--color-text-500);
+}
+
+.error {
+  font-size: 12px;
+  color: var(--color-alert-error-500);
+}
+
+/* Trigger button — shows the swatch + current color string */
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 6px 6px;
+  border-radius: 8px;
+  border: 1px solid var(--color-background-300);
+  background-color: var(--color-background-50);
+  color: var(--color-text-700);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+  width: fit-content;
+}
+
+.trigger:hover:not(:disabled) {
+  border-color: var(--color-primary-400);
+}
+
+.trigger:focus-visible {
+  outline: none;
+  border-color: var(--color-primary-400);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-400) 30%, transparent);
+}
+
+.trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.trigger[data-error="true"] {
+  border-color: var(--color-alert-error-500);
+}
+
+.triggerValue {
+  font-family: "Source Code Pro", monospace;
+  font-size: 12px;
+  color: var(--color-text-700);
+}
+
+/* Swatch — used in trigger and as standalone primitive */
+.swatch {
+  display: inline-block;
+  border-radius: 6px;
+  border: 1px solid var(--color-background-300);
+  flex-shrink: 0;
+  background-image:
+    linear-gradient(45deg, var(--color-background-200) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--color-background-200) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--color-background-200) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--color-background-200) 75%);
+  background-size: 8px 8px;
+  background-position:
+    0 0,
+    0 4px,
+    4px -4px,
+    -4px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.swatch[data-alpha-preview="false"] {
+  background-image: none;
+}
+
+.swatch::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--swatch-color, transparent);
+}
+
+.swatchSm {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.swatchMd {
+  width: 22px;
+  height: 22px;
+}
+
+.swatchLg {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+}
+
+/* Popover & inline surface */
+.popoverContent {
+  background-color: var(--color-background-50);
+  border: 1px solid var(--color-background-300);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow:
+    0 12px 32px -8px rgba(0, 0, 0, 0.15),
+    0 4px 12px -4px rgba(0, 0, 0, 0.08);
+  z-index: 50;
+  width: 260px;
+}
+
+.inlineContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 260px;
+  background-color: var(--color-background-50);
+  border: 1px solid var(--color-background-300);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.surface {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* react-colorful picker styling overrides */
+.surface :global(.react-colorful) {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  user-select: none;
+  cursor: default;
+}
+
+.surface :global(.react-colorful__saturation) {
+  position: relative;
+  flex-grow: 1;
+  height: 160px;
+  border-radius: 8px;
+  border-bottom: none;
+  background-image:
+    linear-gradient(to top, #000, transparent),
+    linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+}
+
+.surface :global(.react-colorful__hue),
+.surface :global(.react-colorful__alpha) {
+  position: relative;
+  height: 12px;
+  border-radius: 9999px;
+}
+
+.surface :global(.react-colorful__hue) {
+  background: linear-gradient(
+    to right,
+    #f00 0%,
+    #ff0 17%,
+    #0f0 33%,
+    #0ff 50%,
+    #00f 67%,
+    #f0f 83%,
+    #f00 100%
+  );
+}
+
+.surface :global(.react-colorful__alpha) {
+  background-image:
+    linear-gradient(45deg, var(--color-background-200) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--color-background-200) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--color-background-200) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--color-background-200) 75%);
+  background-size: 8px 8px;
+  background-position:
+    0 0,
+    0 4px,
+    4px -4px,
+    -4px 0;
+}
+
+.surface :global(.react-colorful__alpha-gradient) {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.surface :global(.react-colorful__pointer) {
+  position: absolute;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 2px solid #fff;
+  border-radius: 9999px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  cursor: grab;
+}
+
+.surface :global(.react-colorful__pointer:active) {
+  cursor: grabbing;
+}
+
+.surface :global(.react-colorful__pointer-fill) {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: currentColor;
+}
+
+.surface :global(.react-colorful__interactive) {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  outline: none;
+  touch-action: none;
+}
+
+.surface :global(.react-colorful__interactive:focus .react-colorful__pointer) {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Toolbar row: eye dropper + format select + input */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.eyeDropper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  border: 1px solid var(--color-background-300);
+  background-color: var(--color-background-50);
+  color: var(--color-text-700);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.eyeDropper:hover:not(:disabled) {
+  background-color: var(--color-background-200);
+}
+
+.eyeDropper:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.formatSelect {
+  flex-shrink: 0;
+  height: 28px;
+  padding: 0 22px 0 8px;
+  border-radius: 6px;
+  border: 1px solid var(--color-background-300);
+  background-color: var(--color-background-50);
+  color: var(--color-text-700);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 10px) 50%,
+    calc(100% - 6px) 50%;
+  background-size:
+    4px 4px,
+    4px 4px;
+  background-repeat: no-repeat;
+}
+
+.input {
+  flex-grow: 1;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 6px;
+  border: 1px solid var(--color-background-300);
+  background-color: var(--color-background-50);
+  color: var(--color-text-700);
+  font-family: "Source Code Pro", monospace;
+  font-size: 12px;
+  min-width: 0;
+}
+
+.input:focus,
+.formatSelect:focus,
+.eyeDropper:focus-visible {
+  outline: none;
+  border-color: var(--color-primary-400);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-400) 30%, transparent);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--color-alert-error-500);
+}

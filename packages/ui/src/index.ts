@@ -30,6 +30,16 @@ export {
 } from "./general/Avatar";
 export { Badge } from "./general/Badge";
 export type { BadgeProps } from "./general/Badge/types";
+export {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "./general/Breadcrumb";
+export type { BreadcrumbLinkProps } from "./general/Breadcrumb/types";
 export { Calendar } from "./general/Calendar";
 export { Card } from "./general/Card";
 export type { CardProps } from "./general/Card/types";
@@ -72,6 +82,23 @@ export {
   CommandShortcut,
 } from "./general/Command";
 export {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuGroup,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuPortal,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from "./general/ContextMenu";
+export {
   Dialog,
   DialogClose,
   DialogContent,
@@ -98,6 +125,23 @@ export {
   DrawerTrigger,
   useDrawer,
 } from "./general/Drawer";
+export {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "./general/DropdownMenu";
 export { ModalButtons, ModalContent } from "./general/Modal";
 export type {
   ModalButtonsProps,
@@ -121,6 +165,31 @@ export {
 } from "./general/Popover";
 export { ProgressBar } from "./general/ProgressBar";
 export type { ProgressBarProps } from "./general/ProgressBar/types";
+export {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "./general/Resizable";
+export type {
+  ResizableHandleProps,
+  ResizablePanelGroupProps,
+} from "./general/Resizable/types";
+export { ScrollArea, ScrollBar } from "./general/ScrollArea";
+export type {
+  ScrollAreaProps,
+  ScrollBarProps,
+} from "./general/ScrollArea/types";
+export {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./general/Sheet";
+export type { SheetContentProps } from "./general/Sheet/types";
 export { Skeleton } from "./general/Skeleton";
 export {
   Table,
@@ -149,8 +218,48 @@ export type { TooltipProps } from "./general/Tooltip/types";
 // Inputs
 export { Checkbox } from "./inputs/Checkbox";
 export type { CheckboxProps } from "./inputs/Checkbox/types";
+export { ColorPicker, ColorPickerSwatch } from "./inputs/ColorPicker";
+export type {
+  ColorFormat,
+  ColorPickerProps,
+  ColorPickerSwatchProps,
+} from "./inputs/ColorPicker/types";
+export { Combobox, ComboboxMulti } from "./inputs/Combobox";
+export type {
+  ComboboxMultiProps,
+  ComboboxOption,
+  ComboboxOptionGroup,
+  ComboboxProps,
+} from "./inputs/Combobox/types";
 export { DatePicker } from "./inputs/DatePicker";
 export type { DatePickerProps } from "./inputs/DatePicker/types";
+export {
+  FileUpload,
+  FileUploadClear,
+  FileUploadDropzone,
+  FileUploadItem,
+  FileUploadItemDelete,
+  FileUploadItemMetadata,
+  FileUploadItemPreview,
+  FileUploadItemProgress,
+  FileUploadList,
+  FileUploadTrigger,
+} from "./inputs/FileUpload";
+export type {
+  FileUploadClearProps,
+  FileUploadDropzoneProps,
+  FileUploadItemDeleteProps,
+  FileUploadItemMetadataProps,
+  FileUploadItemPreviewProps,
+  FileUploadItemProgressProps,
+  FileUploadItemProps,
+  FileUploadListProps,
+  FileUploadProps,
+  FileUploadStatus,
+  FileUploadTriggerProps,
+  FileUploadUploadHelpers,
+  FileWithState,
+} from "./inputs/FileUpload/types";
 export { Input } from "./inputs/Input";
 export type { InputProps } from "./inputs/Input/types";
 export { Multicheck } from "./inputs/Multicheck";
@@ -159,6 +268,8 @@ export { RadioInput } from "./inputs/RadioInput";
 export type { RadioInputProps } from "./inputs/RadioInput/types";
 export { default as Select } from "./inputs/Select";
 export type { SelectProps } from "./inputs/Select/types";
+export { Slider } from "./inputs/Slider";
+export type { SliderProps } from "./inputs/Slider/types";
 export { Switch } from "./inputs/Switch";
 export type { SwitchProps } from "./inputs/Switch/types";
 export { Textarea } from "./inputs/Textarea";
@@ -175,5 +286,9 @@ export { clsx } from "./utils/clsx";
 export { convertBytesToReadable } from "./utils/convertBytesToReadable";
 export { formatToBRLocale } from "./utils/formatToBRLocale";
 export { isImageOrVideo } from "./utils/isImageOrVideo";
+export {
+  PortalContainerProvider,
+  usePortalContainer,
+} from "./utils/portalContainer";
 export { useIsMount } from "./utils/useIsMount";
 export { useWindowSize } from "./utils/useWindowSize";
