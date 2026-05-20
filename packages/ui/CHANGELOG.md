@@ -1,5 +1,23 @@
 # @gaia-dev/ui
 
+## 4.2.0
+
+### Minor Changes
+
+- A new `Empty` component was added to the `general/` category for rendering empty-state placeholders. It follows the existing conventions (CSS Modules with design tokens, JSDoc, and the shared `clsx` util) and is re-exported from `packages/ui/src/index.ts`.
+
+  ---
+
+  **General**
+
+  - `Empty` — composable empty-state container with:
+    - `Empty` — root container with a centered, dashed-border block
+    - `EmptyHeader` — vertical stack for media, title, and description
+    - `EmptyMedia` — media slot for icons or illustrations, with `default` and `icon` variants
+    - `EmptyTitle` — heading text using the heading font family
+    - `EmptyDescription` — muted secondary text with styled inline links
+    - `EmptyContent` — content slot for action buttons or supplementary controls
+
 ## 4.1.0
 
 ### Minor Changes
