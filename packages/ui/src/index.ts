@@ -142,6 +142,15 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "./general/DropdownMenu";
+export {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "./general/Empty";
+export type { EmptyMediaProps } from "./general/Empty/types";
 export { ModalButtons, ModalContent } from "./general/Modal";
 export type {
   ModalButtonsProps,
