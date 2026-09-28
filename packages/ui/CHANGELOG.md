@@ -1,12 +1,33 @@
 # @gaia-dev/ui
 
+## 4.3.0
+
+### Minor Changes
+
+- Correções de acessibilidade e de estilo encontradas ao montar o Confere sobre a lib. Nada muda para quem já usa os componentes; há três props opcionais novas.
+
+  **Acessibilidade**
+
+  - `Select`: o `id` agora vai para o gatilho, então o `<label htmlFor>` nomeia o controle (antes o leitor de tela não anunciava o campo e `getByLabelText` não achava). O gatilho ganha `aria-invalid` e `aria-describedby` apontando para o `hint`/`error`.
+  - `DatePicker`: o `id` vai para o botão gatilho, ligando o rótulo ao controle; `aria-invalid` quando há `error`.
+  - `ProgressBar`: `role="progressbar"` com `aria-valuemin`/`aria-valuemax`/`aria-valuenow`, e repassa props nativas de `<div>` (ex.: `aria-label`).
+  - `Combobox` e `ComboboxMulti`: nova prop opcional `aria-label`, para quando não há `label` visível.
+  - `EmptyTitle`: nova prop opcional `asChild`, para renderizar um título de verdade (`<h2>`…) com o mesmo estilo.
+
+  **Comportamento e estilo**
+
+  - `Input` e `Textarea`: aceitam `ref` (via `forwardRef`), repassado ao `<input>`/`<textarea>`.
+  - `Textarea`: sem altura fixa de 100px — `rows` volta a valer (padrão 4, mesma altura de antes) e o redimensionamento é vertical. O foco agora aplica a borda (o seletor procurava um `input` dentro do textarea).
+  - `Table`: sem classe `undefined` quando não há `className`; hover e zebra sem `!important`, então dá para sobrescrever por CSS.
+  - `Combobox`/`ComboboxMulti`: não filtram a lista inteira enquanto fechados (listas grandes deixam de pesar a cada render).
+
 ## 4.2.0
 
 ### Minor Changes
 
 - A new `Empty` component was added to the `general/` category for rendering empty-state placeholders. It follows the existing conventions (CSS Modules with design tokens, JSDoc, and the shared `clsx` util) and is re-exported from `packages/ui/src/index.ts`.
 
-  ---
+  ***
 
   **General**
 

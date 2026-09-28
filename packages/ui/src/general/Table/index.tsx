@@ -43,7 +43,7 @@ export function Table({ className, ...props }: TableProps) {
     <div data-slot="table-container" className={clsx(styles.tableContainer)}>
       <table
         data-slot="table"
-        className={`${styles.table} ${className}`}
+        className={clsx(styles.table, className)}
         {...props}
       />
     </div>

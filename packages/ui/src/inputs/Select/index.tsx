@@ -43,6 +43,10 @@ const Select: React.FC<SelectProps> = ({
   required = false,
   className,
 }) => {
+  const hintId = hint ? `${id}-hint` : undefined;
+  const errorId = error ? `${id}-error` : undefined;
+  const describedBy = [errorId, hintId].filter(Boolean).join(" ") || undefined;
+
   const handleValueChange = (selectedValue: string) => {
     if (onChange) {
       onChange(selectedValue);
@@ -64,7 +68,12 @@ const Select: React.FC<SelectProps> = ({
             onValueChange={handleValueChange}
             disabled={disabled}
           >
-            <RadixSelect.Trigger className={styles.select_trigger}>
+            <RadixSelect.Trigger
+              id={id}
+              className={styles.select_trigger}
+              aria-invalid={!!error || undefined}
+              aria-describedby={describedBy}
+            >
               <RadixSelect.Value
                 placeholder={placeholder || "Selecione uma opção"}
               />
@@ -94,12 +103,12 @@ const Select: React.FC<SelectProps> = ({
           </RadixSelect.Root>
         </div>
         {hint && (
-          <Body variant="caption" className={styles.hint}>
+          <Body variant="caption" className={styles.hint} id={hintId}>
             {hint}
           </Body>
         )}
         {error && (
-          <Body variant="caption" className={styles.error}>
+          <Body variant="caption" className={styles.error} id={errorId}>
             {error}
           </Body>
         )}

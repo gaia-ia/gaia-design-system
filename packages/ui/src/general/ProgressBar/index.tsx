@@ -26,11 +26,19 @@ export const ProgressBar = ({
   currentStep = 1,
   color = "var(--color-primary-500)",
   className,
+  ...props
 }: ProgressBarProps) => {
   const progressPercentage = (currentStep / size) * 100;
 
   return (
-    <div className={clsx(styles.progressBarContainer, className)}>
+    <div
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={size}
+      aria-valuenow={currentStep}
+      className={clsx(styles.progressBarContainer, className)}
+      {...props}
+    >
       <div
         className={styles.progressBar}
         style={{ width: `${progressPercentage}%`, backgroundColor: color }}

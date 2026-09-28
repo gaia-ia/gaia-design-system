@@ -35,10 +35,10 @@
   width: 100%;
   padding: 10px 12px;
   font-size: 0.875rem;
-  height: 100px;
+  resize: vertical;
 }
 
-.input_container:has(input:focus) {
+.input_container:has(textarea:focus) {
   border: 1px solid var(--color-primary-500);
 }
 

@@ -1,3 +1,5 @@
+import * as React from "react";
+
 import { Body } from "../../typography/Body";
 import clsx from "../../utils/clsx";
 import styles from "./styles.module.css";
@@ -8,6 +10,7 @@ import { TextareaProps } from "./types";
  *
  * @component
  * @param {TextareaProps} props - The props to configure the textarea field.
+ * `rows` defaults to 4; the ref is forwarded to the `<textarea>`.
  * @returns {JSX.Element} A styled textarea input component with accessibility features.
  *
  * @example
@@ -21,40 +24,42 @@ import { TextareaProps } from "./types";
  *   onChange={(e) => setBio(e.target.value)}
  * />
  */
-export const Textarea: React.FC<TextareaProps> = ({
-  label,
-  id,
-  error,
-  hint,
-  required,
-  className,
-  ...props
-}) => {
-  return (
-    <div className={clsx(styles.container, className)}>
-      {label && (
-        <Body as="label" htmlFor={id} className={styles.label} variant="label">
-          {label}
-          {required && <span className={styles.required}>*</span>}
-        </Body>
-      )}
-      <div className={styles.input_container_wrapper}>
-        <div className={styles.input_container} data-input-container>
-          <textarea id={id} {...props} />
+export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+  (
+    { label, id, error, hint, required, className, rows = 4, ...props },
+    ref,
+  ) => {
+    return (
+      <div className={clsx(styles.container, className)}>
+        {label && (
+          <Body
+            as="label"
+            htmlFor={id}
+            className={styles.label}
+            variant="label"
+          >
+            {label}
+            {required && <span className={styles.required}>*</span>}
+          </Body>
+        )}
+        <div className={styles.input_container_wrapper}>
+          <div className={styles.input_container} data-input-container>
+            <textarea ref={ref} id={id} rows={rows} {...props} />
+          </div>
+          {hint && (
+            <Body variant="caption" className={styles.hint}>
+              {hint}
+            </Body>
+          )}
+          {error && (
+            <Body variant="caption" className={styles.error}>
+              {error}
+            </Body>
+          )}
         </div>
-        {hint && (
-          <Body variant="caption" className={styles.hint}>
-            {hint}
-          </Body>
-        )}
-        {error && (
-          <Body variant="caption" className={styles.error}>
-            {error}
-          </Body>
-        )}
       </div>
-    </div>
-  );
-};
+    );
+  },
+);
 
 Textarea.displayName = "Textarea";

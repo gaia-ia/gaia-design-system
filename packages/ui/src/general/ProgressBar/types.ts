@@ -3,4 +3,4 @@ export type ProgressBarProps = {
   currentStep?: number;
   color?: string;
   className?: string;
-};
+} & Omit<React.ComponentProps<"div">, "color" | "children">;

@@ -130,7 +130,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       <div className={styles.wrapper}>
         <Popover>
           <PopoverTrigger asChild>
-            <Button className={styles.trigger} data-empty={!date}>
+            <Button
+              id={id}
+              className={styles.trigger}
+              data-empty={!date}
+              aria-invalid={!!error || undefined}
+            >
               <Body
                 className={clsx(
                   mode === "single"

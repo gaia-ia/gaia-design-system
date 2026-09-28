@@ -33,21 +33,17 @@
   border-bottom: 1px solid var(--color-text-200);
   transition: background-color 0.15s ease;
 }
-.tableRow:hover {
-  background-color: var(--color-background-100) !important;
-}
-
-.tableHeader .tableRow:hover,
-.tableFooter .tableRow:hover {
-  background-color: transparent !important;
-}
-
 .tableRow[data-state="selected"] {
   background-color: var(--color-transparent-100);
 }
 
 .tableBody .tableRow:nth-child(odd) {
   background-color: var(--color-transparent-50);
+}
+
+/* Depois da zebra e com a mesma especificidade: vence sem !important. */
+.tableBody .tableRow:hover {
+  background-color: var(--color-background-100);
 }
 
 .tableHead {

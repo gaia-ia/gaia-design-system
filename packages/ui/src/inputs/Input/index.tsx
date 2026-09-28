@@ -1,3 +1,5 @@
+import * as React from "react";
+
 import { Body } from "../../typography/Body";
 import clsx from "../../utils/clsx";
 import styles from "./styles.module.css";
@@ -11,6 +13,7 @@ import { InputProps } from "./types";
  *
  * @component
  * @param {InputProps} props - Props for configuring the input field.
+ * The ref is forwarded to the `<input>`.
  * @param {string} props.id - A unique identifier used for the `id` and `htmlFor` attributes to link input and label.
  * @param {string} [props.label] - Optional label displayed above the input field.
  * @param {string} [props.error] - Optional error message displayed below the input field.
@@ -30,40 +33,39 @@ import { InputProps } from "./types";
  *   error={formErrors.email}
  * />
  */
-export const Input: React.FC<InputProps> = ({
-  label,
-  id,
-  error,
-  hint,
-  required,
-  className,
-  ...props
-}) => {
-  return (
-    <div className={clsx(styles.container, className)}>
-      {label && (
-        <Body as="label" htmlFor={id} className={styles.label} variant="label">
-          {label}
-          {required && <span className={styles.required}>*</span>}
-        </Body>
-      )}
-      <div className={styles.input_container_wrapper}>
-        <div className={styles.input_container} data-input-container>
-          <input id={id} {...props} />
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ label, id, error, hint, required, className, ...props }, ref) => {
+    return (
+      <div className={clsx(styles.container, className)}>
+        {label && (
+          <Body
+            as="label"
+            htmlFor={id}
+            className={styles.label}
+            variant="label"
+          >
+            {label}
+            {required && <span className={styles.required}>*</span>}
+          </Body>
+        )}
+        <div className={styles.input_container_wrapper}>
+          <div className={styles.input_container} data-input-container>
+            <input ref={ref} id={id} {...props} />
+          </div>
+          {hint && (
+            <Body variant="caption" className={styles.hint}>
+              {hint}
+            </Body>
+          )}
+          {error && (
+            <Body variant="caption" className={styles.error}>
+              {error}
+            </Body>
+          )}
         </div>
-        {hint && (
-          <Body variant="caption" className={styles.hint}>
-            {hint}
-          </Body>
-        )}
-        {error && (
-          <Body variant="caption" className={styles.error}>
-            {error}
-          </Body>
-        )}
       </div>
-    </div>
-  );
-};
+    );
+  },
+);
 
 Input.displayName = "Input";

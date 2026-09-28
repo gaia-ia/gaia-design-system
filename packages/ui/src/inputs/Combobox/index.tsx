@@ -65,6 +65,7 @@ const Combobox: React.FC<ComboboxProps> = ({
   required = false,
   clearable = false,
   className,
+  "aria-label": ariaLabel,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
@@ -83,11 +84,14 @@ const Combobox: React.FC<ComboboxProps> = ({
     searchText.length === 0 ||
     o.label.toLowerCase().includes(searchText.toLowerCase());
 
-  const filteredData = isGrouped(options)
-    ? (options as ComboboxOptionGroup[])
-        .map((g) => ({ ...g, options: g.options.filter(filterFn) }))
-        .filter((g) => g.options.length > 0)
-    : (options as ComboboxOption[]).filter(filterFn);
+  // Fechado, nada aparece: filtrar a lista inteira a cada render só custa.
+  const filteredData = !open
+    ? []
+    : isGrouped(options)
+      ? (options as ComboboxOptionGroup[])
+          .map((g) => ({ ...g, options: g.options.filter(filterFn) }))
+          .filter((g) => g.options.length > 0)
+      : (options as ComboboxOption[]).filter(filterFn);
 
   // Flat list for keyboard navigation index tracking
   const visibleItems: ComboboxOption[] = isGrouped(options)
@@ -262,6 +266,7 @@ const Combobox: React.FC<ComboboxProps> = ({
                 disabled={disabled}
                 autoComplete="off"
                 role="combobox"
+                aria-label={ariaLabel}
                 aria-controls={`${id}-listbox`}
                 aria-expanded={open}
                 aria-haspopup="listbox"
@@ -365,6 +370,7 @@ const ComboboxMulti: React.FC<ComboboxMultiProps> = ({
   disabled = false,
   required = false,
   className,
+  "aria-label": ariaLabel,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
@@ -383,11 +389,14 @@ const ComboboxMulti: React.FC<ComboboxMultiProps> = ({
     searchText.length === 0 ||
     o.label.toLowerCase().includes(searchText.toLowerCase());
 
-  const filteredData = isGrouped(options)
-    ? (options as ComboboxOptionGroup[])
-        .map((g) => ({ ...g, options: g.options.filter(filterFn) }))
-        .filter((g) => g.options.length > 0)
-    : (options as ComboboxOption[]).filter(filterFn);
+  // Fechado, nada aparece: filtrar a lista inteira a cada render só custa.
+  const filteredData = !open
+    ? []
+    : isGrouped(options)
+      ? (options as ComboboxOptionGroup[])
+          .map((g) => ({ ...g, options: g.options.filter(filterFn) }))
+          .filter((g) => g.options.length > 0)
+      : (options as ComboboxOption[]).filter(filterFn);
 
   const visibleItems: ComboboxOption[] = isGrouped(options)
     ? (filteredData as ComboboxOptionGroup[]).flatMap((g) => g.options)
@@ -574,11 +583,11 @@ const ComboboxMulti: React.FC<ComboboxMultiProps> = ({
                 onKeyDown={handleKeyDown}
                 disabled={disabled}
                 role="combobox"
+                aria-label={ariaLabel ?? label ?? placeholder}
                 aria-controls={`${id}-listbox`}
                 aria-expanded={open}
                 aria-haspopup="listbox"
                 aria-invalid={!!error}
-                aria-label={label ?? placeholder}
                 autoComplete="off"
               />
             </div>
