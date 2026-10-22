@@ -1,4 +1,5 @@
 import { Slot } from "radix-ui";
+
 import clsx from "../../utils/clsx";
 import styles from "./styles.module.css";
 import type { EmptyMediaProps } from "./types";
