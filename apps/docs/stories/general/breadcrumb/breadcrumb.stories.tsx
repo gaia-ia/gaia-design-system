@@ -13,15 +13,8 @@ import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import styles from "./styles.module.css";
 
 const ThemeDecorator = (Story: StoryFn) => (
-  <div className={styles.wrapper}>
-    <div className={`${styles.panel} ${styles.dark}`}>
-      <span className={styles.label}>Tema Escuro</span>
-      <Story />
-    </div>
-    <div className={`${styles.panel} ${styles.light}`}>
-      <span className={styles.label}>Tema Claro</span>
-      <Story />
-    </div>
+  <div className={styles.panel}>
+    <Story />
   </div>
 );
 

@@ -1,0 +1,39 @@
+.shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-surface-canvas);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  padding: 32px;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  color: var(--color-text-950);
+}
+
+.text {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-600);
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--color-text-950);
+}
+
+/* No celular a sidebar vira barra no topo: o conteúdo vai para baixo. */
+.shell:has([data-slot="sidebar"][class*="mobile"]) {
+  flex-direction: column;
+}

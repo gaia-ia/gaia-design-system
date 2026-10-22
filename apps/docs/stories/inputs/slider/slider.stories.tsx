@@ -12,15 +12,8 @@ const ThemeDecorator = (Story: StoryFn, context: StoryContext) => {
   const sharedArgs = { ...context.args, value, onValueChange: setValue };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={`${styles.panel} ${styles.light}`}>
-        <span className={styles.label}>Tema Claro</span>
-        <Story args={sharedArgs} />
-      </div>
-      <div className={`${styles.panel} ${styles.dark}`}>
-        <span className={styles.label}>Tema Escuro</span>
-        <Story args={sharedArgs} />
-      </div>
+    <div className={styles.panel}>
+      <Story args={sharedArgs} />
     </div>
   );
 };

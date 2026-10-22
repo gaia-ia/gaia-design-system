@@ -19,11 +19,3 @@
   color: var(--color-text-700);
   margin-bottom: 8px;
 }
-
-.panel.dark {
-  color-scheme: dark;
-}
-
-.panel.light {
-  color-scheme: light;
-}

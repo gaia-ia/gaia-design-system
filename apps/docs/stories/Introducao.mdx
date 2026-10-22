@@ -1,0 +1,42 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Introdução" />
+
+# GAIA Design System
+
+Componentes e tokens usados por todos os produtos da GAIA: gaia-app, BrandSync, CR.IA Studio e Confere.
+
+## Pacotes
+
+- **`@gaia-dev/theme`**: cores, fontes e superfícies, em claro e escuro, como variáveis CSS.
+- **`@gaia-dev/ui`**: componentes React (botões, campos, tabela, diálogos…) que usam o tema.
+
+```bash
+yarn add @gaia-dev/theme @gaia-dev/ui
+```
+
+Importe o tema uma vez, na entrada do app, antes de qualquer componente:
+
+```tsx
+import "@gaia-dev/theme/index.css";
+```
+
+## Como ver os componentes
+
+Use o seletor **Tema** na barra superior:
+
+- **Claro** e **Escuro** trocam o Storybook inteiro: a interface, as Docs e as histórias.
+- **Lado a lado** mostra a mesma história nos dois temas, para comparar.
+
+Na aba **Controls**, embaixo da história, dá para mudar as props e ver o resultado na hora.
+
+## Tokens principais
+
+- `--color-primary-fill` e `--color-on-primary`: botão principal e item ativo (passa no AA com o texto branco).
+- `--color-surface-canvas`, `-raised` e `-muted`: fundo da página, cards e painéis.
+- `--color-border-subtle` e `--color-border-field`: divisórias e borda dos campos.
+- `--color-control`, `-hover` e `-active`: trilhos, botões neutros e seletores segmentados.
+- `--color-danger-soft` e `--color-danger-soft-text`: ações destrutivas.
+- `--font-heading` e `--font-body`: Geist nos títulos, DM Sans no corpo.
+
+A escala completa está em **Tokens → Cores**.
