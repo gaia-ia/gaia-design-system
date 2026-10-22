@@ -5,12 +5,13 @@
   width: fit-content;
   flex-shrink: 0;
 
-  border-radius: 9999px;
+  /* Etiqueta compacta: raio próximo ao dos controles (8px). */
+  border-radius: 6px;
   border: 1px solid transparent;
 
   padding: 0.125rem 0.5rem;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
 
   gap: 0.25rem;
@@ -31,73 +32,63 @@
 }
 
 .badge:focus-visible {
-  border-color: var(--color-primary-500);
+  border-color: var(--color-primary-fill);
   box-shadow: 0 0 0 3px
-    color-mix(in srgb, var(--color-primary-500) 50%, transparent);
+    color-mix(in srgb, var(--color-primary-fill) 35%, transparent);
 }
 
 .badge[aria-invalid="true"] {
   border-color: var(--color-alert-error-500);
   box-shadow: 0 0 0 3px
-    color-mix(in srgb, var(--color-alert-error-500) 20%, transparent);
+    color-mix(in srgb, var(--color-alert-error-500) 25%, transparent);
 }
 
-@media (prefers-color-scheme: dark) {
-  .badge[aria-invalid="true"] {
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--color-alert-error-500) 40%, transparent);
-  }
-}
+/*
+ * Variantes nos tokens do tema; cada uma vale nos dois modos sem
+ * `prefers-color-scheme` (que ignorava o tema escolhido no app).
+ */
 
+/* Neutro (10,6:1 no claro, 9,4:1 no escuro). */
 .badge[data-variant="default"] {
-  background: var(--color-background-300);
-  color: var(--color-text-900);
+  background: var(--color-control);
+  color: var(--color-text-800);
 }
 a.badge[data-variant="default"]:hover {
-  background: color-mix(in srgb, var(--color-background-300) 90%, transparent);
+  background: var(--color-control-hover);
 }
 
+/* Tom da marca: texto primary-700 sobre primary-50 (5,0:1 / 9,9:1). */
 .badge[data-variant="secondary"] {
   background: var(--color-primary-50);
-  color: var(--color-text-900);
+  color: var(--color-primary-700);
 }
 a.badge[data-variant="secondary"]:hover {
-  background: color-mix(in srgb, var(--color-primary-50) 90%, transparent);
+  background: var(--color-primary-100);
 }
 
+/* Destrutivo suave, como o botão (5,8:1 / 7,5:1). Antes era vermelho sólido
+   com texto branco a 4,2:1. */
 .badge[data-variant="destructive"] {
-  background: var(--color-alert-error-500);
-  color: #ffffff;
+  border-color: var(--color-danger-soft-border);
+  background: var(--color-danger-soft);
+  color: var(--color-danger-soft-text);
 }
 a.badge[data-variant="destructive"]:hover {
-  background: color-mix(in srgb, var(--color-alert-error-500) 90%, transparent);
+  background: var(--color-danger-soft-hover);
 }
 .badge[data-variant="destructive"]:focus-visible {
   border-color: var(--color-alert-error-500);
   box-shadow: 0 0 0 3px
-    color-mix(in srgb, var(--color-alert-error-500) 20%, transparent);
-}
-@media (prefers-color-scheme: dark) {
-  .badge[data-variant="destructive"] {
-    background: color-mix(
-      in srgb,
-      var(--color-alert-error-500) 60%,
-      transparent
-    );
-  }
-  .badge[data-variant="destructive"]:focus-visible {
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--color-alert-error-500) 40%, transparent);
-  }
+    color-mix(in srgb, var(--color-alert-error-500) 25%, transparent);
 }
 
 .badge[data-variant="outline"] {
   background: transparent;
-  border-color: var(--color-background-300);
-  color: var(--color-text-900);
+  border-color: var(--color-border-field);
+  color: var(--color-text-800);
 }
 a.badge[data-variant="outline"]:hover {
-  background: var(--color-background-300);
+  background: var(--color-row-hover);
 }
 
 .badge[data-variant="ghost"] {
@@ -105,13 +96,14 @@ a.badge[data-variant="outline"]:hover {
   color: inherit;
 }
 a.badge[data-variant="ghost"]:hover {
-  background: var(--color-background-300);
+  background: var(--color-control);
   color: var(--color-text-900);
 }
 
+/* Antes era `background-300` como cor de texto (1,2:1, quase invisível). */
 .badge[data-variant="link"] {
   background: transparent;
-  color: var(--color-background-300);
+  color: var(--color-primary-700);
   text-decoration: none;
   text-underline-offset: 4px;
 }

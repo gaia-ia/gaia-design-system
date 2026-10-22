@@ -52,7 +52,7 @@
 
 .trigger:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--color-primary-500);
+  box-shadow: 0 0 0 3px var(--color-primary-fill);
 }
 
 /* Chevron */

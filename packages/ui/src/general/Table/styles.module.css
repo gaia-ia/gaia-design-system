@@ -13,7 +13,7 @@
 }
 
 .tableHeader tr {
-  border-bottom: 1px solid var(--color-text-200);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .tableBody tr:last-child {
@@ -22,7 +22,7 @@
 
 .tableFooter {
   background-color: var(--color-transparent-50);
-  border-top: 1px solid var(--color-text-200);
+  border-top: 1px solid var(--color-border-subtle);
   font-weight: 500;
 }
 .tableFooter > tr:last-child {
@@ -30,20 +30,17 @@
 }
 
 .tableRow {
-  border-bottom: 1px solid var(--color-text-200);
+  border-bottom: 1px solid var(--color-border-subtle);
   transition: background-color 0.15s ease;
 }
 .tableRow[data-state="selected"] {
   background-color: var(--color-transparent-100);
 }
 
-.tableBody .tableRow:nth-child(odd) {
-  background-color: var(--color-transparent-50);
-}
-
-/* Depois da zebra e com a mesma especificidade: vence sem !important. */
+/* Sem zebra: a divisória sutil separa as linhas e só o hover marca a linha
+   sob o mouse. */
 .tableBody .tableRow:hover {
-  background-color: var(--color-background-100);
+  background-color: var(--color-row-hover);
 }
 
 .tableHead {

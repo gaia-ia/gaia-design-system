@@ -25,18 +25,18 @@
   display: flex;
   align-items: center;
   background-color: var(--color-background-100);
-  border: 1px solid transparent;
+  border: 1px solid var(--color-border-field);
   border-radius: 4px;
   transition: border-color 0.2s ease;
   overflow: hidden;
 }
 
 .input_container:hover {
-  border-color: var(--color-background-300);
+  border-color: var(--color-border-field-hover);
 }
 
 .input_container:focus-within {
-  border-color: var(--color-primary-500);
+  border-color: var(--color-primary-fill);
 }
 
 .input_container_error {
@@ -167,7 +167,7 @@
 
 .item_active {
   background-color: var(--color-primary-50);
-  color: var(--color-primary-600);
+  color: var(--color-primary-700);
 }
 
 .item_disabled {
@@ -184,7 +184,7 @@
   width: 14px;
   height: 14px;
   flex-shrink: 0;
-  color: var(--color-primary-500);
+  color: var(--color-primary-fill);
 }
 
 .check_icon_hidden {
@@ -227,18 +227,18 @@
   min-height: 42px;
   padding: 6px 10px;
   background-color: var(--color-background-100);
-  border: 1px solid transparent;
+  border: 1px solid var(--color-border-field);
   border-radius: 4px;
   cursor: text;
   transition: border-color 0.2s ease;
 }
 
 .chips_container:hover {
-  border-color: var(--color-background-300);
+  border-color: var(--color-border-field-hover);
 }
 
 .chips_container:focus-within {
-  border-color: var(--color-primary-500);
+  border-color: var(--color-primary-fill);
 }
 
 .chips_container_error {

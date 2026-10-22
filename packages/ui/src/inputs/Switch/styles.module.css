@@ -10,7 +10,7 @@
   border-radius: 9999px;
   border: 1px solid transparent;
 
-  background-color: var(--color-background-400);
+  background-color: var(--color-control-hover);
   transition:
     background-color 150ms ease,
     border-color 150ms ease,
@@ -31,15 +31,17 @@
 }
 
 .root[data-state='checked'] {
-  background-color: var(--color-primary-400);
+  background-color: var(--color-primary-fill);
 }
 
+/* `control-hover`: o `background-400` do escuro (#666) acendia demais. */
 .root[data-state='unchecked'] {
-  background-color: var(--color-background-400);
+  background-color: var(--color-control-hover);
 }
 
 .root:focus-visible {
-  border-color: var(--color-primary-500);
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 1px;
 }
 
 .root[aria-invalid='true'] {

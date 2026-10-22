@@ -13,8 +13,9 @@
 .checkbox_box {
   height: 16px;
   width: 16px;
-  border-radius: 2px;
-  border: 1px solid var(--color-text-700);
+  border-radius: 4px;
+  /* text-500: 3,2:1 sobre o branco, o mínimo de um contorno de controle. */
+  border: 1px solid var(--color-text-500);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,8 +26,10 @@
 }
 
 .container:has(input:checked) .checkbox_box {
-  background-color: var(--color-primary-600);
-  border: 1px solid var(--color-primary-600);
+  /* Mesmo laranja do botão principal. */
+  background-color: var(--color-primary-fill);
+  border: 1px solid var(--color-primary-fill);
+  color: var(--color-on-primary);
 
   svg {
     display: block;

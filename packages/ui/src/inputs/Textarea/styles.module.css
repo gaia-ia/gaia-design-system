@@ -23,8 +23,15 @@
   display: flex;
   background-color: var(--color-background-100);
   border-radius: 4px;
-  border: 1px solid transparent;
+  /* Borda visível em repouso: sobre o branco, só o fundo cinza-claro não
+     dizia que isto é um campo. */
+  border: 1px solid var(--color-border-field);
+  transition: border-color 0.2s ease;
   width: 100%;
+}
+
+.input_container:hover {
+  border-color: var(--color-border-field-hover);
 }
 
 .input_container textarea {
@@ -39,7 +46,7 @@
 }
 
 .input_container:has(textarea:focus) {
-  border: 1px solid var(--color-primary-500);
+  border: 1px solid var(--color-primary-fill);
 }
 
 .error {

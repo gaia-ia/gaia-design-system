@@ -172,7 +172,7 @@
 }
 
 .focusRing:focus-visible {
-  outline: 3px solid var(--color-primary-400);
+  outline: 3px solid var(--color-primary-fill);
   outline-offset: 2px;
 }
 
@@ -366,8 +366,8 @@
 
 /* Selected single (not range) */
 .dayButton[data-selected-single='true'] {
-  background: var(--color-primary-400);
-  color: var(--color-text-950);
+  background: var(--color-primary-fill);
+  color: var(--color-on-primary);
   border-radius: 6px !important;
 }
 
@@ -381,8 +381,8 @@
 /* Range start/end */
 .dayButton[data-range-start='true'],
 .dayButton[data-range-end='true'] {
-  background: var(--color-primary-400);
-  color: var(--color-text-950);
+  background: var(--color-primary-fill);
+  color: var(--color-on-primary);
 }
 
 .dayButton[data-range-start='true'] {

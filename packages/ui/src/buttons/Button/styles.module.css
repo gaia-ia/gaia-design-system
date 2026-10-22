@@ -36,8 +36,9 @@
 }
 
 .button:focus-visible {
-  border-color: var(--color-primary-400);
-  outline: 2px solid var(--color-primary-400);
+  /* O laranja de ação, o mesmo de todos os focos (≥3,8:1 nas superfícies). */
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 1px;
 }
 
 .button:active:not([aria-haspopup]) {
@@ -55,66 +56,73 @@
 
 /* -------------------- Variants -------------------- */
 
+/* Mesmo preenchimento e mesmo peso do link ativo da sidebar dos produtos. */
 .variantDefault {
-  background: var(--color-primary-400);
-  color: var(--color-text-900);
+  background: var(--color-primary-fill);
+  color: var(--color-on-primary);
+  font-weight: 600;
 }
 
 .variantDefault:is(a):hover,
 .variantDefault a:hover,
 .variantDefault:hover {
-  background: var(--color-primary-300);
+  background: var(--color-primary-fill-hover);
 }
 
+/* Contorno neutro sobre superfície: a borda é a mesma dos campos. */
 .variantOutline {
-  border-color: var(--color-text-900);
-  background: transparent;
+  border-color: var(--color-border-field);
+  background: var(--color-surface-raised);
   color: var(--color-text-900);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
 }
 
 .variantOutline:hover,
 .variantOutline[aria-expanded="true"] {
-  background: var(--color-background-300);
-  text-decoration: underline;
+  border-color: var(--color-border-field-hover);
+  background: var(--color-row-hover);
 }
 
 .variantSecondary {
-  background: var(--color-background-400);
+  background: var(--color-control);
   color: var(--color-text-900);
 }
 
 .variantSecondary:hover,
 .variantSecondary[aria-expanded="true"] {
-  background: var(--color-background-300);
+  background: var(--color-control-hover);
 }
 
+/* Como os links e as linhas do rodapé da sidebar. */
 .variantGhost {
   background: transparent;
-  color: var(--color-text-900);
+  color: var(--color-text-700);
 }
 
 .variantGhost:hover,
 .variantGhost[aria-expanded="true"] {
-  background: var(--color-background-300);
+  background: var(--color-background-200);
   color: var(--color-text-900);
 }
 
+/* Destrutivo suave: avisa sem gritar, e fica bem distinto do laranja do
+   principal. Antes era um rosa-salmão (#eb9e9e) com texto escuro. */
 .variantDestructive {
-  background: var(--color-alert-error-50);
-  color: var(--color-text-900);
+  border-color: var(--color-danger-soft-border);
+  background: var(--color-danger-soft);
+  color: var(--color-danger-soft-text);
+  font-weight: 600;
 }
 
 .variantDestructive:hover {
-  background: color-mix(
-    in srgb,
-    var(--color-alert-error-50) 50%,
-    var(--color-background-50)
-  );
+  background: var(--color-danger-soft-hover);
 }
 
+/* O 700 passa no AA nos dois modos (claro 5,5:1, escuro 10,4:1); o 400
+   (#ff9633) quase sumia sobre o branco. */
 .variantLink {
   background: transparent;
-  color: var(--color-primary-400);
+  color: var(--color-primary-700);
   text-underline-offset: 4px;
 }
 

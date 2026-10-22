@@ -27,7 +27,7 @@
   justify-content: center;
   padding: 24px;
   border-radius: 8px;
-  border: 1px dashed var(--color-background-300);
+  border: 1px dashed var(--color-border-field);
   background-color: var(--color-background-100);
   color: var(--color-text-600);
   cursor: pointer;
@@ -38,8 +38,8 @@
 }
 
 .dropzone:focus-visible {
-  border-color: var(--color-primary-500);
-  box-shadow: 0 0 0 2px var(--color-primary-500);
+  border-color: var(--color-primary-fill);
+  box-shadow: 0 0 0 2px var(--color-primary-fill);
 }
 
 .dropzone:hover {
@@ -48,7 +48,7 @@
 
 .dropzone[data-dragging] {
   border-style: solid;
-  border-color: var(--color-primary-500);
+  border-color: var(--color-primary-fill);
   background-color: var(--color-background-200, var(--color-background-100));
 }
 
@@ -85,7 +85,7 @@
   justify-content: center;
   padding: 8px 16px;
   border-radius: 4px;
-  border: 1px solid var(--color-background-300);
+  border: 1px solid var(--color-border-field);
   background-color: var(--color-background-100);
   color: var(--color-text-900);
   font-family: inherit;
@@ -99,12 +99,12 @@
 }
 
 .trigger:hover:not(:disabled) {
-  border-color: var(--color-primary-500);
+  border-color: var(--color-primary-fill);
 }
 
 .trigger:focus-visible {
-  border-color: var(--color-primary-500);
-  box-shadow: 0 0 0 2px var(--color-primary-500);
+  border-color: var(--color-primary-fill);
+  box-shadow: 0 0 0 2px var(--color-primary-fill);
 }
 
 .trigger:disabled,
@@ -132,7 +132,7 @@
   gap: 12px;
   padding: 8px 12px;
   border-radius: 6px;
-  border: 1px solid var(--color-background-300);
+  border: 1px solid var(--color-border-field);
   background-color: var(--color-background-100);
   position: relative;
 }
@@ -198,12 +198,12 @@
 
 .itemProgressFill {
   height: 100%;
-  background-color: var(--color-primary-500);
+  background-color: var(--color-primary-fill);
   transition: width 200ms ease;
 }
 
 .itemProgress[data-state="success"] .itemProgressFill {
-  background-color: var(--color-alert-success-500, var(--color-primary-500));
+  background-color: var(--color-alert-success-500, var(--color-primary-fill));
 }
 
 .itemDelete {
@@ -229,7 +229,7 @@
 }
 
 .itemDelete:focus-visible {
-  box-shadow: 0 0 0 2px var(--color-primary-500);
+  box-shadow: 0 0 0 2px var(--color-primary-fill);
 }
 
 .itemDelete:disabled,
@@ -269,8 +269,8 @@
 }
 
 .clear:focus-visible {
-  border-color: var(--color-primary-500);
-  box-shadow: 0 0 0 2px var(--color-primary-500);
+  border-color: var(--color-primary-fill);
+  box-shadow: 0 0 0 2px var(--color-primary-fill);
 }
 
 .clear:disabled,

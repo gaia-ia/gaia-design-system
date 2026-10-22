@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Geist:wght@400..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
 
 * {
   box-sizing: border-box;
-  font-family: "DM Sans", sans-serif;
+  font-family: var(--font-body);
   padding: 0;
   margin: 0;
 }
@@ -36,6 +36,12 @@ img {
 :root {
   color-scheme: light dark;
 
+  /* Fontes: DM Sans no corpo, Geist nos títulos. Source Code Pro fica só
+     para código e valores (ex.: ColorPicker). */
+  --font-body: "DM Sans", sans-serif;
+  --font-heading: "Geist", "DM Sans", sans-serif;
+  --font-mono: "Source Code Pro", monospace;
+
   /* Accent */
   --color-accent-50: light-dark(#eaf4fa, #07141d);
   --color-accent-100: light-dark(#d5e9f6, #091d2a);
@@ -54,6 +60,13 @@ img {
   --color-alert-error-500: light-dark(#d94a4a, #d94a4a);
   --color-alert-error-950: light-dark(#9c2121, #eb9e9e);
 
+  /* Ação destrutiva suave: fundo claro, texto vermelho e borda leve. Texto
+     5,8:1 no claro e 7,5:1 no escuro (hover 5,1:1 e 6,9:1). */
+  --color-danger-soft: light-dark(#fdecec, #301715);
+  --color-danger-soft-hover: light-dark(#fbdad8, #3d1c1a);
+  --color-danger-soft-text: light-dark(#b42318, #f2958d);
+  --color-danger-soft-border: light-dark(#f6c9c5, #5c2622);
+
   /* Alert - Info */
   --color-alert-info-50: light-dark(#92b2e5, #21498a);
   --color-alert-info-500: light-dark(#4077d1, #4077d1);
@@ -69,48 +82,74 @@ img {
   --color-alert-warning-500: light-dark(#d7ac61, #d7ac61);
   --color-alert-warning-950: light-dark(#a87a2a, #ecd7b2);
 
-  /* Background */
+  /* Background — neutros quase puros no claro (antes "stone", quentes). */
   --color-background-50: light-dark(#ffffff, #121212);
-  --color-background-100: light-dark(#fafaf9, #1a1a1a);
-  --color-background-200: light-dark(#f5f5f4, #333333);
-  --color-background-300: light-dark(#e7e5e4, #4d4d4d);
-  --color-background-400: light-dark(#d6d3d1, #666666);
-  --color-background-500: light-dark(#a8a29e, #808080);
-  --color-background-600: light-dark(#78716c, #999999);
-  --color-background-700: light-dark(#57534e, #b3b3b3);
-  --color-background-800: light-dark(#44403c, #cccccc);
-  --color-background-900: light-dark(#292524, #e6e6e6);
-  --color-background-950: light-dark(#1c1917, #f2f2f2);
+  --color-background-100: light-dark(#fafafa, #1a1a1a);
+  --color-background-200: light-dark(#f3f3f3, #333333);
+  --color-background-300: light-dark(#ebebeb, #4d4d4d);
+  --color-background-400: light-dark(#d6d6d6, #666666);
+  --color-background-500: light-dark(#b8b8b8, #808080);
+  --color-background-600: light-dark(#8f8f8f, #999999);
+  --color-background-700: light-dark(#666666, #b3b3b3);
+  --color-background-800: light-dark(#474747, #cccccc);
+  --color-background-900: light-dark(#262626, #e6e6e6);
+  --color-background-950: light-dark(#1a1a1a, #f2f2f2);
+
+  /* Superfícies e controles por papel. Os degraus `background-*` mudam de
+     sentido entre os modos (300/400 acendem no escuro); estes tokens dão um
+     valor certo para cada papel em cada modo. */
+  --color-surface-canvas: light-dark(#ffffff, #121212);
+  --color-surface-raised: light-dark(#ffffff, #1a1a1a);
+  --color-surface-muted: light-dark(#fafafa, #1a1a1a);
+  --color-border-subtle: light-dark(#ebebeb, #262626);
+  --color-border-field: light-dark(#d6d6d6, #2e2e2e);
+  --color-border-field-hover: light-dark(#b8b8b8, #3d3d3d);
+  --color-control: light-dark(#ebebeb, #262626);
+  --color-control-hover: light-dark(#d6d6d6, #333333);
+  --color-control-active: light-dark(#ffffff, #333333);
+  --color-row-hover: light-dark(#f5f5f5, #1f1f1f);
 
   /* Fixed */
   --color-fixed-black: light-dark(#000000, #000000);
   --color-fixed-white: light-dark(#ffffff, #ffffff);
 
-  /* Primary */
-  --color-primary-50: light-dark(#fff2e5, #241100);
-  --color-primary-100: light-dark(#ffe5cc, #331900);
-  --color-primary-200: light-dark(#ffca99, #663100);
-  --color-primary-300: light-dark(#ffb066, #994a00);
-  --color-primary-400: light-dark(#ff9633, #cc6300);
+  /* Primary — 50 a 500 seguem iguais (o 500, #ff7b00, é a cor da marca). Do
+     600 para baixo a escala puxa para o vermelho: o 600 (#d74100) é o laranja
+     de ação, que passa no AA com texto branco. O escuro espelha a escala. */
+  --color-primary-50: light-dark(#fff2e5, #2e0e00);
+  --color-primary-100: light-dark(#ffe5cc, #521900);
+  --color-primary-200: light-dark(#ffca99, #8a2a00);
+  --color-primary-300: light-dark(#ffb066, #bf3a00);
+  --color-primary-400: light-dark(#ff9633, #d74100);
   --color-primary-500: light-dark(#ff7b00, #ff7b00);
-  --color-primary-600: light-dark(#cc6300, #ff9633);
-  --color-primary-700: light-dark(#994a00, #ffb066);
-  --color-primary-800: light-dark(#663100, #ffca99);
-  --color-primary-900: light-dark(#331900, #ffe5cc);
-  --color-primary-950: light-dark(#241100, #fff2e5);
+  --color-primary-600: light-dark(#d74100, #ff9633);
+  --color-primary-700: light-dark(#bf3a00, #ffb066);
+  --color-primary-800: light-dark(#8a2a00, #ffca99);
+  --color-primary-900: light-dark(#521900, #ffe5cc);
+  --color-primary-950: light-dark(#2e0e00, #fff2e5);
 
-  /* Text */
+  /* Laranja de ação: botão principal, item ativo, foco, marcado/ligado. É o
+     mesmo nos dois modos e sai da escala (primary-600 no claro, primary-400
+     no escuro). 4,52:1 com o texto branco; como foco, ≥3,8:1 sobre as
+     superfícies dos dois modos. O hover é o primary-700 (claro) / 300
+     (escuro). */
+  --color-primary-fill: light-dark(#d74100, #d74100);
+  --color-primary-fill-hover: light-dark(#bf3a00, #bf3a00);
+  --color-on-primary: light-dark(#ffffff, #ffffff);
+
+  /* Text — o topo sai do #0d0d0d (~19:1 sobre o branco) para #141414; os
+     degraus de apoio ficam neutros, como os fundos. */
   --color-text-50: light-dark(#f2f2f2, #0d0d0d);
   --color-text-100: light-dark(#e6e6e6, #1a1a1a);
   --color-text-200: light-dark(#cccccc, #333333);
-  --color-text-300: light-dark(#b3b3b3, #4d4d4d);
-  --color-text-400: light-dark(#999999, #666666);
-  --color-text-500: light-dark(#808080, #808080);
+  --color-text-300: light-dark(#c4c4c4, #4d4d4d);
+  --color-text-400: light-dark(#b8b8b8, #666666);
+  --color-text-500: light-dark(#8f8f8f, #808080);
   --color-text-600: light-dark(#666666, #999999);
-  --color-text-700: light-dark(#4d4d4d, #b3b3b3);
+  --color-text-700: light-dark(#474747, #b3b3b3);
   --color-text-800: light-dark(#333333, #cccccc);
   --color-text-900: light-dark(#1a1a1a, #e6e6e6);
-  --color-text-950: light-dark(#0d0d0d, #ffffff);
+  --color-text-950: light-dark(#141414, #ffffff);
 }
 
 .light {

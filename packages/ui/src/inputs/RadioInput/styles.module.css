@@ -49,10 +49,10 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 1px solid var(--color-text-700);
+  border: 1px solid var(--color-text-500);
 }
 
 .option label:has(input:checked):before {
-  background-color: var(--color-primary-600);
-  border: 1px solid var(--color-primary-600);
+  background-color: var(--color-primary-fill);
+  border: 1px solid var(--color-primary-fill);
 }

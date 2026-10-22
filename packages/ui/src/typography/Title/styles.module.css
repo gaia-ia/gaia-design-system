@@ -1,5 +1,8 @@
 .text {
-  font-family: 'Source Code Pro', sans-serif;
+  /* Geist nos títulos (a mono Source Code Pro pesava demais sobre o claro).
+     O fallback cobre apps que ainda não carregam o tema novo. */
+  font-family: var(--font-heading, 'Geist', 'DM Sans', sans-serif);
+  letter-spacing: -0.2px;
   color: var(--color-text-950);
   padding: 0;
   margin: 0;
@@ -41,4 +44,10 @@
 
 .subheading {
   font-weight: 500;
+}
+
+/* Depois do bloco de 700: o título de página fica em 600. */
+.title {
+  font-weight: 600;
+  letter-spacing: -0.4px;
 }
