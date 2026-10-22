@@ -199,6 +199,14 @@ export {
   SheetTrigger,
 } from "./general/Sheet";
 export type { SheetContentProps } from "./general/Sheet/types";
+export { Sidebar } from "./general/Sidebar";
+export type {
+  SidebarLabels,
+  SidebarLanguage,
+  SidebarLink,
+  SidebarProps,
+  SidebarUser,
+} from "./general/Sidebar/types";
 export { Skeleton } from "./general/Skeleton";
 export {
   Table,
