@@ -108,6 +108,7 @@ function SheetOverlay({
  * @param {SheetContentProps} props
  * @param {"top" | "right" | "bottom" | "left"} [props.side="right"] - Edge the sheet slides in from.
  * @param {boolean} [props.showCloseButton=true] - Whether to show the top-right close icon button.
+ * @param {string} [props.closeLabel="Fechar"] - Accessible name of the close icon button.
  * @param {string} [props.className] - Optional additional class names.
  * @returns {JSX.Element}
  *
@@ -123,6 +124,7 @@ function SheetContent({
   children,
   side = "right",
   showCloseButton = true,
+  closeLabel = "Fechar",
   ...props
 }: SheetContentProps) {
   return (
@@ -141,7 +143,7 @@ function SheetContent({
             className={styles.closeButton}
             asChild
           >
-            <Button variant="ghost" size="icon-sm">
+            <Button variant="ghost" size="icon-sm" aria-label={closeLabel}>
               <XIcon />
             </Button>
           </SheetPrimitive.Close>

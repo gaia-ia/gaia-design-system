@@ -18,7 +18,7 @@ const videoExtensions = ["mp4", "mov", "avi", "wmv", "flv", "mkv"];
  * isImageOrVideo("document.pdf"); // Returns undefined
  */
 export function isImageOrVideo(fileName: string) {
-  const extension = fileName.split(".").pop();
+  const extension = fileName.split(".").pop()?.toLowerCase();
 
   if (imageExtensions.includes(extension as string)) return "IMAGE";
   else if (videoExtensions.includes(extension as string)) return "VIDEO";

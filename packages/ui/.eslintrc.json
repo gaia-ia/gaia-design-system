@@ -1,3 +1,4 @@
 {
-  "extends": "@gaia-dev/eslint-config/react.json"
+  "extends": "@gaia-dev/eslint-config/react.json",
+  "ignorePatterns": ["dist"]
 }

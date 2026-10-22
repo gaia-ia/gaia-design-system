@@ -5,6 +5,8 @@ export type ModalContentProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
   title: string;
   className?: string;
+  /** Accessible name of the close icon button. Defaults to `"Fechar"`. */
+  closeLabel?: string;
 };
 
 export type ModalButtonsProps = {

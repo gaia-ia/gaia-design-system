@@ -106,6 +106,9 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   const inputId = id ?? `file-upload-${generatedId}`;
   const inputRef = useRef<HTMLInputElement>(null);
   const isControlled = value !== undefined;
+  // Mensagens para as regiões aria-live (status: polite; erros: alert).
+  const [statusMessage, setStatusMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [internalFiles, setInternalFiles] = useState<FileWithState[]>(() =>
     (defaultValue ?? []).map((file) => ({
@@ -178,12 +181,14 @@ export const FileUpload: React.FC<FileUploadProps> = ({
       if (disabled) return;
 
       const accepted: FileWithState[] = [];
+      const rejections: string[] = [];
       let currentCount = internalFiles.length;
 
       for (const file of incoming) {
         const error = validateFile(file, currentCount);
         if (error) {
           onFileReject?.(file, error);
+          rejections.push(`${file.name}: ${error}`);
           continue;
         }
         accepted.push({
@@ -196,6 +201,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
         if (!multiple) break;
       }
 
+      if (rejections.length > 0) setErrorMessage(rejections.join(". "));
       if (accepted.length === 0) return;
 
       const nextFiles = multiple
@@ -231,20 +237,23 @@ export const FileUpload: React.FC<FileUploadProps> = ({
                   status: "success",
                   progress: 100,
                 });
+                setStatusMessage(`${file.name} enviado`);
               }
             },
             onError: (file, message) => {
               const targetId = findIdByFile(file);
               if (targetId) {
                 updateFileState(targetId, { status: "error", error: message });
+                setErrorMessage(`${file.name}: ${message}`);
               }
             },
           }),
         ).catch((err: unknown) => {
-          const message = err instanceof Error ? err.message : "Upload failed";
+          const message = err instanceof Error ? err.message : "Falha no envio";
           accepted.forEach((f) =>
             updateFileState(f.id, { status: "error", error: message }),
           );
+          setErrorMessage(message);
         });
       }
     },
@@ -340,6 +349,24 @@ export const FileUpload: React.FC<FileUploadProps> = ({
           aria-hidden="true"
         />
         {children}
+        <div
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          className={styles.srOnly}
+          data-slot="file-upload-status"
+        >
+          {statusMessage}
+        </div>
+        <div
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          className={styles.srOnly}
+          data-slot="file-upload-alert"
+        >
+          {errorMessage}
+        </div>
       </div>
     </FileUploadContext.Provider>
   );
@@ -734,6 +761,7 @@ export const FileUploadItemProgress: React.FC<FileUploadItemProgressProps> = ({
       data-state={item.status}
       className={clsx(styles.itemProgress, className)}
       role="progressbar"
+      aria-label={`Progresso do envio de ${item.file.name}`}
       aria-valuenow={item.progress}
       aria-valuemin={0}
       aria-valuemax={100}

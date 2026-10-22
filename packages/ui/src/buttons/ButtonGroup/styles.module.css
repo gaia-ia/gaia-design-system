@@ -1,43 +1,53 @@
 .root {
   display: flex;
-  gap: 16px;
+  gap: 8px;
 }
 
+/* Cada opção segue o Button: neutra como o `secondary` e, quando escolhida,
+   com o mesmo preenchimento do `default`. Antes era uma pílula que ficava
+   laranja no hover com texto branco a 2,6:1. */
 .item {
   all: unset;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 16px;
-  border-radius: 28px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 8px;
   cursor: pointer;
   width: fit-content;
-  background-color: var(--color-background-200);
+  background-color: var(--color-control);
+  color: var(--color-text-700);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+
+  & span {
+    color: inherit;
+    font-weight: inherit;
+  }
 
   &:hover {
-    background-color: var(--color-primary-500);
+    background-color: var(--color-control-hover);
+    color: var(--color-text-900);
   }
 
-  &:hover span {
-    color: var(--color-fixed-white);
-  }
-
-  &:focus {
-    background-color: var(--color-primary-500);
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-fill);
+    outline-offset: 1px;
   }
 
   &:disabled {
-    background-color: var(--color-primary-50);
-    border: none;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 
-  &[data-state='checked'] {
-    background-color: var(--color-primary-500);
-  }
-
-  &[data-state='checked'] span {
-    font-weight: 700;
-    color: var(--color-fixed-white);
+  &[data-state='checked'],
+  &[data-state='checked']:hover {
+    background-color: var(--color-primary-fill);
+    color: var(--color-on-primary);
+    font-weight: 600;
   }
 }

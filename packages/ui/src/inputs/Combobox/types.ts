@@ -24,6 +24,8 @@ export interface ComboboxProps {
   required?: boolean;
   clearable?: boolean;
   className?: string;
+  /** Accessible name for the input when there is no visible `label`. */
+  "aria-label"?: string;
 }
 
 export interface ComboboxMultiProps

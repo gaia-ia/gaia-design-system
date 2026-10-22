@@ -32,6 +32,7 @@ export const Divider = ({
   orientation = "horizontal",
   decorative = true,
   className,
+  style,
   ...props
 }: DividerProps) => {
   return (
@@ -40,7 +41,7 @@ export const Divider = ({
       decorative={decorative}
       orientation={orientation}
       className={clsx(styles.separator, className)}
-      style={color ? { backgroundColor: color } : undefined}
+      style={color ? { ...style, backgroundColor: color } : style}
       {...props}
     />
   );

@@ -9,6 +9,7 @@ import {
 } from "react";
 import * as RechartsPrimitive from "recharts";
 
+import clsx from "../../utils/clsx";
 import { THEMES } from "./constants";
 import styles from "./styles.module.css";
 import {
@@ -42,10 +43,6 @@ function useChart() {
   return context;
 }
 
-function joinClassNames(...parts: Array<string | undefined | null | false>) {
-  return parts.filter(Boolean).join(" ");
-}
-
 /**
  * A wrapper component that sets up a styled chart environment with theme-aware colors,
  * configuration context, and responsive layout via `ResponsiveContainer` from Recharts.
@@ -62,10 +59,20 @@ function joinClassNames(...parts: Array<string | undefined | null | false>) {
  * @param {string} [props.id] - Optional ID used for CSS scoping; defaults to a unique ID.
  * @param {string} [props.className] - Optional class name for the container.
  * @param {React.ReactNode} props.children - Children are passed to the internal `ResponsiveContainer`.
+ * @param {string} [props.aria-label] - Accessible name of the chart (e.g. "Usuários por mês"). When it (or `aria-labelledby`) is set, the container becomes a `role="figure"`.
+ * @param {React.ReactNode} [props.description] - Text alternative with the data the chart shows (trend, totals, key values). Rendered visually hidden and linked through `aria-describedby`. A chart conveys data only graphically, so give it a name and a description, or render a data table next to it (WCAG 1.1.1).
  * @returns {JSX.Element} A styled and context-aware Recharts container.
  *
+ * Recharts 3 turns on `accessibilityLayer` by default: the SVG is focusable and the arrow keys walk the
+ * data points, announcing them through the tooltip. For a static chart, pass `accessibilityLayer={false}`
+ * to the chart and `role="img"` to the container.
+ *
  * @example
- * <ChartContainer config={{ users: { label: "Users", color: "#3498db" } }}>
+ * <ChartContainer
+ *   aria-label="Usuários por mês"
+ *   description="Crescimento de 120 em janeiro para 310 em junho."
+ *   config={{ users: { label: "Users", color: "#3498db" } }}
+ * >
  *   <BarChart data={data}>
  *     <XAxis dataKey="name" />
  *     <Bar dataKey="users" />
@@ -77,24 +84,40 @@ function ChartContainer({
   className,
   children,
   config,
+  description,
+  "aria-describedby": ariaDescribedBy,
   ...props
 }: ComponentProps<"div"> & {
   config: ChartConfig;
+  description?: ReactNode;
   children: ComponentProps<
     typeof RechartsPrimitive.ResponsiveContainer
   >["children"];
 }) {
   const uniqueId = useId();
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`;
+  const descriptionId = `${chartId}-description`;
+  const isLabelled = Boolean(props["aria-label"] || props["aria-labelledby"]);
+  const describedBy =
+    [ariaDescribedBy, description ? descriptionId : undefined]
+      .filter(Boolean)
+      .join(" ") || undefined;
 
   return (
     <ChartContext.Provider value={{ config }}>
       <div
         data-slot="chart"
         data-chart={chartId}
-        className={joinClassNames(styles.chartContainer, className)}
+        className={clsx(styles.chartContainer, className)}
+        role={isLabelled ? "figure" : undefined}
+        aria-describedby={describedBy}
         {...props}
       >
+        {description ? (
+          <p id={descriptionId} className={styles.srOnly}>
+            {description}
+          </p>
+        ) : null}
         <ChartStyle id={chartId} config={config} />
         <RechartsPrimitive.ResponsiveContainer>
           {children}
@@ -185,10 +208,12 @@ function ChartTooltipContent({
   color,
   nameKey,
   labelKey,
-  ...rest
 }: ExtraTooltipProps & { labelClassName?: string }) {
   const { config } = useChart();
-  const items = (payload ?? []) as ReadonlyArray<RTooltipItem>;
+  const items = useMemo(
+    () => (payload ?? []) as ReadonlyArray<RTooltipItem>,
+    [payload],
+  );
 
   const tooltipLabel = useMemo(() => {
     if (hideLabel || !items.length) return null;
@@ -204,14 +229,14 @@ function ChartTooltipContent({
 
     if (labelFormatter) {
       return (
-        <div className={joinClassNames(styles.tooltipLabel, labelClassName)}>
+        <div className={clsx(styles.tooltipLabel, labelClassName)}>
           {labelFormatter(valueNode, items)}
         </div>
       );
     }
     if (!valueNode) return null;
     return (
-      <div className={joinClassNames(styles.tooltipLabel, labelClassName)}>
+      <div className={clsx(styles.tooltipLabel, labelClassName)}>
         {valueNode}
       </div>
     );
@@ -230,7 +255,7 @@ function ChartTooltipContent({
   const nestLabel = items.length === 1 && indicator !== "dot";
 
   return (
-    <div className={joinClassNames(styles.tooltip, className)} {...rest}>
+    <div className={clsx(styles.tooltip, className)}>
       {!nestLabel ? tooltipLabel : null}
       <div className={styles.tooltipGrid}>
         {items.map((item, index) => {
@@ -258,7 +283,7 @@ function ChartTooltipContent({
           return (
             <div
               key={String(item.dataKey ?? index)}
-              className={joinClassNames(
+              className={clsx(
                 styles.tooltipRow,
                 indicator === "dot" && styles.tooltipRowDotAlign,
               )}
@@ -274,7 +299,7 @@ function ChartTooltipContent({
                   ) : (
                     !hideIndicator && (
                       <div
-                        className={joinClassNames(
+                        className={clsx(
                           styles.tooltipRowIcon,
                           indicatorClass,
                           nestLabel &&
@@ -291,7 +316,7 @@ function ChartTooltipContent({
                     )
                   )}
                   <div
-                    className={joinClassNames(
+                    className={clsx(
                       styles.tooltipRowBody,
                       nestLabel
                         ? styles.tooltipRowBodyNestEnd
@@ -353,7 +378,7 @@ function ChartLegendContent({
 
   return (
     <div
-      className={joinClassNames(
+      className={clsx(
         styles.legend,
         verticalAlign === "top" ? styles.legendPadBottom : styles.legendPadTop,
         className,
@@ -380,7 +405,7 @@ function ChartLegendContent({
                 style={{ backgroundColor: String(item.color ?? "") }}
               />
             )}
-            {itemConfig?.label}
+            {itemConfig?.label ?? item.value}
           </div>
         );
       })}

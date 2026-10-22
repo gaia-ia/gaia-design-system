@@ -20,6 +20,7 @@ import {
  * @component
  * @param {TableProps} props - Props for the table element.
  * @param {string} [props.className] - Additional class name(s) for the `<table>`.
+ * @param {string} [props.containerLabel="Tabela"] - Accessible name of the scroll container. The container is a focusable `role="region"`, so a table wider than the screen can be scrolled from the keyboard.
  * @returns {JSX.Element}
  *
  * @example
@@ -38,12 +39,23 @@ import {
  *   </TableBody>
  * </Table>
  */
-export function Table({ className, ...props }: TableProps) {
+export function Table({
+  className,
+  containerLabel = "Tabela",
+  ...props
+}: TableProps) {
   return (
-    <div data-slot="table-container" className={clsx(styles.tableContainer)}>
+    <div
+      data-slot="table-container"
+      className={clsx(styles.tableContainer)}
+      role="region"
+      aria-label={containerLabel}
+      // Focável para rolar tabelas largas pelo teclado (WCAG 2.1.1).
+      tabIndex={0}
+    >
       <table
         data-slot="table"
-        className={`${styles.table} ${className}`}
+        className={clsx(styles.table, className)}
         {...props}
       />
     </div>
@@ -106,7 +118,11 @@ export function TableFooter({ className, ...props }: TFootProps) {
 /**
  * Renders a `<tr>` (table row) with optional styling hooks.
  *
- * Should be used inside `TableHeader`, `TableBody`, or `TableFooter`.
+ * Should be used inside `TableHeader`, `TableBody`, or `TableFooter`. To mark a
+ * row as selected, pass `data-state="selected"` (visual only) or
+ * `aria-selected` (also exposed to assistive tech, for tables with
+ * `role="grid"`); both get the selected style: a tinted background and a 3px
+ * bar in the action orange on the first cell.
  *
  * @component
  * @param {TRProps} props - Props for the `<tr>` element.

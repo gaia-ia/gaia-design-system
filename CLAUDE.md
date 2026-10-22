@@ -7,10 +7,6 @@
 - For straightforward tasks: read what's needed, make the change, verify
 - If something goes sideways, stop and re-plan
 - When given a bug: just fix it autonomously
-3. **Track Progress**: Mark items complete as you go
-4. **Explain Changes**: High-level summary at each step
-5. **Document Results**: Add review section to `tasks/todo.md`
-6. **Capture Lessons**: Update `tasks/lessons.md` after corrections
 
 ## Core Principles
 
@@ -24,8 +20,10 @@ Turborepo monorepo (Yarn workspaces) that publishes shared React components and 
 
 **Published packages:**
 
-- `@gaia-dev/ui` (v3.3.0) — React component library
-- `@gaia-dev/theme` (v1.0.0) — Design tokens as CSS custom properties
+- `@gaia-dev/ui` — React component library
+- `@gaia-dev/theme` — Design tokens as CSS custom properties
+
+Current versions live in each package's `package.json` (`packages/ui/package.json`, `packages/theme/package.json`).
 
 ## Commands
 
@@ -131,9 +129,15 @@ const ComponentDecorator = (Story: StoryFn, context: StoryContext) => {
 ## CSS & Theming
 
 - **Design tokens** defined in `packages/theme/index.css` as CSS custom properties
-- Token categories: `--color-accent-*`, `--color-primary-*`, `--color-background-*`, `--color-text-*`, `--color-alert-*`, `--color-fixed-*`
+- Token scales: `--color-accent-*`, `--color-primary-*`, `--color-background-*`, `--color-text-*`, `--color-alert-*`, `--color-fixed-*`
+- Role tokens (prefer these over raw scale steps):
+  - Surfaces: `--color-surface-canvas`, `--color-surface-raised`, `--color-surface-muted`
+  - Borders: `--color-border-subtle`, `--color-border-field`, `--color-border-field-hover`
+  - Controls: `--color-control`, `--color-control-hover`, `--color-control-active`, `--color-row-hover`
+  - Primary: `--color-primary-fill`, `--color-primary-fill-hover`, `--color-on-primary`
+  - Danger: `--color-danger-soft`, `--color-danger-soft-hover`, `--color-danger-soft-text`, `--color-danger-soft-border`
 - Light/dark theme support via CSS `light-dark()` function
-- Fonts: DM Sans, Source Code Pro (Google Fonts)
+- Fonts (Google Fonts): `--font-body` DM Sans, `--font-heading` Geist, `--font-mono` Source Code Pro
 
 ## Versioning & Release
 

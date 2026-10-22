@@ -1,9 +1,11 @@
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 
+import clsx from "../../utils/clsx";
 import styles from "./styles.module.css";
 
 function Avatar({
   size = "default",
+  className,
   ...props
 }: React.ComponentProps<typeof AvatarPrimitive.Root> & {
   size?: "default" | "sm" | "lg";
@@ -12,49 +14,66 @@ function Avatar({
     <AvatarPrimitive.Root
       data-slot="avatar"
       data-size={size}
-      className={styles.avatar}
+      className={clsx(styles.avatar, className)}
       {...props}
     />
   );
 }
 
-function AvatarImage(
-  props: React.ComponentProps<typeof AvatarPrimitive.Image>,
-) {
+function AvatarImage({
+  className,
+  ...props
+}: React.ComponentProps<typeof AvatarPrimitive.Image>) {
   return (
     <AvatarPrimitive.Image
       data-slot="avatar-image"
-      className={styles.image}
+      className={clsx(styles.image, className)}
       {...props}
     />
   );
 }
 
-function AvatarFallback(
-  props: React.ComponentProps<typeof AvatarPrimitive.Fallback>,
-) {
+function AvatarFallback({
+  className,
+  ...props
+}: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {
   return (
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"
-      className={styles.fallback}
+      className={clsx(styles.fallback, className)}
       {...props}
     />
   );
 }
 
-function AvatarBadge(props: React.ComponentProps<"span">) {
-  return <span data-slot="avatar-badge" className={styles.badge} {...props} />;
+function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
+  return (
+    <span
+      data-slot="avatar-badge"
+      className={clsx(styles.badge, className)}
+      {...props}
+    />
+  );
 }
 
-function AvatarGroup(props: React.ComponentProps<"div">) {
-  return <div data-slot="avatar-group" className={styles.group} {...props} />;
+function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="avatar-group"
+      className={clsx(styles.group, className)}
+      {...props}
+    />
+  );
 }
 
-function AvatarGroupCount(props: React.ComponentProps<"div">) {
+function AvatarGroupCount({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="avatar-group-count"
-      className={styles.groupCount}
+      className={clsx(styles.groupCount, className)}
       {...props}
     />
   );

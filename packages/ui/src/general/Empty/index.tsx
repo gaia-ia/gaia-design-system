@@ -1,3 +1,5 @@
+import { Slot } from "radix-ui";
+
 import clsx from "../../utils/clsx";
 import styles from "./styles.module.css";
 import type { EmptyMediaProps } from "./types";
@@ -80,11 +82,18 @@ function EmptyMedia({
  *
  * @component
  * @param {React.ComponentProps<"div">} props - Native `<div>` props.
+ * @param {boolean} [props.asChild=false] - Render the child element instead
+ *   (e.g. an `<h2>`), keeping the title styles — for a real heading level.
  * @returns {JSX.Element} The empty state title.
  */
-function EmptyTitle({ className, ...props }: React.ComponentProps<"div">) {
+function EmptyTitle({
+  className,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"div"> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot.Root : "div";
   return (
-    <div
+    <Comp
       data-slot="empty-title"
       className={clsx(styles.title, className)}
       {...props}

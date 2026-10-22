@@ -3,8 +3,7 @@
   gap: 16px;
 }
 
-.dark,
-.light {
+.panel {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,12 +14,4 @@
   button {
     width: fit-content;
   }
-}
-
-.dark {
-  color-scheme: dark;
-}
-
-.light {
-  color-scheme: light;
 }

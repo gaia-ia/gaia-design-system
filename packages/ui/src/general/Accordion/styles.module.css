@@ -52,7 +52,7 @@
 
 .trigger:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--color-primary-500);
+  box-shadow: 0 0 0 3px var(--color-primary-fill);
 }
 
 /* Chevron */
@@ -64,7 +64,7 @@
   pointer-events: none;
   transform: translateY(2px);
   transition: transform 0.2s ease;
-  color: var(--color-text-400);
+  color: var(--color-text-600);
 }
 
 .trigger[data-state="open"] .chevron {

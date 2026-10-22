@@ -20,7 +20,7 @@
 }
 
 .required {
-  color: var(--color-alert-error-500);
+  color: var(--color-danger-soft-text);
   margin-left: 2px;
 }
 
@@ -31,7 +31,7 @@
 
 .error {
   font-size: 12px;
-  color: var(--color-alert-error-500);
+  color: var(--color-danger-soft-text);
 }
 
 /* Trigger button — shows the swatch + current color string */
@@ -41,7 +41,7 @@
   gap: 8px;
   padding: 6px 10px 6px 6px;
   border-radius: 8px;
-  border: 1px solid var(--color-background-300);
+  border: 1px solid var(--color-border-field);
   background-color: var(--color-background-50);
   color: var(--color-text-700);
   font-family: inherit;
@@ -54,13 +54,13 @@
 }
 
 .trigger:hover:not(:disabled) {
-  border-color: var(--color-primary-400);
+  border-color: var(--color-primary-fill);
 }
 
 .trigger:focus-visible {
   outline: none;
-  border-color: var(--color-primary-400);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-400) 30%, transparent);
+  border-color: var(--color-primary-fill);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-fill) 30%, transparent);
 }
 
 .trigger:disabled {
@@ -82,7 +82,7 @@
 .swatch {
   display: inline-block;
   border-radius: 6px;
-  border: 1px solid var(--color-background-300);
+  border: 1px solid var(--color-border-field);
   flex-shrink: 0;
   background-image:
     linear-gradient(45deg, var(--color-background-200) 25%, transparent 25%),
@@ -130,7 +130,7 @@
 /* Popover & inline surface */
 .popoverContent {
   background-color: var(--color-background-50);
-  border: 1px solid var(--color-background-300);
+  border: 1px solid var(--color-border-field);
   border-radius: 12px;
   padding: 12px;
   box-shadow:
@@ -146,7 +146,7 @@
   gap: 12px;
   width: 260px;
   background-color: var(--color-background-50);
-  border: 1px solid var(--color-background-300);
+  border: 1px solid var(--color-border-field);
   border-radius: 12px;
   padding: 12px;
 }
@@ -257,6 +257,14 @@
   transform: translate(-50%, -50%) scale(1.1);
 }
 
+/* Anel de foco visível nos sliders (2D, matiz, alfa): o ponteiro é branco,
+   então só a escala não é um indicador perceptível. */
+.surface
+  :global(.react-colorful__interactive:focus-visible .react-colorful__pointer) {
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 2px;
+}
+
 /* Toolbar row: eye dropper + format select + input */
 .toolbar {
   display: flex;
@@ -273,7 +281,7 @@
   height: 28px;
   flex-shrink: 0;
   border-radius: 6px;
-  border: 1px solid var(--color-background-300);
+  border: 1px solid var(--color-border-field);
   background-color: var(--color-background-50);
   color: var(--color-text-700);
   cursor: pointer;
@@ -294,7 +302,7 @@
   height: 28px;
   padding: 0 22px 0 8px;
   border-radius: 6px;
-  border: 1px solid var(--color-background-300);
+  border: 1px solid var(--color-border-field);
   background-color: var(--color-background-50);
   color: var(--color-text-700);
   font-family: inherit;
@@ -320,7 +328,7 @@
   height: 28px;
   padding: 0 8px;
   border-radius: 6px;
-  border: 1px solid var(--color-background-300);
+  border: 1px solid var(--color-border-field);
   background-color: var(--color-background-50);
   color: var(--color-text-700);
   font-family: "Source Code Pro", monospace;
@@ -332,8 +340,8 @@
 .formatSelect:focus,
 .eyeDropper:focus-visible {
   outline: none;
-  border-color: var(--color-primary-400);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-400) 30%, transparent);
+  border-color: var(--color-primary-fill);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-fill) 30%, transparent);
 }
 
 .input[aria-invalid="true"] {

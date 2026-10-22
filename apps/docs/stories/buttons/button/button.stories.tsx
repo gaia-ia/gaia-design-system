@@ -37,25 +37,14 @@ const ButtonDecorator = (Story: StoryFn, context: StoryContext) => {
   const children = selectedIcon ?? restArgs.children;
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.dark}>
-        <Story
-          args={{
-            ...restArgs,
-            children,
-            onClick: () => window.alert("Clicked!"),
-          }}
-        />
-      </div>
-      <div className={styles.light}>
-        <Story
-          args={{
-            ...restArgs,
-            children,
-            onClick: () => window.alert("Clicked!"),
-          }}
-        />
-      </div>
+    <div className={styles.panel}>
+      <Story
+        args={{
+          ...restArgs,
+          children,
+          onClick: () => window.alert("Clicked!"),
+        }}
+      />
     </div>
   );
 };

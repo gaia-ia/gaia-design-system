@@ -199,6 +199,14 @@ export {
   SheetTrigger,
 } from "./general/Sheet";
 export type { SheetContentProps } from "./general/Sheet/types";
+export { Sidebar } from "./general/Sidebar";
+export type {
+  SidebarLabels,
+  SidebarLanguage,
+  SidebarLink,
+  SidebarProps,
+  SidebarUser,
+} from "./general/Sidebar/types";
 export { Skeleton } from "./general/Skeleton";
 export {
   Table,
@@ -275,7 +283,7 @@ export { Multicheck } from "./inputs/Multicheck";
 export type { MulticheckProps } from "./inputs/Multicheck/types";
 export { RadioInput } from "./inputs/RadioInput";
 export type { RadioInputProps } from "./inputs/RadioInput/types";
-export { default as Select } from "./inputs/Select";
+export { Select } from "./inputs/Select";
 export type { SelectProps } from "./inputs/Select/types";
 export { Slider } from "./inputs/Slider";
 export type { SliderProps } from "./inputs/Slider/types";

@@ -14,13 +14,8 @@ import styles from "./styles.module.css";
 
 const EmptyDecorator = (Story: StoryFn) => {
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.dark}>
-        <Story />
-      </div>
-      <div className={styles.light}>
-        <Story />
-      </div>
+    <div className={styles.panel}>
+      <Story />
     </div>
   );
 };

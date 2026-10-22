@@ -16,6 +16,9 @@
   justify-content: space-between;
   background: var(--color-background-100) !important;
   padding: 10px 12px !important;
+  /* Mesma borda dos outros campos (Input, Select…). */
+  border: 1px solid var(--color-border-field) !important;
+  border-radius: 4px !important;
   display: flex;
   align-items: center;
 
@@ -27,6 +30,25 @@
 
 .trigger:hover {
   background: transparent;
+  border-color: var(--color-border-field-hover) !important;
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 1px;
+}
+
+/* Resumo da seleção: só para leitores de tela (compõe o nome do combobox). */
+.trigger > .srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .values {
@@ -41,7 +63,7 @@
 }
 
 .placeholder {
-  color: var(--color-text-400) !important;
+  color: var(--color-text-500) !important;
   font-weight: 500;
 }
 
@@ -67,6 +89,17 @@
   display: block;
   width: 1rem;
   height: 1rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-fill);
+    outline-offset: 1px;
+  }
 
   > div {
     width: 18px;
@@ -81,6 +114,12 @@
       background: var(--color-background-200);
     }
   }
+}
+
+.badgeToggle {
+  font-family: inherit;
+  line-height: inherit;
+  cursor: pointer;
 }
 
 .badgeRemoveIcon {

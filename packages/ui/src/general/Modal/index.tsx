@@ -1,4 +1,6 @@
+import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+import { useState } from "react";
 
 import { Button } from "../../buttons/Button";
 import { Title } from "../../typography/Title";
@@ -9,8 +11,12 @@ import { ModalButtonsProps, ModalContentProps } from "./types";
 /**
  * A modal dialog container component with a title, close button, and backdrop.
  *
- * Handles closing the modal via backdrop click or top-right icon button.
+ * Built on the Radix Dialog primitive, so it is an accessible modal dialog: `role="dialog"`,
+ * `aria-modal`, named by its title, closes on Escape, backdrop click or the top-right icon button,
+ * keeps Tab focus inside, and returns focus to the element that was focused before it opened.
  * The title is rendered using the `Title` component with a `subtitle` variant.
+ *
+ * Render it only while open (e.g. `{open && <ModalContent ... />}`); closing calls `setOpen(false)`.
  *
  * @component
  * @param {ModalContentProps} props - Props for configuring the modal content.
@@ -18,6 +24,7 @@ import { ModalButtonsProps, ModalContentProps } from "./types";
  * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setOpen - State setter to control open/close behavior.
  * @param {string} props.title - Title text displayed in the modal header.
  * @param {string} [props.className] - Optional custom class name for the modal container.
+ * @param {string} [props.closeLabel="Fechar"] - Accessible name of the close icon button.
  * @returns {JSX.Element} A modal structure with header, content area, and backdrop.
  *
  * @example
@@ -34,25 +41,51 @@ export const ModalContent: React.FC<ModalContentProps> = ({
   setOpen,
   title,
   className,
+  closeLabel = "Fechar",
 }) => {
+  // O modal monta já aberto e sem Trigger do Radix: guarda quem tinha o foco
+  // antes de abrir para devolver ao fechar.
+  const [returnFocusTo] = useState(() =>
+    typeof document === "undefined"
+      ? null
+      : (document.activeElement as HTMLElement | null),
+  );
+
   return (
-    <>
-      <div className={styles.background} onClick={() => setOpen(false)} />
-      <div className={clsx(styles.modal, className)}>
+    <DialogPrimitive.Root
+      open
+      onOpenChange={(open) => {
+        if (!open) setOpen(false);
+      }}
+    >
+      <DialogPrimitive.Overlay className={styles.background} />
+      <DialogPrimitive.Content
+        className={clsx(styles.modal, className)}
+        aria-modal="true"
+        aria-describedby={undefined}
+        onCloseAutoFocus={(event) => {
+          event.preventDefault();
+          returnFocusTo?.focus();
+        }}
+      >
         <div className={styles.header}>
-          <Title variant="subtitle">{title}</Title>
-          <Button
-            size="icon"
-            variant="ghost"
-            onClick={() => setOpen(false)}
-            className={styles.close_button}
-          >
-            <X size={16} />
-          </Button>
+          <DialogPrimitive.Title asChild>
+            <Title variant="subtitle">{title}</Title>
+          </DialogPrimitive.Title>
+          <DialogPrimitive.Close asChild>
+            <Button
+              size="icon"
+              variant="ghost"
+              className={styles.close_button}
+              aria-label={closeLabel}
+            >
+              <X size={16} />
+            </Button>
+          </DialogPrimitive.Close>
         </div>
         <div className={styles.content}>{children}</div>
-      </div>
-    </>
+      </DialogPrimitive.Content>
+    </DialogPrimitive.Root>
   );
 };
 

@@ -1,0 +1,11 @@
+<style>
+  /*
+   * O reset do @gaia-dev/theme zera a margem de todo <a>, e com isso a âncora
+   * dos títulos das Docs (que o Storybook pendura à esquerda com margem
+   * negativa) entrava no fluxo e recuava o título 24px.
+   */
+  .sbdocs :is(h1, h2, h3, h4, h5, h6) > a:first-child {
+    margin-left: -24px;
+    padding-right: 10px;
+  }
+</style>

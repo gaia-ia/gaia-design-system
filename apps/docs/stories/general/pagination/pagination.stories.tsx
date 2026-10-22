@@ -1,4 +1,4 @@
-import { PaginationAll } from "@gaia-dev/ui/src/general/Pagination";
+import { PaginationAll } from "@gaia-dev/ui";
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 

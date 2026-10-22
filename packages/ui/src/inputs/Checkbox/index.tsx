@@ -33,16 +33,17 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   id,
   value,
   checked,
+  className,
   ...props
 }) => {
   return (
     <Body
-      className={clsx(styles.container, props.className)}
+      className={clsx(styles.container, className)}
       variant="label"
       as="label"
       htmlFor={id}
     >
-      <div className={styles.checkbox_box}>
+      <div className={styles.checkbox_box} aria-hidden="true">
         <Check color="var(--color-fixed-white)" size={12} />
       </div>
 

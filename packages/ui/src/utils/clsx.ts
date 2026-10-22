@@ -20,6 +20,10 @@ type ClassValue =
  * @returns {string} A space-separated list of class names.
  */
 function toVal(value: ClassValue): string {
+  if (!value) {
+    return "";
+  }
+
   if (typeof value === "string" || typeof value === "number") {
     return String(value);
   }

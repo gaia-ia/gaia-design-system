@@ -13,6 +13,25 @@
   outline: none;
 }
 
+/* Com o accessibilityLayer do Recharts o SVG recebe foco pelo teclado. */
+.chartContainer :global(.recharts-surface):focus-visible {
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 2px;
+}
+
+/* Descrição do gráfico, só para leitores de tela. */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .chartContainer :global(.recharts-sector[stroke='#fff']) {
   stroke: transparent;
 }

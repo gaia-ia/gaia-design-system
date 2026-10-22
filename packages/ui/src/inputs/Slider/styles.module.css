@@ -25,7 +25,7 @@
   flex-grow: 1;
   overflow: hidden;
   border-radius: 9999px;
-  background-color: var(--color-background-300);
+  background-color: var(--color-control);
 }
 
 .track[data-orientation="horizontal"] {
@@ -41,7 +41,7 @@
 /* SliderPrimitive.Range — the filled portion */
 .range {
   position: absolute;
-  background-color: var(--color-primary-400);
+  background-color: var(--color-primary-fill);
   user-select: none;
 }
 
@@ -61,8 +61,8 @@
   height: 12px;
   flex-shrink: 0;
   border-radius: 9999px;
-  border: 1px solid var(--color-primary-400);
-  background-color: var(--color-primary-400);
+  border: 1px solid var(--color-primary-fill);
+  background-color: var(--color-primary-fill);
   transition:
     color 150ms ease,
     box-shadow 150ms ease;
@@ -78,10 +78,16 @@
 }
 
 .thumb:hover,
-.thumb:focus-visible,
 .thumb:active {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-400) 50%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-fill) 35%, transparent);
   outline: none;
+}
+
+/* Foco de teclado distinto do hover: contorno sólido (também sobrevive ao
+   forced-colors, ao contrário do box-shadow). */
+.thumb:focus-visible {
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 2px;
 }
 
 .thumb[data-disabled] {

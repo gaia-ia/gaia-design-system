@@ -119,10 +119,22 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         ? `${format(date.from, "dd/MM/yyyy")} - ${format(date.to, "dd/MM/yyyy")}`
         : placeholder;
 
+  const labelId = `${id}-label`;
+  const valueId = `${id}-value`;
+  const hintId = hint ? `${id}-hint` : undefined;
+  const errorId = error ? `${id}-error` : undefined;
+  const describedBy = [hintId, errorId].filter(Boolean).join(" ") || undefined;
+
   return (
     <div className={clsx(styles.container, className)}>
       {label && (
-        <Body variant="label" className={styles.label} htmlFor={id} as="label">
+        <Body
+          variant="label"
+          className={styles.label}
+          htmlFor={id}
+          id={labelId}
+          as="label"
+        >
           {label}
           {required && <span className={styles.required}>*</span>}
         </Body>
@@ -130,8 +142,18 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       <div className={styles.wrapper}>
         <Popover>
           <PopoverTrigger asChild>
-            <Button className={styles.trigger} data-empty={!date}>
+            <Button
+              id={id}
+              className={styles.trigger}
+              data-empty={!date}
+              // O <label for> substituiria o conteúdo do botão no nome
+              // acessível; aria-labelledby inclui a data selecionada.
+              aria-labelledby={label ? `${labelId} ${valueId}` : undefined}
+              aria-describedby={describedBy}
+              aria-invalid={!!error || undefined}
+            >
               <Body
+                id={valueId}
                 className={clsx(
                   mode === "single"
                     ? !date && styles.placeholder
@@ -171,12 +193,17 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         </Popover>
 
         {hint && (
-          <Body variant="caption" className={styles.hint}>
+          <Body id={hintId} variant="caption" className={styles.hint}>
             {hint}
           </Body>
         )}
         {error && (
-          <Body variant="caption" className={styles.error}>
+          <Body
+            id={errorId}
+            variant="caption"
+            className={styles.error}
+            role="alert"
+          >
             {error}
           </Body>
         )}

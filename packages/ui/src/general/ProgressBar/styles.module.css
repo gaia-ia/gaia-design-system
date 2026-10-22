@@ -2,7 +2,9 @@
   height: 8px;
   border-radius: 4px;
   overflow: hidden; /* Esconde o excesso da barra interna */
-  background-color: var(--color-background-200);
+  /* Trilho: o preenchimento padrão (primary-fill) fica a 3,8:1 no claro e
+     3,4:1 no escuro; o background-200 do escuro (#333) dava só 2,8:1. */
+  background-color: var(--color-control);
 }
 
 .progressBar {

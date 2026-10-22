@@ -30,7 +30,11 @@ const PopoverExample = ({
         <PopoverTrigger asChild>
           <Button>Abrir Popover</Button>
         </PopoverTrigger>
-        <PopoverContent align={align} sideOffset={sideOffset}>
+        <PopoverContent
+          align={align}
+          sideOffset={sideOffset}
+          aria-label="Exemplo de popover"
+        >
           <p>{content}</p>
         </PopoverContent>
       </Popover>
@@ -102,9 +106,15 @@ export const WithForm: Story = {
         <PopoverTrigger asChild>
           <Button>Editar Nome</Button>
         </PopoverTrigger>
-        <PopoverContent>
+        {/* role="dialog" precisa de nome: aria-labelledby aponta para um texto do conteúdo. */}
+        <PopoverContent aria-labelledby="edit-name-title">
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <Body variant="label" htmlFor="name" as="label">
+            <Body
+              variant="label"
+              htmlFor="name"
+              as="label"
+              id="edit-name-title"
+            >
               Nome
             </Body>
             <Input

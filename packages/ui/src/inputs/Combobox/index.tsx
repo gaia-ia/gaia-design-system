@@ -65,12 +65,20 @@ const Combobox: React.FC<ComboboxProps> = ({
   required = false,
   clearable = false,
   className,
+  "aria-label": ariaLabel,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
   const [activeIndex, setActiveIndex] = React.useState(-1);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const anchorRef = React.useRef<HTMLDivElement>(null);
+  // Evita reabrir a lista quando o foco volta ao input por código (ex.: limpar).
+  const skipOpenOnFocusRef = React.useRef(false);
+  const optionBaseId = React.useId();
+  const optionId = (index: number) => `${optionBaseId}-opt-${index}`;
+  const hintId = hint ? `${id}-hint` : undefined;
+  const errorId = error ? `${id}-error` : undefined;
+  const describedBy = [hintId, errorId].filter(Boolean).join(" ") || undefined;
 
   const allFlat = flattenOptions(options);
   const selectedLabel = allFlat.find((o) => o.value === value)?.label ?? "";
@@ -79,15 +87,19 @@ const Combobox: React.FC<ComboboxProps> = ({
   // When closed, input shows the selected label; when open, shows the search text
   const displayValue = open ? searchText : selectedLabel;
 
-  const filterFn = (o: ComboboxOption) =>
-    searchText.length === 0 ||
-    o.label.toLowerCase().includes(searchText.toLowerCase());
+  // Memoizado: só refiltra quando opções ou busca mudam. Não zera ao fechar,
+  // senão o texto de vazio pisca durante a animação de saída.
+  const filteredData = React.useMemo(() => {
+    const filterFn = (o: ComboboxOption) =>
+      searchText.length === 0 ||
+      o.label.toLowerCase().includes(searchText.toLowerCase());
 
-  const filteredData = isGrouped(options)
-    ? (options as ComboboxOptionGroup[])
-        .map((g) => ({ ...g, options: g.options.filter(filterFn) }))
-        .filter((g) => g.options.length > 0)
-    : (options as ComboboxOption[]).filter(filterFn);
+    return isGrouped(options)
+      ? (options as ComboboxOptionGroup[])
+          .map((g) => ({ ...g, options: g.options.filter(filterFn) }))
+          .filter((g) => g.options.length > 0)
+      : (options as ComboboxOption[]).filter(filterFn);
+  }, [options, searchText]);
 
   // Flat list for keyboard navigation index tracking
   const visibleItems: ComboboxOption[] = isGrouped(options)
@@ -117,7 +129,9 @@ const Combobox: React.FC<ComboboxProps> = ({
     onChange?.(null);
     setSearchText("");
     setOpen(false);
+    skipOpenOnFocusRef.current = true;
     inputRef.current?.focus();
+    skipOpenOnFocusRef.current = false;
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -157,8 +171,8 @@ const Combobox: React.FC<ComboboxProps> = ({
         }
         break;
       case "Escape":
+        // Fecha a lista e mantém o foco no input (padrão APG de combobox).
         handleClose();
-        inputRef.current?.blur();
         break;
       case "Tab":
         handleClose();
@@ -174,6 +188,7 @@ const Combobox: React.FC<ComboboxProps> = ({
       return (
         <div
           key={String(opt.value)}
+          id={optionId(flatI)}
           role="option"
           aria-selected={isSelected}
           aria-disabled={opt.disabled}
@@ -227,7 +242,11 @@ const Combobox: React.FC<ComboboxProps> = ({
       {label && (
         <Body as="label" htmlFor={id} className={styles.label} variant="label">
           {label}
-          {required && <span className={styles.required}>*</span>}
+          {required && (
+            <span className={styles.required} aria-hidden="true">
+              *
+            </span>
+          )}
         </Body>
       )}
       <div className={styles.input_container_wrapper}>
@@ -256,16 +275,24 @@ const Combobox: React.FC<ComboboxProps> = ({
                   setActiveIndex(-1);
                   if (!open) setOpen(true);
                 }}
-                onFocus={handleOpen}
+                onFocus={() => {
+                  if (!skipOpenOnFocusRef.current) handleOpen();
+                }}
                 onKeyDown={handleKeyDown}
                 placeholder={placeholder}
                 disabled={disabled}
                 autoComplete="off"
                 role="combobox"
+                aria-label={ariaLabel}
                 aria-controls={`${id}-listbox`}
                 aria-expanded={open}
                 aria-haspopup="listbox"
-                aria-invalid={!!error}
+                aria-activedescendant={
+                  open && activeIndex >= 0 ? optionId(activeIndex) : undefined
+                }
+                aria-required={required || undefined}
+                aria-invalid={!!error || undefined}
+                aria-describedby={describedBy}
                 aria-autocomplete="list"
               />
               <div className={styles.input_actions}>
@@ -275,7 +302,6 @@ const Combobox: React.FC<ComboboxProps> = ({
                     className={styles.clear_button}
                     onMouseDown={(e) => e.preventDefault()}
                     onClick={handleClear}
-                    tabIndex={-1}
                     aria-label="Limpar seleção"
                   >
                     <XIcon size={14} />
@@ -314,12 +340,17 @@ const Combobox: React.FC<ComboboxProps> = ({
           </PopoverPrimitive.Portal>
         </PopoverPrimitive.Root>
         {hint && (
-          <Body variant="caption" className={styles.hint}>
+          <Body id={hintId} variant="caption" className={styles.hint}>
             {hint}
           </Body>
         )}
         {error && (
-          <Body variant="caption" className={styles.error}>
+          <Body
+            id={errorId}
+            variant="caption"
+            className={styles.error}
+            role="alert"
+          >
             {error}
           </Body>
         )}
@@ -365,12 +396,18 @@ const ComboboxMulti: React.FC<ComboboxMultiProps> = ({
   disabled = false,
   required = false,
   className,
+  "aria-label": ariaLabel,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
   const [activeIndex, setActiveIndex] = React.useState(-1);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const anchorRef = React.useRef<HTMLDivElement>(null);
+  const optionBaseId = React.useId();
+  const optionId = (index: number) => `${optionBaseId}-opt-${index}`;
+  const hintId = hint ? `${id}-hint` : undefined;
+  const errorId = error ? `${id}-error` : undefined;
+  const describedBy = [hintId, errorId].filter(Boolean).join(" ") || undefined;
 
   const allFlat = flattenOptions(options);
 
@@ -379,15 +416,19 @@ const ComboboxMulti: React.FC<ComboboxMultiProps> = ({
     return acc;
   }, {});
 
-  const filterFn = (o: ComboboxOption) =>
-    searchText.length === 0 ||
-    o.label.toLowerCase().includes(searchText.toLowerCase());
+  // Memoizado: só refiltra quando opções ou busca mudam. Não zera ao fechar,
+  // senão o texto de vazio pisca durante a animação de saída.
+  const filteredData = React.useMemo(() => {
+    const filterFn = (o: ComboboxOption) =>
+      searchText.length === 0 ||
+      o.label.toLowerCase().includes(searchText.toLowerCase());
 
-  const filteredData = isGrouped(options)
-    ? (options as ComboboxOptionGroup[])
-        .map((g) => ({ ...g, options: g.options.filter(filterFn) }))
-        .filter((g) => g.options.length > 0)
-    : (options as ComboboxOption[]).filter(filterFn);
+    return isGrouped(options)
+      ? (options as ComboboxOptionGroup[])
+          .map((g) => ({ ...g, options: g.options.filter(filterFn) }))
+          .filter((g) => g.options.length > 0)
+      : (options as ComboboxOption[]).filter(filterFn);
+  }, [options, searchText]);
 
   const visibleItems: ComboboxOption[] = isGrouped(options)
     ? (filteredData as ComboboxOptionGroup[]).flatMap((g) => g.options)
@@ -463,6 +504,7 @@ const ComboboxMulti: React.FC<ComboboxMultiProps> = ({
       return (
         <div
           key={String(opt.value)}
+          id={optionId(flatI)}
           role="option"
           aria-selected={isSelected}
           aria-disabled={opt.disabled}
@@ -516,7 +558,11 @@ const ComboboxMulti: React.FC<ComboboxMultiProps> = ({
       {label && (
         <Body as="label" htmlFor={id} className={styles.label} variant="label">
           {label}
-          {required && <span className={styles.required}>*</span>}
+          {required && (
+            <span className={styles.required} aria-hidden="true">
+              *
+            </span>
+          )}
         </Body>
       )}
       <div className={styles.input_container_wrapper}>
@@ -574,11 +620,17 @@ const ComboboxMulti: React.FC<ComboboxMultiProps> = ({
                 onKeyDown={handleKeyDown}
                 disabled={disabled}
                 role="combobox"
+                aria-label={ariaLabel ?? label ?? placeholder}
                 aria-controls={`${id}-listbox`}
                 aria-expanded={open}
                 aria-haspopup="listbox"
-                aria-invalid={!!error}
-                aria-label={label ?? placeholder}
+                aria-activedescendant={
+                  open && activeIndex >= 0 ? optionId(activeIndex) : undefined
+                }
+                aria-required={required || undefined}
+                aria-invalid={!!error || undefined}
+                aria-describedby={describedBy}
+                aria-autocomplete="list"
                 autoComplete="off"
               />
             </div>
@@ -610,12 +662,17 @@ const ComboboxMulti: React.FC<ComboboxMultiProps> = ({
           </PopoverPrimitive.Portal>
         </PopoverPrimitive.Root>
         {hint && (
-          <Body variant="caption" className={styles.hint}>
+          <Body id={hintId} variant="caption" className={styles.hint}>
             {hint}
           </Body>
         )}
         {error && (
-          <Body variant="caption" className={styles.error}>
+          <Body
+            id={errorId}
+            variant="caption"
+            className={styles.error}
+            role="alert"
+          >
             {error}
           </Body>
         )}

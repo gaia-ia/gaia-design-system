@@ -2,6 +2,12 @@
   position: relative;
   width: 100%;
   overflow-x: auto;
+  border-radius: 4px;
+}
+
+.tableContainer:focus-visible {
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 2px;
 }
 
 .table {
@@ -13,7 +19,7 @@
 }
 
 .tableHeader tr {
-  border-bottom: 1px solid var(--color-text-200);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .tableBody tr:last-child {
@@ -21,8 +27,8 @@
 }
 
 .tableFooter {
-  background-color: var(--color-transparent-50);
-  border-top: 1px solid var(--color-text-200);
+  background-color: var(--color-surface-muted);
+  border-top: 1px solid var(--color-border-subtle);
   font-weight: 500;
 }
 .tableFooter > tr:last-child {
@@ -30,24 +36,29 @@
 }
 
 .tableRow {
-  border-bottom: 1px solid var(--color-text-200);
+  border-bottom: 1px solid var(--color-border-subtle);
   transition: background-color 0.15s ease;
 }
-.tableRow:hover {
-  background-color: var(--color-background-100) !important;
+
+/* Sem zebra: a divisória sutil separa as linhas e só o hover marca a linha
+   sob o mouse. */
+.tableBody .tableRow:hover {
+  background-color: var(--color-row-hover);
 }
 
-.tableHeader .tableRow:hover,
-.tableFooter .tableRow:hover {
-  background-color: transparent !important;
+/* Selecionada: fundo primary-50 e, como a cor sozinha não basta, uma barra de
+   3px no laranja de ação na primeira célula (4,1:1 no claro, 3,9:1 no
+   escuro). Vale também no hover. */
+.tableRow[data-state="selected"],
+.tableRow[aria-selected="true"],
+.tableBody .tableRow[data-state="selected"]:hover,
+.tableBody .tableRow[aria-selected="true"]:hover {
+  background-color: var(--color-primary-50);
 }
 
-.tableRow[data-state="selected"] {
-  background-color: var(--color-transparent-100);
-}
-
-.tableBody .tableRow:nth-child(odd) {
-  background-color: var(--color-transparent-50);
+.tableRow[data-state="selected"] > :first-child,
+.tableRow[aria-selected="true"] > :first-child {
+  box-shadow: inset 3px 0 0 var(--color-primary-fill);
 }
 
 .tableHead {
@@ -78,5 +89,5 @@
 .tableCaption {
   margin-top: 1rem;
   font-size: 0.875rem;
-  color: var(--color-text-400);
+  color: var(--color-text-600);
 }

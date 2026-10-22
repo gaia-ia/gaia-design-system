@@ -21,13 +21,7 @@
   margin-bottom: 8px;
 }
 
-.panel.dark {
-  color-scheme: dark;
-}
 
-.panel.light {
-  color-scheme: light;
-}
 
 .verticalPanel {
   height: 200px;

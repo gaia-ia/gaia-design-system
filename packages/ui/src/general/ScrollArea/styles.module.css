@@ -18,8 +18,8 @@
 }
 
 .viewport:focus-visible {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent-400) 50%, transparent);
-  outline-width: 1px;
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 2px;
 }
 
 /* ScrollAreaPrimitive.ScrollAreaScrollbar — scrollbar track */

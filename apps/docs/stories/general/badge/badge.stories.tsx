@@ -14,9 +14,16 @@ const meta: Meta<typeof Badge> = {
       defaultValue: "Badge",
     },
     variant: {
-      options: ["primary", "secondary"],
+      options: [
+        "default",
+        "secondary",
+        "destructive",
+        "outline",
+        "ghost",
+        "link",
+      ],
       control: { type: "radio" },
-      defaultValue: "primary",
+      defaultValue: "default",
     },
   },
 };
@@ -25,7 +32,7 @@ export default meta;
 
 type Story = StoryObj<typeof Badge>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     children: "Badge",
   },
@@ -36,4 +43,26 @@ export const Secondary: Story = {
     children: "Badge",
     variant: "secondary",
   },
+};
+
+const VARIANTS = [
+  "default",
+  "secondary",
+  "destructive",
+  "outline",
+  "ghost",
+  "link",
+] as const;
+
+/** Todas as variantes lado a lado, para comparar. */
+export const Variantes: Story = {
+  render: () => (
+    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+      {VARIANTS.map((variant) => (
+        <Badge key={variant} variant={variant}>
+          {variant}
+        </Badge>
+      ))}
+    </div>
+  ),
 };

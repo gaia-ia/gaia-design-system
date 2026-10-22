@@ -52,15 +52,21 @@ function PopoverTrigger({
  *
  * Positioned relative to the trigger or anchor, with optional alignment and offset.
  *
+ * Accessibility: Radix renders it with `role="dialog"`, which needs an accessible name.
+ * Pass `aria-label` (short text) or `aria-labelledby` (id of a heading inside the content);
+ * both are forwarded to the content element.
+ *
  * @component
  * @param {React.ComponentProps<typeof PopoverPrimitive.Content>} props - Popover content props.
+ * @param {string} [props.aria-label] - Accessible name of the popover dialog.
+ * @param {string} [props.aria-labelledby] - Id of the element that names the popover dialog.
  * @param {string} [props.className] - Optional class name(s) for styling.
  * @param {"start" | "center" | "end"} [props.align="center"] - Alignment relative to the trigger.
  * @param {number} [props.sideOffset=4] - Pixel offset between the trigger and content.
  * @returns {JSX.Element}
  *
  * @example
- * <PopoverContent align="end" sideOffset={8}>
+ * <PopoverContent align="end" sideOffset={8} aria-label="Detalhes">
  *   <p>This is a popover!</p>
  * </PopoverContent>
  */

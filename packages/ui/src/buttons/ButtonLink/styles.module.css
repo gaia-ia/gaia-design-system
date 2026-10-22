@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100%;
@@ -11,29 +11,31 @@
 
 /* primary */
 
+/* Mesmo visual da variante `default` do Button. */
 .button.primary {
-  background-color: var(--color-primary-400);
+  background-color: var(--color-primary-fill);
   border: none;
 }
 
 .button.primary:hover {
-  background-color: var(--color-primary-300);
+  background-color: var(--color-primary-fill-hover);
 }
 
 .button.primary span,
 .button.primary:hover span {
-  color: var(--color-text-900);
+  color: var(--color-on-primary);
+  font-weight: 600;
 }
 
 /* secondary */
 
 .button.secondary {
-  background-color: var(--color-background-200);
+  background-color: var(--color-control);
   border: none;
 }
 
 .button.secondary:hover {
-  background-color: var(--color-background-300);
+  background-color: var(--color-control-hover);
 }
 
 .button.secondary span {
@@ -43,12 +45,13 @@
 /* outlined */
 
 .button.outlined {
-  background-color: transparent;
-  border: 1px solid var(--color-text-900);
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-border-field);
 }
 
-.button.outlined:hover span {
-  text-decoration: underline;
+.button.outlined:hover {
+  background-color: var(--color-row-hover);
+  border-color: var(--color-border-field-hover);
 }
 
 .button.outlined span {
@@ -85,8 +88,17 @@
   background-color: var(--color-primary-50);
 }
 
+/* esconde o texto visualmente, mas mantém como nome acessível */
 .button.icon span {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* sizes */
