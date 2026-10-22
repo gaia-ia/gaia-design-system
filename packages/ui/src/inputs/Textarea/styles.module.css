@@ -50,5 +50,5 @@
 }
 
 .error {
-  color: var(--color-alert-error-500);
+  color: var(--color-danger-soft-text);
 }

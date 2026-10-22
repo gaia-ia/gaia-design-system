@@ -283,7 +283,7 @@ export { Multicheck } from "./inputs/Multicheck";
 export type { MulticheckProps } from "./inputs/Multicheck/types";
 export { RadioInput } from "./inputs/RadioInput";
 export type { RadioInputProps } from "./inputs/RadioInput/types";
-export { default as Select } from "./inputs/Select";
+export { Select } from "./inputs/Select";
 export type { SelectProps } from "./inputs/Select/types";
 export { Slider } from "./inputs/Slider";
 export type { SliderProps } from "./inputs/Slider/types";

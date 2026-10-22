@@ -18,7 +18,8 @@ const meta: Meta<typeof ProgressBar> = {
       control: {
         type: "color",
       },
-      description: "Cor da barra de progresso",
+      description:
+        "Cor do preenchimento. Padrão: `var(--color-primary-fill)`, ≥3:1 sobre o trilho. Uma cor própria precisa manter 3:1 sobre o trilho (`--color-control`).",
     },
   },
 };
@@ -31,7 +32,6 @@ export const Default: Story = {
   args: {
     size: 5,
     currentStep: 2,
-    color: "var(--color-background-300)",
   },
 };
 
@@ -39,7 +39,6 @@ export const Empty: Story = {
   args: {
     size: 5,
     currentStep: 0,
-    color: "var(--color-background-300)",
   },
 };
 
@@ -47,7 +46,6 @@ export const Halfway: Story = {
   args: {
     size: 10,
     currentStep: 5,
-    color: "var(--color-background-300)",
   },
 };
 
@@ -55,6 +53,5 @@ export const Complete: Story = {
   args: {
     size: 5,
     currentStep: 5,
-    color: "var(--color-background-300)",
   },
 };

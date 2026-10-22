@@ -6,9 +6,9 @@ import {
   SunMoon,
   X,
 } from "lucide-react";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
-import Select from "../../inputs/Select";
+import { Select } from "../../inputs/Select";
 import clsx from "../../utils/clsx";
 import { useWindowSize } from "../../utils/useWindowSize";
 import { Avatar, AvatarFallback, AvatarImage } from "../Avatar";
@@ -23,8 +23,19 @@ const DEFAULT_LABELS: SidebarLabels = {
   openMenu: "Abrir menu",
   closeMenu: "Fechar menu",
   theme: "Tema",
+  language: "Idioma",
   logout: "Sair",
 };
+
+// O que recebe foco por Tab dentro do menu aberto no celular.
+const FOCUSABLE = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  "[tabindex]:not([tabindex='-1'])",
+].join(", ");
 
 const initialsOf = (name: string) =>
   name
@@ -101,6 +112,9 @@ export function Sidebar({
     () => readStored(storageKey) ?? defaultCollapsed,
   );
   const [menuOpen, setMenuOpen] = useState(false);
+  const asideRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const bodyId = `sb-${uid}-body`;
 
   const isControlled = collapsedProp !== undefined;
   const collapsed = isControlled ? collapsedProp : collapsedState;
@@ -110,6 +124,43 @@ export function Sidebar({
   useEffect(() => {
     if (!isMobile) setMenuOpen(false);
   }, [isMobile]);
+
+  // Menu aberto no celular cobre a página: Esc fecha e devolve o foco ao
+  // botão, e o Tab circula só dentro da sidebar.
+  const overlayOpen = isMobile && menuOpen;
+  useEffect(() => {
+    if (!overlayOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      // Esc/Tab já tratados por algo aberto dentro (ex.: o Select de idioma).
+      if (event.defaultPrevented) return;
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        toggleRef.current?.focus();
+        return;
+      }
+      const aside = asideRef.current;
+      if (event.key !== "Tab" || !aside) return;
+      const focusables = Array.from(
+        aside.querySelectorAll<HTMLElement>(FOCUSABLE),
+      ).filter((el) => el.getClientRects().length > 0);
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      if (!aside.contains(active)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      } else if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [overlayOpen]);
 
   const toggle = () => {
     if (isMobile) {
@@ -142,6 +193,10 @@ export function Sidebar({
     : compact
       ? labels.expand
       : labels.collapse;
+
+  // Só anuncia "sair" quando a ação existe de fato.
+  const accountLabel =
+    user && onLogout ? `${user.name} · ${labels.logout}` : (user?.name ?? "");
 
   const showBody = !isMobile || menuOpen;
 
@@ -179,6 +234,7 @@ export function Sidebar({
 
   return (
     <aside
+      ref={asideRef}
       data-slot="sidebar"
       className={clsx(
         styles.sidebar,
@@ -194,18 +250,20 @@ export function Sidebar({
             {compact ? (logoCompact ?? logo) : logo}
           </div>
           <button
+            ref={toggleRef}
             type="button"
             className={styles.toggle}
             onClick={toggle}
             aria-label={toggleLabel}
             aria-expanded={isMobile ? menuOpen : !compact}
+            aria-controls={showBody ? bodyId : undefined}
           >
             <ToggleIcon size={16} aria-hidden />
           </button>
         </div>
 
         {showBody && (
-          <div className={styles.body}>
+          <div id={bodyId} className={styles.body}>
             <nav className={styles.nav} aria-label={labels.navigation}>
               {sections.map((links, s) => (
                 <div key={s} className={styles.section}>
@@ -240,6 +298,13 @@ export function Sidebar({
 
               {language && (
                 <div className={styles.language}>
+                  {/* O Select não aceita aria-label: nomeia o combobox por um label oculto. */}
+                  <label
+                    htmlFor={`sb-${uid}-language`}
+                    className={styles.srOnly}
+                  >
+                    {labels.language}
+                  </label>
                   <Select
                     id={`sb-${uid}-language`}
                     options={language.options.map(({ value, label, flag }) => ({
@@ -265,7 +330,7 @@ export function Sidebar({
                     className={clsx(styles.row, styles.account)}
                     onClick={onLogout}
                     disabled={!onLogout}
-                    aria-label={`${user.name} · ${labels.logout}`}
+                    aria-label={accountLabel}
                     title={user.email}
                   >
                     <Avatar className={styles.avatar} aria-hidden>
@@ -283,7 +348,7 @@ export function Sidebar({
                   </button>
                   {compact && (
                     <Tooltip
-                      text={`${user.name} · ${labels.logout}`}
+                      text={accountLabel}
                       anchorSelect={`#sb-${uid}-account`}
                       place="right"
                     />

@@ -4,9 +4,21 @@
   gap: 8px;
   width: 100%;
   cursor: pointer;
+  position: relative;
 
+  /* Visualmente oculto, mas focável e exposto à tecnologia assistiva:
+     `display: none` tirava o checkbox do Tab e do leitor de tela. */
   input {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    opacity: 0;
   }
 }
 
@@ -14,7 +26,7 @@
   height: 16px;
   width: 16px;
   border-radius: 4px;
-  /* text-500: 3,2:1 sobre o branco, o mínimo de um contorno de controle. */
+  /* text-500: 5,1:1 sobre o branco, acima do mínimo de 3:1 de um contorno de controle. */
   border: 1px solid var(--color-text-500);
   display: flex;
   align-items: center;
@@ -34,4 +46,9 @@
   svg {
     display: block;
   }
+}
+
+.container:has(input:focus-visible) .checkbox_box {
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 2px;
 }

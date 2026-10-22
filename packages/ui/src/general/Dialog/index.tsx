@@ -111,8 +111,10 @@ function DialogOverlay({
  * @component
  * @param {React.ComponentProps<typeof DialogPrimitive.Content> & {
  *   showCloseButton?: boolean;
+ *   closeLabel?: string;
  * }} props
  * @param {boolean} [props.showCloseButton=true] - Whether to show the top-right close icon button.
+ * @param {string} [props.closeLabel="Fechar"] - Accessible name of the close icon button.
  * @param {string} [props.className] - Optional additional class names.
  * @returns {JSX.Element}
  *
@@ -133,9 +135,11 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
+  closeLabel = "Fechar",
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean;
+  closeLabel?: string;
 }) {
   return (
     <DialogPortal>
@@ -152,7 +156,7 @@ function DialogContent({
             className={styles.dialogClose}
             asChild
           >
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" aria-label={closeLabel}>
               <XIcon />
             </Button>
           </DialogPrimitive.Close>

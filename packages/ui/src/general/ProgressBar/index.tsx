@@ -11,7 +11,7 @@ import type { ProgressBarProps } from "./types";
  * @param {ProgressBarProps} props - Props for the `ProgressBar` component.
  * @param {number} props.size - The total number of steps in the progress sequence.
  * @param {number} [props.currentStep=1] - The current active step (defaults to `1`). Used to calculate the fill percentage.
- * @param {string} [props.color='var(--color-primary-500)'] - The CSS color of the filled portion of the bar.
+ * @param {string} [props.color='var(--color-primary-fill)'] - The CSS color of the filled portion of the bar. The default reaches 3:1 against the track (`--color-control`) in both modes (3.8:1 light, 3.4:1 dark); a custom color must keep that 3:1 (WCAG 1.4.11).
  * @param {string} [props.className] - Optional additional class name(s) for styling the outer container.
  * @returns {JSX.Element} A visual representation of progress using a horizontal bar.
  *
@@ -24,7 +24,7 @@ import type { ProgressBarProps } from "./types";
 export const ProgressBar = ({
   size,
   currentStep = 1,
-  color = "var(--color-primary-500)",
+  color = "var(--color-primary-fill)",
   className,
   ...props
 }: ProgressBarProps) => {

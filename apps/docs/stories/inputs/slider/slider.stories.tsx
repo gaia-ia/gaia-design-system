@@ -53,6 +53,15 @@ const meta: Meta<typeof Slider> = {
       control: "boolean",
       description: "Se o slider está desabilitado",
     },
+    "aria-label": {
+      control: "text",
+      description:
+        "Nome acessível. Um thumb: vai no thumb. Range: nomeia o grupo; cada thumb usa thumbLabels ou o padrão do Radix.",
+    },
+    thumbLabels: {
+      control: "object",
+      description: "Nome acessível de cada thumb, por índice",
+    },
   },
 };
 
@@ -62,6 +71,7 @@ type Story = StoryObj<typeof Slider>;
 
 export const Default: Story = {
   args: {
+    "aria-label": "Volume",
     value: [50],
     min: 0,
     max: 100,
@@ -77,6 +87,8 @@ export const Range: Story = {
     },
   ],
   args: {
+    "aria-label": "Faixa de preço",
+    thumbLabels: ["Preço mínimo", "Preço máximo"],
     value: [25, 75],
     min: 0,
     max: 100,
@@ -97,6 +109,7 @@ export const Vertical: Story = {
     },
   ],
   args: {
+    "aria-label": "Volume",
     value: [40],
     orientation: "vertical",
     min: 0,
@@ -106,6 +119,7 @@ export const Vertical: Story = {
 
 export const WithStep: Story = {
   args: {
+    "aria-label": "Volume",
     value: [50],
     min: 0,
     max: 100,
@@ -115,6 +129,7 @@ export const WithStep: Story = {
 
 export const Disabled: Story = {
   args: {
+    "aria-label": "Volume",
     value: [60],
     disabled: true,
   },

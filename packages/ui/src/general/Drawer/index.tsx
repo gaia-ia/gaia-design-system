@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
 
+import clsx from "../../utils/clsx";
 import { usePortalContainer } from "../../utils/portalContainer";
 import styles from "./styles.module.css";
 
@@ -39,6 +40,8 @@ function useDrawer() {
  *
  * Provides context and state management for the drawer. Must wrap `DrawerTrigger` and `DrawerContent`.
  * Supports `direction` prop to control where the drawer slides in from (`bottom`, `top`, `left`, `right`).
+ * Controlled when `open` is passed (pair it with `onOpenChange`); otherwise keeps its own state,
+ * starting from `defaultOpen`. `onOpenChange` is called in both modes, including via `useDrawer()`.
  *
  * @component
  * @param props - Props passed to Vaul's `Drawer.Root`.
@@ -55,21 +58,37 @@ function useDrawer() {
  *   </DrawerContent>
  * </Drawer>
  */
-function Drawer(props: React.ComponentProps<typeof DrawerPrimitive.Root>) {
-  const [open, setOpen] = React.useState(false);
+function Drawer({
+  open: openProp,
+  defaultOpen = false,
+  onOpenChange,
+  ...props
+}: React.ComponentProps<typeof DrawerPrimitive.Root>) {
+  const [openState, setOpenState] = React.useState(defaultOpen);
+  const isControlled = openProp !== undefined;
+  const open = isControlled ? openProp : openState;
+
+  // Controlado: só avisa o consumidor. Não controlado: guarda aqui e avisa.
+  const setOpen = React.useCallback(
+    (next: boolean) => {
+      if (!isControlled) setOpenState(next);
+      onOpenChange?.(next);
+    },
+    [isControlled, onOpenChange],
+  );
+
+  const context = React.useMemo(
+    () => ({ open: () => setOpen(true), close: () => setOpen(false) }),
+    [setOpen],
+  );
 
   return (
-    <DrawerContext.Provider
-      value={{
-        open: () => setOpen(true),
-        close: () => setOpen(false),
-      }}
-    >
+    <DrawerContext.Provider value={context}>
       <DrawerPrimitive.Root
         data-slot="drawer"
+        {...props}
         open={open}
         onOpenChange={setOpen}
-        {...props}
       />
     </DrawerContext.Provider>
   );
@@ -142,13 +161,14 @@ function DrawerClose(
  * @param props - Overlay props.
  * @returns The rendered component.
  */
-function DrawerOverlay(
-  props: React.ComponentProps<typeof DrawerPrimitive.Overlay>,
-) {
+function DrawerOverlay({
+  className,
+  ...props
+}: React.ComponentProps<typeof DrawerPrimitive.Overlay>) {
   return (
     <DrawerPrimitive.Overlay
       data-slot="drawer-overlay"
-      className={styles.overlay}
+      className={clsx(styles.overlay, className)}
       {...props}
     />
   );
@@ -177,6 +197,7 @@ function DrawerOverlay(
  */
 function DrawerContent({
   children,
+  className,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Content>) {
   return (
@@ -184,7 +205,7 @@ function DrawerContent({
       <DrawerOverlay />
       <DrawerPrimitive.Content
         data-slot="drawer-content"
-        className={styles.content}
+        className={clsx(styles.content, className)}
         {...props}
       >
         <div className={styles.handle} />
@@ -204,8 +225,14 @@ function DrawerContent({
  * @param props - Standard div props.
  * @returns The rendered component.
  */
-function DrawerHeader(props: React.ComponentProps<"div">) {
-  return <div data-slot="drawer-header" className={styles.header} {...props} />;
+function DrawerHeader({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="drawer-header"
+      className={clsx(styles.header, className)}
+      {...props}
+    />
+  );
 }
 
 /**
@@ -217,8 +244,14 @@ function DrawerHeader(props: React.ComponentProps<"div">) {
  * @param props - Standard div props.
  * @returns The rendered component.
  */
-function DrawerFooter(props: React.ComponentProps<"div">) {
-  return <div data-slot="drawer-footer" className={styles.footer} {...props} />;
+function DrawerFooter({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="drawer-footer"
+      className={clsx(styles.footer, className)}
+      {...props}
+    />
+  );
 }
 
 /**
@@ -230,13 +263,14 @@ function DrawerFooter(props: React.ComponentProps<"div">) {
  * @param props - Title props.
  * @returns The rendered component.
  */
-function DrawerTitle(
-  props: React.ComponentProps<typeof DrawerPrimitive.Title>,
-) {
+function DrawerTitle({
+  className,
+  ...props
+}: React.ComponentProps<typeof DrawerPrimitive.Title>) {
   return (
     <DrawerPrimitive.Title
       data-slot="drawer-title"
-      className={styles.title}
+      className={clsx(styles.title, className)}
       {...props}
     />
   );
@@ -251,13 +285,14 @@ function DrawerTitle(
  * @param props - Description props.
  * @returns The rendered component.
  */
-function DrawerDescription(
-  props: React.ComponentProps<typeof DrawerPrimitive.Description>,
-) {
+function DrawerDescription({
+  className,
+  ...props
+}: React.ComponentProps<typeof DrawerPrimitive.Description>) {
   return (
     <DrawerPrimitive.Description
       data-slot="drawer-description"
-      className={styles.description}
+      className={clsx(styles.description, className)}
       {...props}
     />
   );

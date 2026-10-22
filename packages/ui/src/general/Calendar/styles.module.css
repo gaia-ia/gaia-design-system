@@ -116,7 +116,7 @@
 
 .weekday {
   flex: 1;
-  color: var(--color-text-400);
+  color: var(--color-text-600);
   border-radius: 6px;
   font-weight: 500;
   font-size: 12.8px; /* ~0.8rem */
@@ -137,7 +137,7 @@
 .weekNumber {
   font-size: 12.8px;
   user-select: none;
-  color: var(--color-text-400);
+  color: var(--color-text-600);
 }
 
 .hidden {
@@ -290,11 +290,11 @@
 }
 
 .outside {
-  color: var(--color-text-400);
+  color: var(--color-text-600);
 }
 
 .outside[aria-selected='true'] {
-  color: var(--color-text-400);
+  color: var(--color-text-600);
 }
 
 .disabled {

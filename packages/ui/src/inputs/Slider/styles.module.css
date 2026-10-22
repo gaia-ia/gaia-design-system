@@ -78,10 +78,16 @@
 }
 
 .thumb:hover,
-.thumb:focus-visible,
 .thumb:active {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-fill) 35%, transparent);
   outline: none;
+}
+
+/* Foco de teclado distinto do hover: contorno sólido (também sobrevive ao
+   forced-colors, ao contrário do box-shadow). */
+.thumb:focus-visible {
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 2px;
 }
 
 .thumb[data-disabled] {

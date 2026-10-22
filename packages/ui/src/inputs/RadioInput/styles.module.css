@@ -20,7 +20,8 @@
 }
 
 .error {
-  color: var(--color-alert-error-500);
+  /* danger-soft-text: 6,6:1 no claro e 8,4:1 no escuro (error-500 ficava em 4,2:1). */
+  color: var(--color-danger-soft-text);
   margin-bottom: 8px;
 }
 
@@ -32,10 +33,22 @@
 }
 
 .option input {
-  display: none;
+  /* Visualmente oculto, mas focável (Tab e setas) e exposto à tecnologia
+     assistiva: `display: none` tirava os radios do teclado. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  opacity: 0;
 }
 
 .option label {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -55,4 +68,9 @@
 .option label:has(input:checked):before {
   background-color: var(--color-primary-fill);
   border: 1px solid var(--color-primary-fill);
+}
+
+.option label:has(input:focus-visible):before {
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 2px;
 }

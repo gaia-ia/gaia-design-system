@@ -88,8 +88,17 @@
   background-color: var(--color-primary-50);
 }
 
+/* esconde o texto visualmente, mas mantém como nome acessível */
 .button.icon span {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* sizes */

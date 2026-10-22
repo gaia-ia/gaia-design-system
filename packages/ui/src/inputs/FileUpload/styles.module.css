@@ -9,7 +9,9 @@
   opacity: 0.6;
 }
 
-.hiddenInput {
+.hiddenInput,
+/* Regiões aria-live: só para leitores de tela. */
+.srOnly {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -184,7 +186,7 @@
 }
 
 .itemError {
-  color: var(--color-alert-error-500);
+  color: var(--color-danger-soft-text);
 }
 
 .itemProgress {

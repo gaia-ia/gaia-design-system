@@ -70,17 +70,20 @@
   padding-left: 28px;
 }
 
+/* Destrutivo: o vermelho suave do Button (texto 6,6:1 no claro, 8,4:1 no
+   escuro; 5,8:1 / 7,5:1 sobre o fundo do foco). O `alert-error-500` ficava
+   em 4,2:1. */
 .item[data-variant="destructive"] {
-  color: var(--color-alert-error-500);
+  color: var(--color-danger-soft-text);
 }
 
 .item[data-variant="destructive"] svg {
-  color: var(--color-alert-error-500);
+  color: var(--color-danger-soft-text);
 }
 
 .item[data-variant="destructive"]:focus {
-  background-color: rgba(217, 74, 74, 0.1);
-  color: var(--color-alert-error-500);
+  background-color: var(--color-danger-soft);
+  color: var(--color-danger-soft-text);
 }
 
 .item[data-disabled] {
@@ -275,6 +278,17 @@
   height: 16px;
 }
 
+/* Foco pelo teclado: o fundo cinza sozinho fica em ~1,1:1 com o painel, então
+   o item focado ganha o contorno de 2px no laranja de ação, por dentro (4,5:1
+   sobre o painel claro, 4,1:1 sobre o escuro). */
+.item:focus-visible,
+.checkboxItem:focus-visible,
+.radioItem:focus-visible,
+.subTrigger:focus-visible {
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: -2px;
+}
+
 /* ChevronRight icon in SubTrigger */
 .chevron {
   margin-left: auto;
@@ -319,13 +333,6 @@
 
 .subContent[data-state="closed"] {
   animation: contentHide 100ms ease-in;
-}
-
-/* ─── Dark Mode ─── */
-@media (prefers-color-scheme: dark) {
-  .item[data-variant="destructive"]:focus {
-    background-color: rgba(217, 74, 74, 0.2);
-  }
 }
 
 /* ─── Animations ─── */

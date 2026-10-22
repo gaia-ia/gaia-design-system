@@ -61,5 +61,6 @@
 }
 
 .error {
-  color: var(--color-alert-error-500);
+  /* danger-soft-text: 6,6:1 no claro e 8,4:1 no escuro (error-500 ficava em 4,2:1). */
+  color: var(--color-danger-soft-text);
 }

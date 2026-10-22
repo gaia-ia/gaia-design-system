@@ -34,9 +34,12 @@
   background-color: var(--color-primary-fill);
 }
 
-/* `control-hover`: o `background-400` do escuro (#666) acendia demais. */
+/* `control-hover`: o `background-400` do escuro (#666) acendia demais.
+   A borda text-500 (3,2:1 no claro, 4,7:1 no escuro) marca o limite do
+   controle desligado; só o fundo ficava em ~1,4:1. */
 .root[data-state='unchecked'] {
   background-color: var(--color-control-hover);
+  border-color: var(--color-text-500);
 }
 
 .root:focus-visible {
@@ -85,4 +88,19 @@
 
 .root[data-state='checked'] .thumb {
   transform: translateX(calc(100% - 2px));
+}
+
+.field {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field_label {
+  cursor: pointer;
+}
+
+.field:has(.root[data-disabled]) .field_label {
+  cursor: not-allowed;
+  opacity: 0.5;
 }

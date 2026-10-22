@@ -64,7 +64,7 @@
   pointer-events: none;
   transform: translateY(2px);
   transition: transform 0.2s ease;
-  color: var(--color-text-400);
+  color: var(--color-text-600);
 }
 
 .trigger[data-state="open"] .chevron {

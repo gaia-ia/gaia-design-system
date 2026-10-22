@@ -7,4 +7,6 @@ export interface SheetContentProps
   side?: "top" | "right" | "bottom" | "left";
   /** Whether to render the top-right close icon button. Defaults to `true`. */
   showCloseButton?: boolean;
+  /** Accessible name of the close icon button. Defaults to `"Fechar"`. */
+  closeLabel?: string;
 }

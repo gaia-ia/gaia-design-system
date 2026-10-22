@@ -25,6 +25,10 @@
   border-bottom: 1px solid var(--color-background-200);
 }
 
+.commandInputWrapper:focus-within {
+  border-bottom-color: var(--color-primary-fill);
+}
+
 .searchIcon {
   width: 1rem;
   height: 1rem;
@@ -83,9 +87,15 @@
   user-select: none;
 }
 
+/* O cmdk mantém o foco no campo (aria-activedescendant), então o item
+   selecionado é o único indicador de foco: fundo neutro mais o contorno de 2px
+   no laranja de ação, por dentro (4,3:1 sobre o painel claro, 3,9:1 sobre o
+   escuro). O `accent-100` sozinho ficava em 1,2:1. */
 .commandItem[data-selected="true"] {
-  background-color: var(--color-accent-100);
+  background-color: var(--color-control);
   color: var(--color-text-900);
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: -2px;
 }
 
 .commandItem[data-disabled="true"] {

@@ -38,6 +38,27 @@ type CarouselContextProps = {
 
 const CarouselContext = createContext<CarouselContextProps | null>(null);
 
+// Elementos que já usam as setas (cursor de texto, valor, foco entre itens).
+const ARROW_KEY_TARGETS = [
+  "input",
+  "textarea",
+  "select",
+  "[contenteditable]:not([contenteditable='false'])",
+  "[role='slider']",
+  "[role='spinbutton']",
+  "[role='textbox']",
+  "[role='combobox']",
+  "[role='listbox']",
+  "[role='radio']",
+  "[role='tab']",
+  "[role='menuitem']",
+].join(", ");
+
+function isArrowKeyTarget(target: EventTarget) {
+  if (!(target instanceof HTMLElement)) return false;
+  return target.isContentEditable || target.matches(ARROW_KEY_TARGETS);
+}
+
 function useCarousel() {
   const context = useContext(CarouselContext);
   if (!context)
@@ -50,6 +71,8 @@ function useCarousel() {
  *
  * This component initializes the carousel, sets up scroll controls, and provides context to nested components.
  * It supports both horizontal and vertical orientation, keyboard navigation, plugin injection, and external API access.
+ * Keyboard: ArrowLeft/ArrowRight (ArrowUp/ArrowDown when vertical) move between slides, except when the
+ * event comes from a field or widget inside a slide that uses the arrows itself.
  *
  * @component
  * @param {ComponentProps<'div'> & CarouselProps} props - Props for the Carousel container.
@@ -78,6 +101,7 @@ function Carousel({
   plugins,
   className = "",
   children,
+  onKeyDown,
   ...props
 }: ComponentProps<"div"> & CarouselProps) {
   const [carouselRef, api] = useEmblaCarousel(
@@ -98,15 +122,21 @@ function Carousel({
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === "ArrowLeft") {
+      onKeyDown?.(event);
+      // Não rouba as setas de campos e widgets dentro dos slides.
+      if (event.defaultPrevented || isArrowKeyTarget(event.target)) return;
+      const isVertical = orientation === "vertical";
+      const prevKey = isVertical ? "ArrowUp" : "ArrowLeft";
+      const nextKey = isVertical ? "ArrowDown" : "ArrowRight";
+      if (event.key === prevKey) {
         event.preventDefault();
         scrollPrev();
-      } else if (event.key === "ArrowRight") {
+      } else if (event.key === nextKey) {
         event.preventDefault();
         scrollNext();
       }
     },
-    [scrollPrev, scrollNext],
+    [onKeyDown, orientation, scrollPrev, scrollNext],
   );
 
   useEffect(() => {
@@ -120,6 +150,7 @@ function Carousel({
     api.on("reInit", onSelect);
     api.on("select", onSelect);
     return () => {
+      api?.off("reInit", onSelect);
       api?.off("select", onSelect);
     };
   }, [api, onSelect]);
@@ -139,12 +170,12 @@ function Carousel({
       }}
     >
       <div
-        onKeyDownCapture={handleKeyDown}
         className={`${styles.root} ${className}`}
         role="region"
         aria-roledescription="carousel"
         data-slot="carousel"
         {...props}
+        onKeyDown={handleKeyDown}
       >
         {children}
       </div>
@@ -225,6 +256,7 @@ function CarouselItem({ className = "", ...props }: ComponentProps<"div">) {
  * @param {ComponentProps<typeof Button>} props - Props passed to the underlying `Button` component.
  * @param {string} [props.className] - Optional additional class names.
  * @param {'icon' | 'small' | 'large' | ...} [props.size='icon'] - Button size (inherited from design system).
+ * @param {string} [props.aria-label='Slide anterior'] - Accessible name; override to localize.
  * @returns {JSX.Element} Previous button with left arrow icon.
  *
  * @example
@@ -247,6 +279,7 @@ function CarouselPrevious({
       className={`${styles.navBtn} ${posClass} ${className}`}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
+      aria-label="Slide anterior"
       {...props}
     >
       <ArrowLeft size={16} />
@@ -262,6 +295,7 @@ function CarouselPrevious({
  * @param {ComponentProps<typeof Button>} props - Props passed to the underlying `Button` component.
  * @param {string} [props.className] - Optional additional class names.
  * @param {'icon' | 'small' | 'large' | ...} [props.size='icon'] - Button size (inherited from design system).
+ * @param {string} [props.aria-label='Próximo slide'] - Accessible name; override to localize.
  * @returns {JSX.Element} Next button with right arrow icon.
  *
  * @example
@@ -284,6 +318,7 @@ function CarouselNext({
       className={`${styles.navBtn} ${posClass} ${className}`}
       disabled={!canScrollNext}
       onClick={scrollNext}
+      aria-label="Próximo slide"
       {...props}
     >
       <ArrowRight size={16} />

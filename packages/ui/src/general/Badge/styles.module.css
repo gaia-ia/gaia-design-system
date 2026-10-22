@@ -33,8 +33,8 @@
 
 .badge:focus-visible {
   border-color: var(--color-primary-fill);
-  box-shadow: 0 0 0 3px
-    color-mix(in srgb, var(--color-primary-fill) 35%, transparent);
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 2px;
 }
 
 .badge[aria-invalid="true"] {

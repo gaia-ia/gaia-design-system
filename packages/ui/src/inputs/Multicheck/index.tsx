@@ -12,7 +12,7 @@ import {
   PopoverTrigger,
 } from "@gaia-dev/ui";
 import { CheckIcon, ChevronsUpDownIcon, XIcon } from "lucide-react";
-import { useState } from "react";
+import { useId, useState } from "react";
 
 import styles from "./styles.module.css";
 import { MulticheckProps } from "./types";
@@ -128,6 +128,9 @@ import { MulticheckProps } from "./types";
  * - This component is **controlled**: it does not own the selected values state.
  * - Clicking the remove icon on a badge stops event propagation so it won’t toggle the popover.
  * - The trigger uses `role="combobox"` and `aria-expanded` to reflect the popover state.
+ *   It is focusable and opens with Enter, Space or ArrowDown; its accessible name
+ *   combines the label with the current selection.
+ * - Badge remove and expand/collapse controls are real buttons reachable by keyboard.
  */
 const Multicheck: React.FC<MulticheckProps> = ({
   id,
@@ -145,6 +148,11 @@ const Multicheck: React.FC<MulticheckProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const baseId = useId();
+  const triggerId = `${id}commbobox`;
+  const labelId = `${baseId}-label`;
+  const summaryId = `${baseId}-summary`;
+  const contentId = `${baseId}-content`;
 
   const toggleSelection = (value: string) => {
     setSelectedValues((prev) => {
@@ -165,10 +173,24 @@ const Multicheck: React.FC<MulticheckProps> = ({
     : selectedValues.slice(0, maxShownItems);
   const hiddenCount = selectedValues.length - visibleItems.length;
 
+  const selectedLabels = selectedValues
+    .map((val) => options.find((o) => o.value === val)?.label)
+    .filter(Boolean)
+    .join(", ");
+
+  const handleTriggerKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    // Ignora teclas vindas dos botões internos (remover / expandir).
+    if (e.target !== e.currentTarget) return;
+    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+      e.preventDefault();
+      setOpen(true);
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       {label && (
-        <Body htmlFor={`${id}commbobox`} as="label" variant="label">
+        <Body id={labelId} htmlFor={triggerId} as="label" variant="label">
           {label}
         </Body>
       )}
@@ -176,11 +198,19 @@ const Multicheck: React.FC<MulticheckProps> = ({
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <div
-            id={`${id}commbobox`}
+            id={triggerId}
             role="combobox"
+            tabIndex={0}
+            aria-haspopup="listbox"
             aria-expanded={open}
+            aria-controls={contentId}
+            aria-labelledby={label ? `${labelId} ${summaryId}` : summaryId}
+            onKeyDown={handleTriggerKeyDown}
             className={styles.trigger}
           >
+            <span id={summaryId} className={styles.srOnly}>
+              {selectedLabels || selectPlaceholder}
+            </span>
             <div className={styles.values}>
               {selectedValues.length > 0 ? (
                 <>
@@ -193,44 +223,61 @@ const Multicheck: React.FC<MulticheckProps> = ({
                         <span className={styles.badgeLabel}>
                           {framework.label}
                         </span>
-                        <div
+                        <button
+                          type="button"
                           className={styles.badgeRemoveBtn}
+                          aria-label={`Remover ${framework.label}`}
                           onClick={(e) => {
                             e.stopPropagation();
                             removeSelection(val);
                           }}
                         >
                           <div>
-                            <XIcon className={styles.badgeRemoveIcon} />
+                            <XIcon
+                              className={styles.badgeRemoveIcon}
+                              aria-hidden="true"
+                            />
                           </div>
-                        </div>
+                        </button>
                       </Badge>
                     );
                   })}
 
                   {hiddenCount > 0 || expanded ? (
-                    <Badge
-                      variant="outline"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setExpanded((prev) => !prev);
-                      }}
-                      className={styles.badge}
-                    >
-                      {expanded ? showLessText : `+${hiddenCount} ${moreText}`}
+                    <Badge variant="outline" className={styles.badge} asChild>
+                      <button
+                        type="button"
+                        className={styles.badgeToggle}
+                        aria-expanded={expanded}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setExpanded((prev) => !prev);
+                        }}
+                      >
+                        {expanded
+                          ? showLessText
+                          : `+${hiddenCount} ${moreText}`}
+                      </button>
                     </Badge>
                   ) : null}
                 </>
               ) : (
-                <span className={styles.placeholder}>{selectPlaceholder}</span>
+                <span className={styles.placeholder} aria-hidden="true">
+                  {selectPlaceholder}
+                </span>
               )}
             </div>
 
-            <ChevronsUpDownIcon className={styles.chevron} size={16} />
+            <ChevronsUpDownIcon
+              className={styles.chevron}
+              size={16}
+              aria-hidden="true"
+            />
           </div>
         </PopoverTrigger>
 
         <PopoverContent
+          id={contentId}
           className={styles.popoverContent}
           data-combobox-popper
           onWheelCapture={(e) => e.stopPropagation()}
@@ -241,18 +288,33 @@ const Multicheck: React.FC<MulticheckProps> = ({
             <CommandList>
               <CommandEmpty>{noOptionFoundText}</CommandEmpty>
               <CommandGroup>
-                {options.map((framework) => (
-                  <CommandItem
-                    key={framework.value}
-                    value={framework.value}
-                    onSelect={() => toggleSelection(framework.value)}
-                  >
-                    <span className={styles.itemLabel}>{framework.label}</span>
-                    {selectedValues.includes(framework.value) && (
-                      <CheckIcon size={16} className={styles.itemCheck} />
-                    )}
-                  </CommandItem>
-                ))}
+                {options.map((framework) => {
+                  const isSelected = selectedValues.includes(framework.value);
+                  return (
+                    <CommandItem
+                      key={framework.value}
+                      value={framework.value}
+                      // A busca do cmdk usa `value` + `keywords`: inclui o rótulo
+                      // visível para que digitar o texto exibido encontre a opção.
+                      keywords={[framework.label]}
+                      // `aria-selected` do cmdk indica o destaque; a seleção real
+                      // fica em `aria-checked` (suportado em role="option").
+                      aria-checked={isSelected}
+                      onSelect={() => toggleSelection(framework.value)}
+                    >
+                      <span className={styles.itemLabel}>
+                        {framework.label}
+                      </span>
+                      {isSelected && (
+                        <CheckIcon
+                          size={16}
+                          className={styles.itemCheck}
+                          aria-hidden="true"
+                        />
+                      )}
+                    </CommandItem>
+                  );
+                })}
               </CommandGroup>
             </CommandList>
           </Command>

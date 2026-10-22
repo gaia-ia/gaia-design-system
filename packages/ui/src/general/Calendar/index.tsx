@@ -1,4 +1,3 @@
-import { clsx } from "@gaia-dev/ui";
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
@@ -6,12 +5,14 @@ import {
 } from "lucide-react";
 import * as React from "react";
 import {
+  type ClassNames,
   DayButton,
   DayPicker,
   getDefaultClassNames,
   type Locale,
 } from "react-day-picker";
 
+import clsx from "../../utils/clsx";
 import styles from "./styles.module.css";
 
 /**
@@ -94,6 +95,16 @@ function Calendar({
 }: React.ComponentProps<typeof DayPicker>) {
   const defaultClassNames = getDefaultClassNames();
 
+  // Slots do consumidor sem merge explícito abaixo (ex.: day_button, selected):
+  // somamos ao default do rdp em vez de substituí-lo. Os slots listados no
+  // objeto `classNames` abaixo sobrescrevem estes com o merge completo.
+  const consumerClassNames = Object.fromEntries(
+    Object.entries(classNames ?? {}).map(([key, value]) => [
+      key,
+      clsx(defaultClassNames[key as keyof ClassNames], value),
+    ]),
+  ) as Partial<ClassNames>;
+
   const captionLabelClass =
     captionLayout === "label"
       ? clsx(styles.captionLabel, styles.captionLabelText)
@@ -111,6 +122,7 @@ function Calendar({
         ...formatters,
       }}
       classNames={{
+        ...consumerClassNames,
         root: clsx(styles.root, defaultClassNames.root, classNames?.root),
         months: clsx(
           styles.months,
@@ -218,8 +230,6 @@ function Calendar({
           defaultClassNames.hidden,
           classNames?.hidden,
         ),
-
-        ...classNames,
       }}
       components={{
         Root: ({ className: rootClassName, rootRef, ...rootProps }) => (

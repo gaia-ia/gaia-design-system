@@ -7,7 +7,10 @@ export type SidebarLink = {
   /** Destino. Vai como `href` e, quando `linkAs` é um componente, também como `to`. */
   href: string;
   /** Ícone do lucide-react (ou qualquer componente que aceite `size`). */
-  icon: ComponentType<{ size?: number; "aria-hidden"?: boolean }>;
+  icon: ComponentType<{
+    size?: number | string;
+    "aria-hidden"?: boolean | "true" | "false";
+  }>;
   /** Marca o item como página atual. Com `NavLink` não precisa: ele já põe `aria-current`. */
   active?: boolean;
   /** Etiqueta curta à direita do título (ex.: "Novo", um contador). */
@@ -34,6 +37,8 @@ export type SidebarLabels = {
   openMenu: string;
   closeMenu: string;
   theme: string;
+  /** Nome acessível do seletor de idioma. Padrão: "Idioma". */
+  language: string;
   logout: string;
 };
 

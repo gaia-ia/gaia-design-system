@@ -62,7 +62,7 @@
 }
 
 .input::placeholder {
-  color: var(--color-text-400);
+  color: var(--color-text-600);
 }
 
 .input:disabled {
@@ -92,6 +92,12 @@
 }
 
 .clear_button:hover {
+  color: var(--color-text-950);
+}
+
+.clear_button:focus-visible {
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 1px;
   color: var(--color-text-950);
 }
 
@@ -141,7 +147,7 @@
   padding: 6px 12px 2px;
   font-size: 0.75rem;
   font-weight: 500;
-  color: var(--color-text-400);
+  color: var(--color-text-600);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -205,7 +211,7 @@
 .empty {
   padding: 16px 12px;
   font-size: 0.875rem;
-  color: var(--color-text-400);
+  color: var(--color-text-600);
   text-align: center;
 }
 
@@ -215,7 +221,7 @@
 }
 
 .error {
-  color: var(--color-alert-error-500);
+  color: var(--color-danger-soft-text);
 }
 
 /* Multi-select chips container */
@@ -300,7 +306,7 @@
 }
 
 .chips_input::placeholder {
-  color: var(--color-text-400);
+  color: var(--color-text-600);
 }
 
 .chips_input:disabled {

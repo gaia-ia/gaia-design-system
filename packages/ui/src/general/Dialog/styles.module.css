@@ -14,6 +14,9 @@
   display: grid;
   width: 100%;
   max-width: calc(100% - 2rem);
+  /* Conteúdo alto (formulários, zoom) rola em vez de sair da tela. */
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
   transform: translate(-50%, -50%) scale(1);
   gap: 1rem;
   border-radius: 0.5rem;

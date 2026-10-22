@@ -52,7 +52,11 @@ const barConfig: ChartConfig = {
 };
 
 export const Default = () => (
-  <ChartContainer config={barConfig}>
+  <ChartContainer
+    config={barConfig}
+    aria-label="Vendas por mês, de janeiro a junho"
+    description="Vendas: janeiro 186, fevereiro 305, março 237, abril 173, maio 209, junho 214. O pico foi em fevereiro."
+  >
     <BarChart data={barData}>
       <CartesianGrid vertical={false} />
       <XAxis dataKey="mes" tickLine={false} axisLine={false} />

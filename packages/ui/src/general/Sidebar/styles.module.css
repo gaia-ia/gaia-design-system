@@ -136,7 +136,8 @@
 
 .link:focus-visible {
   outline: 2px solid var(--color-primary-fill);
-  outline-offset: 1px;
+  /* anel interno: o overflow do .nav cortaria um anel externo */
+  outline-offset: -2px;
 }
 
 /* Ativo pelo `aria-current`: vem do `active` ou do NavLink do router. */
@@ -325,4 +326,17 @@
     transition: none;
     transform: none;
   }
+}
+
+/* Texto só para leitor de tela (ex.: nome do seletor de idioma). */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

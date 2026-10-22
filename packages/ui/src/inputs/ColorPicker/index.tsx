@@ -220,6 +220,7 @@ function ColorPickerToolbar({
               (e.target as HTMLInputElement).blur();
             }
           }}
+          aria-label="Valor da cor"
           aria-invalid={invalid || undefined}
           disabled={disabled}
         />
@@ -352,6 +353,13 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   const displayValue = formatColor(internalColor, format, withoutAlpha);
   const swatchColor = rgbaToHex(internalColor, !withoutAlpha);
 
+  const fallbackId = React.useId();
+  const baseId = id ?? fallbackId;
+  const labelId = `${baseId}-label`;
+  const hintId = hint && !error ? `${baseId}-hint` : undefined;
+  const errorId = error ? `${baseId}-error` : undefined;
+  const describedBy = [hintId, errorId].filter(Boolean).join(" ") || undefined;
+
   const body = (
     <ColorPickerBody
       color={internalColor}
@@ -370,23 +378,41 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   return (
     <div className={clsx(styles.container, className)}>
       {label && (
-        <Body as="label" htmlFor={id} className={styles.label} variant="label">
+        <Body
+          as="label"
+          id={labelId}
+          // No modo inline não há um controle único para o `for` apontar;
+          // o rótulo nomeia o grupo via aria-labelledby.
+          htmlFor={inline ? undefined : baseId}
+          className={styles.label}
+          variant="label"
+        >
           {label}
           {required && <span className={styles.required}>*</span>}
         </Body>
       )}
       {inline ? (
-        <div className={styles.inlineContent} data-slot="color-picker-inline">
+        <div
+          className={styles.inlineContent}
+          data-slot="color-picker-inline"
+          role="group"
+          aria-labelledby={label ? labelId : undefined}
+          aria-describedby={describedBy}
+        >
           {body}
         </div>
       ) : (
         <PopoverPrimitive.Root>
           <PopoverPrimitive.Trigger asChild>
             <button
-              id={id}
+              id={baseId}
               type="button"
               className={styles.trigger}
               disabled={disabled}
+              // O <label for> substituiria o conteúdo no nome acessível;
+              // incluímos o valor atual para que ele seja anunciado.
+              aria-label={label ? `${label}: ${displayValue}` : undefined}
+              aria-describedby={describedBy}
               data-error={error ? "true" : undefined}
               data-slot="color-picker-trigger"
             >
@@ -411,12 +437,12 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         </PopoverPrimitive.Root>
       )}
       {hint && !error && (
-        <Body variant="caption" className={styles.hint}>
+        <Body id={hintId} variant="caption" className={styles.hint}>
           {hint}
         </Body>
       )}
       {error && (
-        <Body variant="caption" className={styles.error}>
+        <Body id={errorId} variant="caption" className={styles.error}>
           {error}
         </Body>
       )}

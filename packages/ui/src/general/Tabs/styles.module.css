@@ -146,3 +146,8 @@
   outline: none;
   font-size: 14px;
 }
+
+.content:focus-visible {
+  outline: 2px solid var(--color-primary-fill);
+  outline-offset: 2px;
+}

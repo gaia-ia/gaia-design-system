@@ -18,7 +18,7 @@ import { InputProps } from "./types";
  * @param {string} [props.label] - Optional label displayed above the input field.
  * @param {string} [props.error] - Optional error message displayed below the input field.
  * @param {string} [props.hint] - Optional hint text displayed below the input and above the error (if any).
- * @param {boolean} [props.required] - If true, appends a visual asterisk to the label.
+ * @param {boolean} [props.required] - If true, marks the native input as required and appends a visual asterisk to the label.
  * @param {string} [props.className] - Optional class name for styling the outermost container.
  * @returns {JSX.Element} A complete, styled, accessible input field.
  *
@@ -34,7 +34,25 @@ import { InputProps } from "./types";
  * />
  */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ label, id, error, hint, required, className, ...props }, ref) => {
+  (
+    {
+      label,
+      id,
+      error,
+      hint,
+      required,
+      className,
+      "aria-describedby": ariaDescribedBy,
+      "aria-invalid": ariaInvalid,
+      ...props
+    },
+    ref,
+  ) => {
+    const hintId = hint ? `${id}-hint` : undefined;
+    const errorId = error ? `${id}-error` : undefined;
+    const describedBy =
+      [ariaDescribedBy, errorId, hintId].filter(Boolean).join(" ") || undefined;
+
     return (
       <div className={clsx(styles.container, className)}>
         {label && (
@@ -45,20 +63,31 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             variant="label"
           >
             {label}
-            {required && <span className={styles.required}>*</span>}
+            {required && (
+              <span className={styles.required} aria-hidden="true">
+                *
+              </span>
+            )}
           </Body>
         )}
         <div className={styles.input_container_wrapper}>
           <div className={styles.input_container} data-input-container>
-            <input ref={ref} id={id} {...props} />
+            <input
+              ref={ref}
+              id={id}
+              required={required}
+              aria-invalid={ariaInvalid ?? (error ? true : undefined)}
+              aria-describedby={describedBy}
+              {...props}
+            />
           </div>
           {hint && (
-            <Body variant="caption" className={styles.hint}>
+            <Body variant="caption" className={styles.hint} id={hintId}>
               {hint}
             </Body>
           )}
           {error && (
-            <Body variant="caption" className={styles.error}>
+            <Body variant="caption" className={styles.error} id={errorId}>
               {error}
             </Body>
           )}

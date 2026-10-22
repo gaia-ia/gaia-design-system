@@ -14,7 +14,12 @@
  * formatToBRLocale("1000");          // "1.000"
  */
 export const formatToBRLocale = (value: number | string) => {
-  const num = Number(value);
+  // Aceita vírgula decimal ("1234,78") quando não há ponto na string
+  const num = Number(
+    typeof value === "string" && value.includes(",") && !value.includes(".")
+      ? value.replace(",", ".")
+      : value,
+  );
 
   // Detect decimal places from the original string (if any)
   const decimalPlaces =

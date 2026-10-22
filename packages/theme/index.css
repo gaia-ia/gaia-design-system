@@ -102,8 +102,13 @@ img {
   --color-surface-raised: light-dark(#ffffff, #1a1a1a);
   --color-surface-muted: light-dark(#fafafa, #1a1a1a);
   --color-border-subtle: light-dark(#ebebeb, #262626);
-  --color-border-field: light-dark(#d6d6d6, #2e2e2e);
-  --color-border-field-hover: light-dark(#b8b8b8, #3d3d3d);
+  /* Contorno de campo: é ele que mostra onde o controle está, então precisa
+     de 3:1 sobre a página e sobre o fundo do campo (WCAG 1.4.11). Claro
+     #8a8a8a: 3,45:1 no #fff e 3,31:1 no #fafafa; escuro #6b6b6b: 3,52:1 no
+     #121212 e 3,27:1 no #1a1a1a. O hover marca mais (4,5:1 / 4,4:1). Para
+     divisórias decorativas use `border-subtle`. */
+  --color-border-field: light-dark(#8a8a8a, #6b6b6b);
+  --color-border-field-hover: light-dark(#767676, #808080);
   --color-control: light-dark(#ebebeb, #262626);
   --color-control-hover: light-dark(#d6d6d6, #333333);
   --color-control-active: light-dark(#ffffff, #333333);
@@ -144,7 +149,11 @@ img {
   --color-text-200: light-dark(#cccccc, #333333);
   --color-text-300: light-dark(#c4c4c4, #4d4d4d);
   --color-text-400: light-dark(#b8b8b8, #666666);
-  --color-text-500: light-dark(#8f8f8f, #808080);
+  /* 500 é o menor degrau que ainda serve para texto (≥4,5:1). Claro
+     #6e6e6e: 5,10:1 no canvas, 4,89:1 no muted, 4,60:1 no background-200.
+     Escuro #8a8a8a: 5,43:1 no canvas, 5,04:1 no muted, 4,77:1 no row-hover.
+     Do 400 para baixo é só decorativo. */
+  --color-text-500: light-dark(#6e6e6e, #8a8a8a);
   --color-text-600: light-dark(#666666, #999999);
   --color-text-700: light-dark(#474747, #b3b3b3);
   --color-text-800: light-dark(#333333, #cccccc);

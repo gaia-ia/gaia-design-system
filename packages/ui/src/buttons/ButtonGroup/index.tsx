@@ -1,6 +1,7 @@
 import * as RadioGroup from "@radix-ui/react-radio-group";
 
 import { Body } from "../../typography/Body";
+import clsx from "../../utils/clsx";
 import styles from "./styles.module.css";
 
 /**
@@ -18,10 +19,13 @@ import styles from "./styles.module.css";
  *   <ButtonGroupItem value="2">Two</ButtonGroupItem>
  * </ButtonGroupRoot>
  */
-export const ButtonGroupRoot = (props: RadioGroup.RadioGroupProps) => {
+export const ButtonGroupRoot = ({
+  className,
+  ...props
+}: RadioGroup.RadioGroupProps) => {
   return (
     <RadioGroup.Root
-      className={`${styles.root} ${props.className} `}
+      className={clsx(styles.root, className)}
       {...props}
     ></RadioGroup.Root>
   );
@@ -48,10 +52,11 @@ ButtonGroupRoot.displayName = "ButtonGroupRoot";
  */
 export const ButtonGroupItem = ({
   children,
+  className,
   ...props
 }: RadioGroup.RadioGroupItemProps) => {
   return (
-    <RadioGroup.Item className={`${styles.item} ${props.className}`} {...props}>
+    <RadioGroup.Item className={clsx(styles.item, className)} {...props}>
       <RadioGroup.Indicator />
       <Body variant="small_body">{children}</Body>
     </RadioGroup.Item>

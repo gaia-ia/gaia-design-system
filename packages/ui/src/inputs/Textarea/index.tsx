@@ -26,9 +26,25 @@ import { TextareaProps } from "./types";
  */
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
-    { label, id, error, hint, required, className, rows = 4, ...props },
+    {
+      label,
+      id,
+      error,
+      hint,
+      required,
+      className,
+      rows = 4,
+      "aria-describedby": ariaDescribedBy,
+      "aria-invalid": ariaInvalid,
+      ...props
+    },
     ref,
   ) => {
+    const hintId = hint ? `${id}-hint` : undefined;
+    const errorId = error ? `${id}-error` : undefined;
+    const describedBy =
+      [ariaDescribedBy, errorId, hintId].filter(Boolean).join(" ") || undefined;
+
     return (
       <div className={clsx(styles.container, className)}>
         {label && (
@@ -39,20 +55,32 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             variant="label"
           >
             {label}
-            {required && <span className={styles.required}>*</span>}
+            {required && (
+              <span className={styles.required} aria-hidden="true">
+                *
+              </span>
+            )}
           </Body>
         )}
         <div className={styles.input_container_wrapper}>
           <div className={styles.input_container} data-input-container>
-            <textarea ref={ref} id={id} rows={rows} {...props} />
+            <textarea
+              ref={ref}
+              id={id}
+              rows={rows}
+              required={required}
+              aria-invalid={ariaInvalid ?? (error ? true : undefined)}
+              aria-describedby={describedBy}
+              {...props}
+            />
           </div>
           {hint && (
-            <Body variant="caption" className={styles.hint}>
+            <Body variant="caption" className={styles.hint} id={hintId}>
               {hint}
             </Body>
           )}
           {error && (
-            <Body variant="caption" className={styles.error}>
+            <Body variant="caption" className={styles.error} id={errorId}>
               {error}
             </Body>
           )}

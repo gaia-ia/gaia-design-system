@@ -101,6 +101,7 @@ export function PaginationLink({
       variant={isActive ? "secondary" : "ghost"}
       data-slot="pagination-link"
       data-active={isActive}
+      aria-current={isActive ? "page" : undefined}
       className={clsx(styles.paginationLink, className)}
       {...props}
     >
@@ -194,9 +195,7 @@ export function PaginationEllipsis({
       className={clsx(styles.ellipsis, className)}
       {...props}
     >
-      <span className="sr-only">
-        <Ellipsis />
-      </span>
+      <Ellipsis className={styles.ellipsisIcon} aria-hidden />
     </span>
   );
 }
@@ -230,6 +229,8 @@ export function PaginationAll({
   totalPages: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 } & React.ComponentProps<"nav">) {
+  // garante ao menos 1 página e um número inteiro
+  const pages = Math.max(1, Math.floor(totalPages));
   let wasEllipsisInserted = false;
 
   return (
@@ -238,18 +239,17 @@ export function PaginationAll({
         <PaginationItem>
           <PaginationPrevious
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-            disabled={page === 1}
+            disabled={page <= 1}
           />
         </PaginationItem>
 
-        {[...Array(totalPages)].map((_, index) => {
+        {[...Array(pages)].map((_, index) => {
           const pageNumber = index + 1;
           const isFirst = pageNumber === 1;
-          const isLast = pageNumber === totalPages;
+          const isLast = pageNumber === pages;
           const isNearCurrent = Math.abs(pageNumber - page) <= 1;
           const isEdgeCaseStart = page <= 2 && pageNumber <= 3;
-          const isEdgeCaseEnd =
-            page >= totalPages - 2 && pageNumber >= totalPages - 2;
+          const isEdgeCaseEnd = page >= pages - 2 && pageNumber >= pages - 2;
 
           const shouldRender =
             isFirst ||
@@ -285,8 +285,8 @@ export function PaginationAll({
         })}
         <PaginationItem>
           <PaginationNext
-            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={page === totalPages}
+            onClick={() => setPage((prev) => Math.min(prev + 1, pages))}
+            disabled={page >= pages}
           />
         </PaginationItem>
       </PaginationContent>

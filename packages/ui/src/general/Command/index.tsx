@@ -88,7 +88,9 @@ function CommandDialog({
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
-        <Command className={styles.commandScoped}>{children}</Command>
+        <Command label={title} className={styles.commandScoped}>
+          {children}
+        </Command>
       </DialogContent>
     </Dialog>
   );
