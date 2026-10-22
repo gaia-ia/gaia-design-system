@@ -1,6 +1,6 @@
 ---
-"@gaia-dev/theme": minor
-"@gaia-dev/ui": minor
+"@gaia-dev/theme": major
+"@gaia-dev/ui": major
 ---
 
 Modo claro mais confortável e títulos sem a fonte mono, validados como protótipo no gaia-app, BrandSync e CR.IA Studio (mesmo padrão do Confere). Nenhum token foi removido; o modo escuro mantém os valores atuais, exceto `text-500` (abaixo).
@@ -40,3 +40,14 @@ Modo claro mais confortável e títulos sem a fonte mono, validados como protót
 - Todos os focos e indicadores (`Accordion`, `Badge`, `Calendar`, `Resizable`, `Tabs`, `Switch`, campos) usam `--color-primary-fill`; o dia selecionado do `Calendar` também, com texto branco. A opção escolhida do `Select`/`Combobox` usa texto `primary-700` sobre `primary-50`.
 - `Badge`: raio de 6px e peso 600. As variantes passam para os tokens do tema e valem nos dois modos sem `prefers-color-scheme`. `default` usa `--color-control`; `secondary`, texto `primary-700` sobre `primary-50`; `destructive`, o vermelho suave do botão (antes vermelho sólido com branco a 4,2:1); `outline`, a borda dos campos; `link`, `primary-700` (antes era `background-300`, a 1,2:1).
 - `ButtonLink`: `primary`, `secondary` e `outlined` seguem o `Button`; o raio passa a 8px.
+
+**Mudanças que quebram (por isso a versão major)**
+
+- `Select` passa a ser só export nomeado: `import Select from ".../Select"` deixa de funcionar; use `import { Select } from "@gaia-dev/ui"`.
+- `Select`: `onChange` devolve o valor no tipo original da opção (número continua número), não mais sempre string.
+- `Modal`: agora é um diálogo do Radix, com foco preso, Escape para fechar e bloqueio de rolagem e de clique fora enquanto aberto.
+- `Drawer`: passa a respeitar `open`/`onOpenChange` do consumidor (antes eram ignorados).
+- `RadioInput`: o rótulo do grupo é um `span` com `role="radiogroup"`, não mais um `<label>`; o `label` das opções não vai mais para o DOM.
+- `Slider`: sem `value`/`defaultValue`, renderiza um thumb só (antes dois); com um thumb, o `aria-label` vai para o thumb, não para a raiz.
+- `Table`: o contêiner de rolagem vira uma região focável (`role="region"`, `tabIndex=0`, nome por `containerLabel`).
+- Tokens com valor novo que mudam a aparência dos apps: `--color-border-field` (`#8a8a8a`/`#6b6b6b`, 3:1 para contorno de controle) e `--color-text-500`.
