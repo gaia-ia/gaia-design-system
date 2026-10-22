@@ -46,7 +46,7 @@
       window.FRAMEWORK_OPTIONS = {};
       window.CHANNEL_OPTIONS = {};
       window.FEATURES = {"argTypeTargetsV7":true,"legacyDecoratorFileOrder":false,"disallowImplicitActionsInRenderV8":true};
-      window.STORIES = [{"titlePrefix":"","directory":"./stories","files":"*.stories.tsx","importPathMatcher":"^\\.[\\\\/](?:stories\\/(?!\\.)(?=.)[^/]*?\\.stories\\.tsx)$"},{"titlePrefix":"","directory":"./stories","files":"**/*.stories.tsx","importPathMatcher":"^\\.[\\\\/](?:stories(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.tsx)$"}];
+      window.STORIES = [{"titlePrefix":"","directory":"./stories","files":"**/*.mdx","importPathMatcher":"^\\.[\\\\/](?:stories(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.mdx)$"},{"titlePrefix":"","directory":"./stories","files":"*.stories.tsx","importPathMatcher":"^\\.[\\\\/](?:stories\\/(?!\\.)(?=.)[^/]*?\\.stories\\.tsx)$"},{"titlePrefix":"","directory":"./stories","files":"**/*.stories.tsx","importPathMatcher":"^\\.[\\\\/](?:stories(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.tsx)$"}];
       window.DOCS_OPTIONS = {"defaultName":"Docs","autodocs":true};
       window.TAGS_OPTIONS = {"dev-only":{"excludeFromDocsStories":true},"docs-only":{"excludeFromSidebar":true},"test-only":{"excludeFromSidebar":true,"excludeFromDocsStories":true}};
 
@@ -508,8 +508,19 @@
     console.warn('unable to connect to top frame for connecting dev tools');
   }
 </script>
+<style>
+  /*
+   * O reset do @gaia-dev/theme zera a margem de todo <a>, e com isso a âncora
+   * dos títulos das Docs (que o Storybook pendura à esquerda com margem
+   * negativa) entrava no fluxo e recuava o título 24px.
+   */
+  .sbdocs :is(h1, h2, h3, h4, h5, h6) > a:first-child {
+    margin-left: -24px;
+    padding-right: 10px;
+  }
+</style>
 
-    <script type="module" crossorigin src="/gaia-design-system/assets/iframe-CkE5_Wch.js"></script>
+    <script type="module" crossorigin src="/gaia-design-system/assets/iframe-DBTyuhD0.js"></script>
   </head>
 
   <body>

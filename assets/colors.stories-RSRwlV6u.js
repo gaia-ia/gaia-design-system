@@ -1,0 +1,51 @@
+import{j as e}from"./jsx-runtime-DiklIkkE.js";import{R as i}from"./index-DRjF_FHU.js";const b=[50,100,200,300,400,500,600,700,800,900,950],j=[{title:"Ação",description:"O laranja de ação. Sai da escala Primary (600 no claro, 400 no escuro) e passa no AA com texto branco.",tokens:[{name:"--color-primary-fill",use:"Botão principal, item ativo, foco, marcado e ligado"},{name:"--color-primary-fill-hover",use:"Hover do botão principal"},{name:"--color-on-primary",use:"Texto e ícones sobre o laranja de ação"}]},{title:"Superfícies",description:"Camadas da interface, do fundo da página aos painéis.",tokens:[{name:"--color-surface-canvas",use:"Fundo da página"},{name:"--color-surface-raised",use:"Cards, popovers e botões outline"},{name:"--color-surface-muted",use:"Painéis, como a sidebar"}]},{title:"Bordas",description:"Divisórias e o contorno dos campos.",tokens:[{name:"--color-border-subtle",use:"Divisórias, tabelas e cards"},{name:"--color-border-field",use:"Borda dos campos em repouso"},{name:"--color-border-field-hover",use:"Borda dos campos no hover"}]},{title:"Controles",description:"Elementos neutros que o usuário aciona.",tokens:[{name:"--color-control",use:"Trilhos, botão secondary, badge default"},{name:"--color-control-hover",use:"Hover dos controles neutros"},{name:"--color-control-active",use:"Aba ativa do seletor segmentado"},{name:"--color-row-hover",use:"Hover da linha de tabela"}]},{title:"Destrutivo",description:"Ações que apagam ou desfazem, no estilo suave.",tokens:[{name:"--color-danger-soft",use:"Fundo do botão e do badge destrutivos"},{name:"--color-danger-soft-hover",use:"Hover do botão destrutivo"},{name:"--color-danger-soft-text",use:"Texto destrutivo"},{name:"--color-danger-soft-border",use:"Borda destrutiva"}]}],S=[{title:"Primary",prefix:"--color-primary",note:"500 é a cor da marca; 600 é o laranja de ação."},{title:"Accent",prefix:"--color-accent"},{title:"Background",prefix:"--color-background"},{title:"Text",prefix:"--color-text"}],C=["success","warning","error","info"],T=o=>{var a;const r=((a=o.match(/\d+(\.\d+)?/g))==null?void 0:a.map(Number))??[];return r.length<3?"":`#${r.slice(0,3).map(t=>Math.round(t).toString(16).padStart(2,"0")).join("")}`},k=o=>{if(!o)return!0;const[r,a,t]=[1,3,5].map(n=>parseInt(o.slice(n,n+2),16)/255),l=n=>n<=.03928?n/12.92:((n+.055)/1.055)**2.4;return .2126*l(r)+.7152*l(a)+.0722*l(t)>.25},g=()=>{const o=i.useRef(null),[r,a]=i.useState("");return i.useEffect(()=>{const t=requestAnimationFrame(()=>{o.current&&a(T(getComputedStyle(o.current).backgroundColor))});return()=>cancelAnimationFrame(t)}),{ref:o,hex:r}},f=o=>{var r;(r=navigator.clipboard)==null||r.writeText(o).catch(()=>{})},s={page:{width:"100%",maxWidth:1080,margin:"0 auto",padding:"40px 32px 64px",color:"var(--color-text-900)",fontFamily:"var(--font-body)"},h1:{fontFamily:"var(--font-heading)",fontSize:32,fontWeight:600,letterSpacing:-.6,margin:0},lead:{margin:"8px 0 0",fontSize:15,lineHeight:1.6,color:"var(--color-text-600)",maxWidth:680},h2:{fontFamily:"var(--font-heading)",fontSize:20,fontWeight:600,letterSpacing:-.3,margin:"48px 0 4px"},h3:{fontFamily:"var(--font-heading)",fontSize:15,fontWeight:600,margin:0},muted:{fontSize:13,lineHeight:1.5,color:"var(--color-text-600)",margin:"2px 0 0"},card:{border:"1px solid var(--color-border-subtle)",borderRadius:12,background:"var(--color-surface-raised)",overflow:"hidden"},mono:{fontFamily:"var(--font-mono)",fontSize:12}},d=({cssVar:o,size:r=40})=>{const{ref:a,hex:t}=g();return e.jsxs("div",{style:{display:"flex",flexDirection:"column",alignItems:"center",gap:4},children:[e.jsx("div",{ref:a,title:t,style:{width:r,height:r,borderRadius:10,background:`var(${o})`,boxShadow:"inset 0 0 0 1px rgb(0 0 0 / 0.08)"}}),e.jsx("span",{style:{...s.mono,fontSize:11,color:"var(--color-text-600)"},children:t})]})},w=({token:o,last:r})=>{const[a,t]=i.useState(!1);return e.jsxs("div",{style:{display:"grid",gridTemplateColumns:"64px minmax(0, 1fr)",alignItems:"center",gap:16,padding:"12px 20px",borderBottom:r?"none":"1px solid var(--color-border-subtle)"},children:[e.jsx(d,{cssVar:o.name}),e.jsxs("div",{style:{minWidth:0},children:[e.jsx("button",{type:"button",onClick:()=>{f(`var(${o.name})`),t(!0),window.setTimeout(()=>t(!1),1200)},title:"Copiar var()",style:{...s.mono,padding:"2px 6px",margin:"0 0 4px -6px",border:"none",borderRadius:4,background:"transparent",color:"var(--color-text-900)",fontWeight:500,cursor:"pointer"},children:a?"copiado ✓":o.name}),e.jsx("div",{style:{fontSize:13,color:"var(--color-text-600)"},children:o.use})]})]})},z=({group:o})=>e.jsxs("section",{style:s.card,children:[e.jsxs("header",{style:{padding:"16px 20px",borderBottom:"1px solid var(--color-border-subtle)"},children:[e.jsx("h3",{style:s.h3,children:o.title}),e.jsx("p",{style:s.muted,children:o.description})]}),o.tokens.map((r,a)=>e.jsx(w,{token:r,last:a===o.tokens.length-1},r.name))]}),A=({cssVar:o,step:r})=>{const{ref:a,hex:t}=g(),l=k(t)?"#1a1a1a":"#ffffff",[n,y]=i.useState(!0);return i.useEffect(()=>{const p=a.current;if(!p)return;const m=new ResizeObserver(([v])=>y(v.contentRect.width>=46));return m.observe(p),()=>m.disconnect()},[a]),e.jsxs("div",{ref:a,title:`${o} · ${t}`,onClick:()=>f(`var(${o})`),style:{flex:"1 1 0",minWidth:0,height:80,padding:"10px 8px 8px",display:"flex",flexDirection:"column",justifyContent:"space-between",overflow:"hidden",whiteSpace:"nowrap",background:`var(${o})`,color:l,cursor:"copy"},children:[e.jsx("span",{style:{fontSize:12,fontWeight:600},children:r}),n&&e.jsx("span",{style:{...s.mono,fontSize:10,opacity:.85},children:t})]})},F=({scale:o})=>e.jsxs("section",{style:{marginTop:24},children:[e.jsxs("div",{style:{display:"flex",alignItems:"baseline",gap:12},children:[e.jsx("h3",{style:s.h3,children:o.title}),e.jsxs("span",{style:{...s.mono,color:"var(--color-text-500)"},children:[o.prefix,"-*"]})]}),o.note&&e.jsx("p",{style:s.muted,children:o.note}),e.jsx("div",{style:{display:"flex",marginTop:10,borderRadius:10,overflow:"hidden",border:"1px solid var(--color-border-subtle)"},children:b.map(r=>e.jsx(A,{cssVar:`${o.prefix}-${r}`,step:r},r))})]}),R=({name:o})=>e.jsxs("section",{style:{...s.card,padding:"14px 16px"},children:[e.jsx("h3",{style:{...s.h3,fontSize:14,textTransform:"capitalize"},children:o}),e.jsx("div",{style:{display:"flex",gap:16,marginTop:10},children:[50,500,950].map(r=>e.jsxs("div",{style:{display:"flex",flexDirection:"column",alignItems:"center",gap:2},children:[e.jsx(d,{cssVar:`--color-alert-${o}-${r}`}),e.jsx("span",{style:{fontSize:11,color:"var(--color-text-500)"},children:r})]},r))})]}),H={title:"Tokens/Cores",parameters:{layout:"fullscreen",options:{showPanel:!1},controls:{disable:!0},actions:{disable:!0}}},c=()=>e.jsxs("div",{style:s.page,children:[e.jsx("h1",{style:s.h1,children:"Cores"}),e.jsxs("p",{style:s.lead,children:["Use os ",e.jsx("strong",{children:"tokens por papel"})," nos componentes e nos apps: eles já trazem o valor certo para cada tema. As ",e.jsx("strong",{children:"escalas"})," são a matéria-prima desses tokens. As cores seguem o tema escolhido na barra (use ",e.jsx("strong",{children:"Lado a lado"})," para comparar). Clique num nome ou num degrau para copiar o ",e.jsx("code",{style:s.mono,children:"var()"}),"."]}),e.jsx("h2",{style:s.h2,children:"Tokens por papel"}),e.jsx("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(min(100%, 320px), 1fr))",gap:16,marginTop:16},children:j.map(o=>e.jsx(z,{group:o},o.title))}),e.jsx("h2",{style:s.h2,children:"Escalas"}),e.jsx("p",{style:s.muted,children:"Onze degraus por cor. No escuro a escala se inverte: o 50 é o mais escuro e o 950 o mais claro."}),S.map(o=>e.jsx(F,{scale:o},o.title)),e.jsx("h2",{style:s.h2,children:"Alertas"}),e.jsx("p",{style:s.muted,children:"Fundo (50), cor (500) e contraste (950) de cada estado."}),e.jsx("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(min(100%, 200px), 1fr))",gap:16,marginTop:16},children:C.map(o=>e.jsx(R,{name:o},o))}),e.jsx("h2",{style:s.h2,children:"Fixas"}),e.jsx("p",{style:s.muted,children:"Não mudam com o tema."}),e.jsxs("div",{style:{display:"flex",gap:16,marginTop:12},children:[e.jsx(d,{cssVar:"--color-fixed-white"}),e.jsx(d,{cssVar:"--color-fixed-black"})]})]});c.__docgenInfo={description:"",methods:[],displayName:"Cores"};var u,x,h;c.parameters={...c.parameters,docs:{...(u=c.parameters)==null?void 0:u.docs,source:{originalSource:`() => <div style={s.page}>
+    <h1 style={s.h1}>Cores</h1>
+    <p style={s.lead}>
+      Use os <strong>tokens por papel</strong> nos componentes e nos apps: eles
+      já trazem o valor certo para cada tema. As <strong>escalas</strong> são a
+      matéria-prima desses tokens. As cores seguem o tema escolhido na barra
+      (use <strong>Lado a lado</strong> para comparar). Clique num nome ou num
+      degrau para copiar o <code style={s.mono}>var()</code>.
+    </p>
+
+    <h2 style={s.h2}>Tokens por papel</h2>
+    <div style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))",
+    gap: 16,
+    marginTop: 16
+  }}>
+      {semanticGroups.map(group => <SemanticCard key={group.title} group={group} />)}
+    </div>
+
+    <h2 style={s.h2}>Escalas</h2>
+    <p style={s.muted}>
+      Onze degraus por cor. No escuro a escala se inverte: o 50 é o mais escuro
+      e o 950 o mais claro.
+    </p>
+    {scales.map(scale => <ScaleStrip key={scale.title} scale={scale} />)}
+
+    <h2 style={s.h2}>Alertas</h2>
+    <p style={s.muted}>
+      Fundo (50), cor (500) e contraste (950) de cada estado.
+    </p>
+    <div style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 200px), 1fr))",
+    gap: 16,
+    marginTop: 16
+  }}>
+      {alerts.map(name => <AlertCard key={name} name={name} />)}
+    </div>
+
+    <h2 style={s.h2}>Fixas</h2>
+    <p style={s.muted}>Não mudam com o tema.</p>
+    <div style={{
+    display: "flex",
+    gap: 16,
+    marginTop: 12
+  }}>
+      <Swatch cssVar="--color-fixed-white" />
+      <Swatch cssVar="--color-fixed-black" />
+    </div>
+  </div>`,...(h=(x=c.parameters)==null?void 0:x.docs)==null?void 0:h.source}}};const B=["Cores"];export{c as Cores,B as __namedExportsOrder,H as default};

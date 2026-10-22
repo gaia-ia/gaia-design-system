@@ -1,0 +1,8 @@
+import{S as p}from"./index-pxkObp9p.js";import"./jsx-runtime-DiklIkkE.js";import"./index-DRjF_FHU.js";import"./index-DHHUZ-3A.js";import"./index-BdQq_4o_.js";import"./index-B4P-2A7h.js";import"./index-DRtXj63t.js";import"./index-Bms3GI6n.js";import"./index-C7sk0Hs-.js";import"./index-CwIEgGhy.js";import"./index-CLlkV7gm.js";import"./index-BrKBBPft.js";import"./index-I4Re_PL0.js";import"./index-Bnhoviar.js";import"./index-X59MVnDc.js";import"./index-CFX21f3v.js";import"./index-D8lkqur8.js";import"./index-C0xqUTPU.js";import"./index-Iz9Zo_Nw.js";import"./index-D9Woksp6.js";import"./clsx-DegBVMCo.js";import"./chevron-down-CpJcI-Q_.js";import"./createLucideIcon-Bl20gA7w.js";const C={title:"Components/inputs/Select",component:p,tags:["autodocs"],argTypes:{label:{control:{type:"text"}},id:{control:{type:"text"}},error:{control:{type:"text"}},hint:{control:{type:"text"}},placeholder:{control:{type:"text"}},disabled:{control:{type:"boolean"}},required:{control:{type:"boolean"}}}},a=[{value:"option1",label:"Primeira Opção"},{value:"option2",label:"Segunda Opção"},{value:"option3",label:"Terceira Opção"},{value:"option4",label:"Quarta Opção",disabled:!0}],o={args:{label:"Selecione uma opção",id:"select-default",options:a,placeholder:"Escolha uma opção..."}};var t,e,r;o.parameters={...o.parameters,docs:{...(t=o.parameters)==null?void 0:t.docs,source:{originalSource:`{
+  args: {
+    label: "Selecione uma opção",
+    id: "select-default",
+    options: mockOptions,
+    placeholder: "Escolha uma opção..."
+  }
+}`,...(r=(e=o.parameters)==null?void 0:e.docs)==null?void 0:r.source}}};const P=["Default"];export{o as Default,P as __namedExportsOrder,C as default};
